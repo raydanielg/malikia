@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\MotherIntakeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/dashboard', function () {
@@ -23,3 +24,8 @@ require __DIR__.'/auth.php';
 // OAuth: Google
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('oauth.google.redirect');
 Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('oauth.google.callback');
+
+// Intake form
+Route::get('/fomu', [MotherIntakeController::class, 'create'])->name('intake.create');
+Route::post('/fomu', [MotherIntakeController::class, 'store'])->name('intake.store');
+Route::get('/asante', [MotherIntakeController::class, 'thankyou'])->name('intake.thankyou');

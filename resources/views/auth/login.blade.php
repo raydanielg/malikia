@@ -8,20 +8,6 @@
             <div class="w-full max-w-lg">
                 <h1 class="text-2xl font-semibold mb-6">Karibu tena</h1>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                    <a href="{{ route('oauth.google.redirect') }}" class="inline-flex items-center justify-center gap-2 border rounded-md py-2.5 text-sm hover:bg-gray-50">
-                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="h-4 w-4"/>
-                        Endelea na Google
-                    </a>
-                </div>
-
-                <div class="relative my-6">
-                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t"></div></div>
-                    <div class="relative flex justify-center text-xs uppercase">
-                        <span class="bg-white px-2 text-gray-500">au</span>
-                    </div>
-                </div>
-
                 <form method="POST" action="{{ route('login') }}" class="space-y-4">
                     @csrf
                     <div>
@@ -50,6 +36,22 @@
                         Ingia kwenye akaunti
                     </button>
                 </form>
+
+                <div class="relative my-6">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t"></div></div>
+                    <div class="relative flex justify-center text-xs uppercase">
+                        <span class="bg-white px-2 text-gray-500">au</span>
+                    </div>
+                </div>
+
+                <a href="{{ route('oauth.google.redirect') }}" class="w-full inline-flex justify-center items-center gap-2 border rounded-md py-2.5 text-sm hover:bg-gray-50">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="h-4 w-4"/>
+                    Endelea na Google
+                </a>
+
+                <a href="{{ route('register') }}" class="mt-3 w-full inline-flex justify-center items-center gap-2 border border-[#7e22ce] text-[#7e22ce] rounded-md py-2.5 text-sm hover:bg-[#f3e8ff]">
+                    Jisajili akaunti mpya
+                </a>
             </div>
         </div>
 
