@@ -11,6 +11,31 @@
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
+        <!-- SEO -->
+        @php
+            $appName = config('app.name', 'Malkia Konnect');
+            $description = 'Malkia Konnect ni jukwaa la kidijitali kwa akina mama wajawazito na wanaoendelea na safari ya uzazi: elimu na makala, huduma na programu, jamii ya akina mama, matukio na warsha, na rasilimali mtandaoni. Mama siyo peke yake.';
+            $canonical = url()->current();
+            $ogImage = asset('logo.jpg');
+        @endphp
+        <meta name="description" content="{{ $description }}">
+        <link rel="canonical" href="{{ $canonical }}">
+        <meta name="theme-color" content="#f53003">
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ $appName }}">
+        <meta property="og:description" content="{{ $description }}">
+        <meta property="og:url" content="{{ $canonical }}">
+        <meta property="og:image" content="{{ $ogImage }}">
+        <meta property="og:site_name" content="{{ $appName }}">
+
+        <!-- Twitter Cards -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $appName }}">
+        <meta name="twitter:description" content="{{ $description }}">
+        <meta name="twitter:image" content="{{ $ogImage }}">
+
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
