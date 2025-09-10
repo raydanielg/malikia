@@ -1,0 +1,20 @@
+# Redirect all requests to /public
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks
+    RewriteEngine On
+
+    # If the request is for an existing directory or file at the root, serve it directly
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ public/%{REQUEST_URI} [L,QSA]
+
+    # If the request is exactly the root, send to public/
+    RewriteRule ^$ public/ [L]
+</IfModule>
+
+# Extra protection: block direct access to sensitive files at project root
+<FilesMatch "^(\.env|artisan|composer\.(json|lock)|package\.json|package-lock\.json|vite\.config\.js|webpack\.mix\.js|phpunit\.xml|README\.md)$">
+    Require all denied
+    Satisfy All
+</FilesMatch>
