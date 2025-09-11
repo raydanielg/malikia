@@ -19,10 +19,10 @@
             <!-- Desktop Nav -->
             <nav class="hidden lg:flex items-center gap-6 text-sm">
                 <a href="/" class="hover:text-[#7e22ce]">Home</a>
-                <a href="#services" class="hover:text-[#7e22ce]">Huduma</a>
+                <a href="{{ route('services') }}" class="hover:text-[#7e22ce]">Huduma</a>
                 <a href="#duka" class="hover:text-[#7e22ce]">Duka</a>
-                <a href="#kuhusu" class="hover:text-[#7e22ce]">Kuhusu Sisi</a>
-                <a href="#wasiliana" class="hover:text-[#7e22ce]">Wasiliana Nasi</a>
+                <a href="{{ route('about') }}" class="hover:text-[#7e22ce]">Kuhusu Sisi</a>
+                <a href="{{ route('contact') }}" class="hover:text-[#7e22ce]">Wasiliana Nasi</a>
                 <a href="#blog" class="hover:text-[#7e22ce]">Blog</a>
                 <a href="#rasilimali" class="hover:text-[#7e22ce]">Rasilimali</a>
             </nav>
@@ -47,10 +47,10 @@
                 <div class="peer-checked:block hidden absolute top-16 inset-x-0 bg-white border-b shadow-sm">
                     <nav class="px-4 py-4 flex flex-col gap-3 text-sm">
                         <a href="/" class="hover:text-[#7e22ce]">Home</a>
-                        <a href="#services" class="hover:text-[#7e22ce]">Huduma</a>
+                        <a href="{{ route('services') }}" class="hover:text-[#7e22ce]">Huduma</a>
                         <a href="#duka" class="hover:text-[#7e22ce]">Duka</a>
-                        <a href="#kuhusu" class="hover:text-[#7e22ce]">Kuhusu Sisi</a>
-                        <a href="#wasiliana" class="hover:text-[#7e22ce]">Wasiliana Nasi</a>
+                        <a href="{{ route('about') }}" class="hover:text-[#7e22ce]">Kuhusu Sisi</a>
+                        <a href="{{ route('contact') }}" class="hover:text-[#7e22ce]">Wasiliana Nasi</a>
                         <a href="#blog" class="hover:text-[#7e22ce]">Blog</a>
                         <a href="#rasilimali" class="hover:text-[#7e22ce]">Rasilimali</a>
                         <div class="pt-2 flex flex-col gap-2">
@@ -111,116 +111,272 @@
         </div>
     </section>
 
-    <!-- Services -->
-    <section id="services" class="py-16 lg:py-24 bg-white">
+    <!-- FAQ -->
+    <section id="faq" class="py-16 lg:py-24 bg-white">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <p class="text-sm uppercase tracking-wider text-[#7e22ce]">Maswali Yanayoulizwa</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold">Maswali na Majibu (FAQ)</h2>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Ikiwa una swali kuhusu {{ config('app.name', 'Malkia Konnect') }}, kuna uwezekano mkubwa majibu yako yapo hapa. Bado una swali? Wasiliana nasi.</p>
+            </div>
+
+            <div class="mx-auto max-w-3xl divide-y rounded-2xl border bg-white">
+                <!-- Item 1 -->
+                <div x-data="{open:false}" class="p-4 sm:p-6">
+                    <button @click="open=!open" class="w-full flex items-start gap-3 text-left">
+                        <span class="mt-1 h-8 w-8 flex items-center justify-center rounded-lg bg-[#7e22ce]/10 text-[#7e22ce]">
+                            <!-- Question mark icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0z"/><path d="M9 13h2v2H9v-2zm1-8a3.5 3.5 0 00-3.5 3.5.75.75 0 001.5 0A2 2 0 0110 6a2 2 0 011.85 1.23c.3.7.16 1.29-.44 1.82-.63.56-1.41.95-1.41 2.2V12h2v-.55c0-.5.43-.77.9-1.13 1.06-.81 1.85-1.92 1.04-3.78A3.5 3.5 0 0010 5z"/></svg>
+                        </span>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold">Malkia Konnect ni nini?</h3>
+                                <svg :class="open ? 'rotate-180' : ''" class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </div>
+                            <div x-show="open" x-transition.scale.origin.top.left class="mt-2 text-sm text-gray-600">
+                                {{ config('app.name', 'Malkia Konnect') }} ni jukwaa linalokupa elimu, jamii, na ushauri wa kitaalamu kuhusu ujauzito na ulezi.
+                            </div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Item 2 -->
+                <div x-data="{open:false}" class="p-4 sm:p-6">
+                    <button @click="open=!open" class="w-full flex items-start gap-3 text-left">
+                        <span class="mt-1 h-8 w-8 flex items-center justify-center rounded-lg bg-[#f59e0b]/10 text-[#f59e0b]">
+                            <!-- Shield check icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14A1 1 0 003 18h14a1 1 0 00.894-1.447l-7-14z"/><path d="M9 12l-2-2 1.414-1.414L9 9.172l2.586-2.586L13 8l-4 4z"/></svg>
+                        </span>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold">Je, taarifa zangu ziko salama?</h3>
+                                <svg :class="open ? 'rotate-180' : ''" class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </div>
+                            <div x-show="open" x-transition.scale.origin.top.left class="mt-2 text-sm text-gray-600">
+                                Ndiyo. Tunaheshimu faragha yako na tunatunza taarifa zako kwa usalama kulingana na sera zetu za faragha.
+                            </div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Item 3 -->
+                <div x-data="{open:false}" class="p-4 sm:p-6">
+                    <button @click="open=!open" class="w-full flex items-start gap-3 text-left">
+                        <span class="mt-1 h-8 w-8 flex items-center justify-center rounded-lg bg-[#10b981]/10 text-[#10b981]">
+                            <!-- Sparkles icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l2 4 4 2-4 2-2 4-2-4-4-2 4-2 2-4zm14 2l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3zm-4 8l2 3 3 2-3 2-2 3-2-3-3-2 3-2 2-3z"/></svg>
+                        </span>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold">Nitaanza vipi haraka?</h3>
+                                <svg :class="open ? 'rotate-180' : ''" class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </div>
+                            <div x-show="open" x-transition.scale.origin.top.left class="mt-2 text-sm text-gray-600">
+                                Anza kwa kujaza <a href="{{ route('intake.create') }}" class="text-[#7e22ce] underline">fomu yetu</a>. Tutakushauri hatua inayofuata kulingana na mahitaji yako.
+                            </div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Item 4 -->
+                <div x-data="{open:false}" class="p-4 sm:p-6">
+                    <button @click="open=!open" class="w-full flex items-start gap-3 text-left">
+                        <span class="mt-1 h-8 w-8 flex items-center justify-center rounded-lg bg-[#3b82f6]/10 text-[#3b82f6]">
+                            <!-- Video icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M15 8.5V6a2 2 0 00-2-2H3a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-2.5l6 3V5.5l-6 3z"/></svg>
+                        </span>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold">Je, kuna warsha au video?</h3>
+                                <svg :class="open ? 'rotate-180' : ''" class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </div>
+                            <div x-show="open" x-transition.scale.origin.top.left class="mt-2 text-sm text-gray-600">
+                                Ndiyo, tunayo maktaba ya video na warsha zinazoongozwa na wataalamu mara kwa mara.
+                            </div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Item 5 -->
+                <div x-data="{open:false}" class="p-4 sm:p-6">
+                    <button @click="open=!open" class="w-full flex items-start gap-3 text-left">
+                        <span class="mt-1 h-8 w-8 flex items-center justify-center rounded-lg bg-[#ef4444]/10 text-[#ef4444]">
+                            <!-- Heart icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41.81 4.5 2.09A6 6 0 0 1 21.5 4C24 4 26 6 26 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        </span>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold">Msaada wa baada ya kujifungua upoje?</h3>
+                                <svg :class="open ? 'rotate-180' : ''" class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </div>
+                            <div x-show="open" x-transition.scale.origin.top.left class="mt-2 text-sm text-gray-600">
+                                Tunakupa mwongozo wa kunyonyesha, usingizi wa mtoto, na ustawi wa akili wa mama.
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Featured Blog -->
+    <section id="blog" class="py-16 lg:py-24 bg-white">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <p class="text-sm uppercase tracking-wider text-[#7e22ce]">Our Services</p>
-                <h2 class="text-3xl lg:text-4xl font-extrabold">Huduma Zetu</h2>
-                <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Tunatoa huduma shirikishi kwa mama kabla, wakati na baada ya kujifungua. Chagua unachohitaji, tutakupa mwongozo unaofaa.</p>
+                <p class="text-sm uppercase tracking-wider text-[#7e22ce]">Featured Blog</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold">Makala Zilizochaguliwa</h2>
+                <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Soma makala fupi kutoka kwa wataalamu wetu. Endelea kusoma ili kupata mwongozo sahihi na salama.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Card 1 -->
-                <div class="group p-6 border rounded-2xl bg-white hover:shadow-lg transition duration-300 animate-fade-up" style="--delay:.05s">
-                    <div class="h-12 w-12 rounded-lg bg-[#7e22ce]/10 text-[#7e22ce] flex items-center justify-center mb-4 group-hover:scale-110 transition">
-                        <!-- Academic Cap Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path d="M11.7 2.1a1 1 0 01.6 0l9 3a1 1 0 010 1.9l-3.29 1.1A4 4 0 0118 11.17V14a1 1 0 11-2 0v-2.83a2 2 0 00-1.34-1.89L12 8.53 5 10.86V14a1 1 0 11-2 0v-3.5L1.7 9a1 1 0 010-1.9l9-3z"/><path d="M6 15.5a1 1 0 011.316-.949l4 1.25a2 2 0 001.368 0l4-1.25A1 1 0 0118 16.5V18a4 4 0 11-8 0v-1.5l-3-.94V18a6 6 0 0012 0v-1.5a1 1 0 112 0V18a8 8 0 11-16 0v-2.5z"/></svg>
+                <!-- Post 1 -->
+                <article class="group rounded-2xl overflow-hidden border bg-white hover:shadow-lg transition animate-fade-up" style="--delay:.05s">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="{{ asset('african-pregnant-woman-is-sitting-floor-dressed-with-african-pattern-fabric_156889-8 (1).jpg') }}" alt="Mwongozo wa Trimester ya Kwanza" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy" />
+                        <span class="absolute top-3 left-3 text-xs px-2 py-1 rounded bg-[#7e22ce] text-white">Featured</span>
                     </div>
-                    <h3 class="font-semibold mb-1">Elimu na Kozi</h3>
-                    <p class="text-sm text-gray-600">Mafunzo mafupi ya hatua zote za safari ya uzazi—kuanzia ujauzito hadi kulea.</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="group p-6 border rounded-2xl bg-white hover:shadow-lg transition duration-300 animate-fade-up" style="--delay:.10s">
-                    <div class="h-12 w-12 rounded-lg bg-[#f59e0b]/10 text-[#f59e0b] flex items-center justify-center mb-4 group-hover:scale-110 transition">
-                        <!-- Users Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path d="M16 11c1.657 0 3-1.79 3-4s-1.343-4-3-4-3 1.79-3 4 1.343 4 3 4zM8 11c1.657 0 3-1.79 3-4S9.657 3 8 3 5 4.79 5 7s1.343 4 3 4zm0 2c-2.21 0-4 1.79-4 4v2h8v-2c0-2.21-1.79-4-4-4zm8 0c-.29 0-.57.03-.84.08A5.977 5.977 0 0120 18v2h-6v-2c0-2.21 1.79-4 4-4z"/></svg>
+                    <div class="p-5">
+                        <h3 class="font-semibold text-lg mb-1">Mwongozo wa Trimester ya Kwanza</h3>
+                        <p class="text-sm text-gray-600 mb-3">Dalili za kawaida, nini cha kula, na vitu muhimu vya kuzingatia katika wiki za mwanzo.</p>
+                        <a href="#" class="inline-flex items-center gap-1 text-[#7e22ce] hover:underline">Soma zaidi
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M12.293 3.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 11-1.414-1.414L14.586 9H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/></svg>
+                        </a>
                     </div>
-                    <h3 class="font-semibold mb-1">Jamii na Vikundi</h3>
-                    <p class="text-sm text-gray-600">Community yenye usaidizi—uliza, jibu, na shiriki safari yako na akina mama wengine.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="group p-6 border rounded-2xl bg-white hover:shadow-lg transition duration-300 animate-fade-up" style="--delay:.15s">
-                    <div class="h-12 w-12 rounded-lg bg-[#10b981]/10 text-[#10b981] flex items-center justify-center mb-4 group-hover:scale-110 transition">
-                        <!-- Stethoscope (custom path) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path d="M7 2a1 1 0 011 1v4a3 3 0 106 0V3a1 1 0 112 0v4a5 5 0 11-10 0V3a1 1 0 011-1zm11 9a3 3 0 100 6 3 3 0 000-6zm-4.4 6.8A6.5 6.5 0 014 11V9a1 1 0 012 0v2a4.5 4.5 0 108.999.001V14a1 1 0 11-2 0v-1.086A6.502 6.502 0 0113.6 17.8z"/></svg>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="group rounded-2xl overflow-hidden border bg-white hover:shadow-lg transition animate-fade-up" style="--delay:.10s">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="{{ asset('young-indian-pregnant-woman-standing-studio-setting_1187-448987-removebg-preview.png') }}" alt="Lishe Bora kwa Mama Mjamzito" class="w-full h-full object-cover group-hover:scale-105 transition duration-300 bg-white" loading="lazy" />
+                        <span class="absolute top-3 left-3 text-xs px-2 py-1 rounded bg-[#7e22ce] text-white">Featured</span>
                     </div>
-                    <h3 class="font-semibold mb-1">Ushauri wa Wataalamu</h3>
-                    <p class="text-sm text-gray-600">Unganishwa na wakunga, madaktari na washauri wa lishe kwa ushauri wa moja kwa moja.</p>
-                </div>
-                <!-- Card 4 -->
-                <div class="group p-6 border rounded-2xl bg-white hover:shadow-lg transition duration-300 animate-fade-up" style="--delay:.20s">
-                    <div class="h-12 w-12 rounded-lg bg-[#3b82f6]/10 text-[#3b82f6] flex items-center justify-center mb-4 group-hover:scale-110 transition">
-                        <!-- Video Camera Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path d="M15 8.5V6a2 2 0 00-2-2H3a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-2.5l6 3V5.5l-6 3z"/></svg>
+                    <div class="p-5">
+                        <h3 class="font-semibold text-lg mb-1">Lishe Bora kwa Mama Mjamzito</h3>
+                        <p class="text-sm text-gray-600 mb-3">Jedwali la vyakula muhimu, virutubisho vinavyoshauriwa, na jinsi ya kuepuka njaa ya mara kwa mara.</p>
+                        <a href="#" class="inline-flex items-center gap-1 text-[#7e22ce] hover:underline">Soma zaidi
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M12.293 3.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 11-1.414-1.414L14.586 9H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/></svg>
+                        </a>
                     </div>
-                    <h3 class="font-semibold mb-1">Warsha na Video</h3>
-                    <p class="text-sm text-gray-600">Vipindi vinavyoongozwa na wataalamu na maktaba ya video kwa muda wowote.</p>
-                </div>
-                <!-- Card 5 -->
-                <div class="group p-6 border rounded-2xl bg-white hover:shadow-lg transition duration-300 animate-fade-up" style="--delay:.25s">
-                    <div class="h-12 w-12 rounded-lg bg-[#ef4444]/10 text-[#ef4444] flex items-center justify-center mb-4 group-hover:scale-110 transition">
-                        <!-- Heart Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41.81 4.5 2.09A6 6 0 0 1 21.5 4C24 4 26 6 26 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="group rounded-2xl overflow-hidden border bg-white hover:shadow-lg transition animate-fade-up" style="--delay:.15s">
+                    <div class="relative h-48 overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-[#7e22ce] to-[#f59e0b]"></div>
+                        <span class="absolute top-3 left-3 text-xs px-2 py-1 rounded bg-[#7e22ce] text-white">Featured</span>
                     </div>
-                    <h3 class="font-semibold mb-1">Huduma Baada ya Kujifungua</h3>
-                    <p class="text-sm text-gray-600">Mwongozo wa afya ya mama na mtoto, kunyonyesha, usingizi, na ustawi wa akili.</p>
-                </div>
-                <!-- Card 6 -->
-                <div class="group p-6 border rounded-2xl bg-white hover:shadow-lg transition duration-300 animate-fade-up" style="--delay:.30s">
-                    <div class="h-12 w-12 rounded-lg bg-[#8b5cf6]/10 text-[#8b5cf6] flex items-center justify-center mb-4 group-hover:scale-110 transition">
-                        <!-- Shopping Bag Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path d="M6 7V6a6 6 0 1112 0v1h2a1 1 0 011 1v12a2 2 0 01-2 2H5a2 2 0 01-2-2V8a1 1 0 011-1h2zm2 0h8V6a4 4 0 10-8 0v1z"/></svg>
+                    <div class="p-5">
+                        <h3 class="font-semibold text-lg mb-1">Kujifungua kwa Amani: Maandalizi</h3>
+                        <p class="text-sm text-gray-600 mb-3">Vidokezo vya kisaikolojia na kimwili vinavyosaidia kujiandaa kwa siku ya kujifungua.</p>
+                        <a href="#" class="inline-flex items-center gap-1 text-[#7e22ce] hover:underline">Soma zaidi
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M12.293 3.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 11-1.414-1.414L14.586 9H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/></svg>
+                        </a>
                     </div>
-                    <h3 class="font-semibold mb-1">Duka la Mama</h3>
-                    <p class="text-sm text-gray-600">Vifaa na bidhaa muhimu zilizopendekezwa na wataalamu kwa kila hatua.</p>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Features -->
+    <!-- Features as Progress Steps -->
     <section id="features" class="py-16 lg:py-24 bg-gray-50">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" x-data="{start:false}" x-init="setTimeout(()=>start=true, 200)">
+            <div class="text-center mb-10">
+                <p class="text-sm uppercase tracking-wider text-[#7e22ce]">How It Helps</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold">Safari yako kwa hatua</h2>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Tunakuongoza hatua kwa hatua: pata elimu sahihi, ungana na jamii yenye upendo, na onana na wataalamu wa karibu.</p>
+            </div>
+
+            <!-- Horizontal on lg, vertical on mobile -->
+            <div class="relative">
+                <!-- Connector line -->
+                <div class="hidden lg:block absolute top-7 left-0 right-0 h-1 bg-gray-200 rounded-full"></div>
+                <div class="hidden lg:block absolute top-7 left-0 h-1 bg-gradient-to-r from-[#7e22ce] to-[#f59e0b] rounded-full transition-all duration-1000" :style="start ? 'width:100%' : 'width:0%'"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                    <!-- Step 1 -->
+                    <div class="flex lg:block items-start gap-4 animate-fade-up" style="--delay:.05s">
+                        <!-- Dot/Number -->
+                        <div class="relative shrink-0">
+                            <div class="h-14 w-14 rounded-full bg-white border-2 border-[#7e22ce] flex items-center justify-center font-extrabold text-[#7e22ce] shadow-sm">1</div>
+                            <!-- Vertical connector for mobile -->
+                            <div class="lg:hidden absolute left-1/2 -bottom-10 -translate-x-1/2 w-1 h-10 bg-gray-200"></div>
+                            <div class="lg:hidden absolute left-1/2 -bottom-10 -translate-x-1/2 w-1 bg-gradient-to-b from-[#7e22ce] to-[#f59e0b] transition-all duration-1000" :style="start ? 'height:40px' : 'height:0px'"></div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Elimu sahihi</h3>
+                            <p class="text-gray-600">Makala, video, na kozi fupi za kila hatua ya ujauzito hadi baada ya kujifungua.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex lg:block items-start gap-4 animate-fade-up" style="--delay:.12s">
+                        <div class="relative shrink-0">
+                            <div class="h-14 w-14 rounded-full bg-white border-2 border-[#7e22ce] flex items-center justify-center font-extrabold text-[#7e22ce] shadow-sm">2</div>
+                            <div class="lg:hidden absolute left-1/2 -bottom-10 -translate-x-1/2 w-1 h-10 bg-gray-200"></div>
+                            <div class="lg:hidden absolute left-1/2 -bottom-10 -translate-x-1/2 w-1 bg-gradient-to-b from-[#7e22ce] to-[#f59e0b] transition-all duration-1000 delay-200" :style="start ? 'height:40px' : 'height:0px'"></div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Jamii yenye upendo</h3>
+                            <p class="text-gray-600">Uliza maswali na shiriki uzoefu; hupaswi kupita safari hii pekee.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex lg:block items-start gap-4 animate-fade-up" style="--delay:.19s">
+                        <div class="relative shrink-0">
+                            <div class="h-14 w-14 rounded-full bg-white border-2 border-[#7e22ce] flex items-center justify-center font-extrabold text-[#7e22ce] shadow-sm">3</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Wataalamu wa karibu</h3>
+                            <p class="text-gray-600">Unganishwa na wakunga, madaktari na washauri wa lishe kwa ushauri makini.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fallback when no items -->
+                <div x-show="!items.length" class="mt-6 text-center text-gray-600">
+                    Hakuna testimonials kwa sasa. Tutarudisha taarifa hivi karibuni.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Subscribe -->
+    <section id="newsletter" class="py-16 lg:py-24 bg-gray-50">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-6 bg-white rounded-xl border animate-fade-up" style="--delay:.05s">
-                    <div class="h-10 w-10 rounded bg-[#f59e0b]/20 text-[#7e22ce] flex items-center justify-center font-bold mb-4">1</div>
-                    <h3 class="font-semibold mb-2">Elimu sahihi</h3>
-                    <p class="text-gray-600 text-sm">Makala, video, na kozi fupi za kila hatua ya ujauzito hadi baada ya kujifungua.</p>
-                </div>
-                <div class="p-6 bg-white rounded-xl border animate-fade-up" style="--delay:.12s">
-                    <div class="h-10 w-10 rounded bg-[#f59e0b]/20 text-[#7e22ce] flex items-center justify-center font-bold mb-4">2</div>
-                    <h3 class="font-semibold mb-2">Jamii yenye upendo</h3>
-                    <p class="text-gray-600 text-sm">Uliza maswali na shiriki uzoefu; hupaswi kupita safari hii pekee.</p>
-                </div>
-                <div class="p-6 bg-white rounded-xl border animate-fade-up" style="--delay:.19s">
-                    <div class="h-10 w-10 rounded bg-[#f59e0b]/20 text-[#7e22ce] flex items-center justify-center font-bold mb-4">3</div>
-                    <h3 class="font-semibold mb-2">Wataalamu wa karibu</h3>
-                    <p class="text-gray-600 text-sm">Unganishwa na wakunga, madaktari na washauri wa lishe kwa ushauri makini.</p>
-                </div>
+            <div class="text-center mb-8">
+                <p class="text-sm uppercase tracking-wider text-[#7e22ce]">Stay Updated</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold">Jisajili kupokea taarifa muhimu</h2>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Pokea makala, vidokezo vya afya ya uzazi na taarifa za warsha moja kwa moja kwenye barua pepe yako.</p>
             </div>
+
+            @if (session('newsletter_ok'))
+                <div class="mx-auto max-w-2xl mb-4 rounded-md bg-green-50 text-green-800 px-4 py-3 border border-green-200">
+                    {{ session('newsletter_ok') }}
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('newsletter.store') }}" class="mx-auto max-w-2xl">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div class="md:col-span-1">
+                        <label class="sr-only">Jina</label>
+                        <input name="name" value="{{ old('name') }}" class="w-full border rounded-md px-3 py-3" placeholder="Jina (hiari)">
+                        @error('name')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="sr-only">Barua pepe</label>
+                        <div class="flex">
+                            <input type="email" name="email" value="{{ old('email') }}" class="flex-1 border rounded-l-md px-3 py-3" placeholder="Ingiza barua pepe yako" required>
+                            <button class="px-6 py-3 rounded-r-md bg-[#7e22ce] text-white hover:bg-[#6b21a8] whitespace-nowrap">Jisajili</button>
+                        </div>
+                        @error('email')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                    </div>
+                </div>
+                <p class="mt-3 text-xs text-gray-500">Kwa kujisajili, unakubali kupokea barua pepe kutoka {{ config('app.name', 'Malkia Konnect') }}. Unaweza kujiondoa wakati wowote.</p>
+            </form>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="py-16 lg:py-24">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl lg:text-4xl font-extrabold mb-4">Jiunge sasa na uanze safari yenye amani.</h2>
-            <p class="text-gray-600 mb-8">Ni bure kuanza — unaweza kubadilisha au kufuta akaunti yako wakati wowote.</p>
-            <a href="{{ route('register') }}" class="px-8 py-3 rounded-md bg-[#7e22ce] text-white hover:bg-[#6b21a8]">Jisajili bure</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="border-t py-8">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-600">
-            <p>© {{ date('Y') }} {{ config('app.name', 'Malkia Konnect') }}. Haki zote zimehifadhiwa.</p>
-            <div class="flex items-center gap-4">
-                <a href="#" class="hover:text-[#7e22ce]">Masharti</a>
-                <a href="#" class="hover:text-[#7e22ce]">Faragha</a>
-                <a href="#" class="hover:text-[#7e22ce]">Wasiliana nasi</a>
-            </div>
-        </div>
-    </footer>
+    @include('partials.footer')
 </body>
 </html>
