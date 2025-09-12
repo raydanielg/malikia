@@ -5,375 +5,317 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Malkia Konnect') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=shopping_cart" />
 </head>
 <body class="antialiased text-gray-900">
-    <!-- Header -->
-    <header class="w-full sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <!-- Brand -->
-            <a href="/" class="flex items-center gap-2">
-                <img src="{{ asset('LOGO-MALKIA-KONNECT.jpg') }}" alt="Logo" class="h-8 w-8 rounded object-cover"/>
-                <span class="font-semibold">{{ config('app.name', 'Malkia Konnect') }}</span>
+    @include('partials.header')
+    <!-- Hero: Split CTA -->
+    <section class="relative overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+            <!-- Left: Maternity Products -->
+            <a href="{{ route('services') }}" class="group relative min-h-[420px] lg:min-h-[520px] overflow-hidden">
+                <img src="{{ asset('african-pregnant-woman-is-sitting-floor-dressed-with-african-pattern-fabric_156889-8 (1).jpg') }}" alt="Maternity Products" class="absolute inset-0 w-full h-full object-cover"/>
+                <div class="absolute inset-0 bg-teal-700/60 transition group-hover:bg-teal-700/50"></div>
+                <div class="relative z-10 h-full w-full flex items-center justify-center text-center px-6 py-10">
+                    <div class="max-w-md text-white">
+                        <!-- Icon -->
+                        <div class="mx-auto mb-4 h-12 w-12 grid place-items-center rounded-full bg-white/20">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3.75h2.25l1.5 12.75A1.5 1.5 0 007.5 18h9a1.5 1.5 0 001.47-1.25l1.2-7.25H6.3"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 21a1 1 0 110-2 1 1 0 010 2zm8 0a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                        </div>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-3">Maternity Products</h1>
+                        <p class="text-white/90 mb-6">Discover our carefully designed products to support you through every stage of motherhood.</p>
+                        <div class="inline-flex items-center gap-2 rounded-full bg-white/90 text-teal-700 px-5 py-2.5 group-hover:bg-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3.75h2.25l1.5 12.75A1.5 1.5 0 007.5 18h9a1.5 1.5 0 001.47-1.25l1.2-7.25H6.3"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 21a1 1 0 110-2 1 1 0 010 2zM17 21a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                            <span class="font-semibold">Shop Now</span>
+                        </div>
+                    </div>
+                </div>
             </a>
 
-            <!-- Desktop Nav -->
-            <nav class="hidden lg:flex items-center gap-6 text-sm">
-                <a href="/" class="hover:text-[#7e22ce]">Home</a>
-                <a href="{{ route('services') }}" class="hover:text-[#7e22ce]">Huduma</a>
-                <a href="#duka" class="hover:text-[#7e22ce]">Duka</a>
-                <a href="{{ route('about') }}" class="hover:text-[#7e22ce]">Kuhusu Sisi</a>
-                <a href="{{ route('contact') }}" class="hover:text-[#7e22ce]">Wasiliana Nasi</a>
-                <a href="#blog" class="hover:text-[#7e22ce]">Blog</a>
-                <a href="#rasilimali" class="hover:text-[#7e22ce]">Rasilimali</a>
-            </nav>
-
-            <!-- Actions -->
-            <div class="hidden sm:flex items-center gap-2">
-                @auth
-                    <a href="{{ route('dashboard') }}" class="px-4 py-2 rounded border text-sm">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}" class="px-4 py-2 rounded border text-sm">Ingia</a>
-                    <a href="{{ route('register') }}" class="px-4 py-2 rounded text-sm text-white bg-[#7e22ce] hover:bg-[#6b21a8]">Jisajili</a>
-                @endauth
-            </div>
-
-            <!-- Mobile toggle -->
-            <div class="lg:hidden">
-                <input id="nav-toggle" type="checkbox" class="peer hidden" />
-                <label for="nav-toggle" class="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-gray-100 cursor-pointer">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                </label>
-                <!-- Mobile menu panel -->
-                <div class="peer-checked:block hidden absolute top-16 inset-x-0 bg-white border-b shadow-sm">
-                    <nav class="px-4 py-4 flex flex-col gap-3 text-sm">
-                        <a href="/" class="hover:text-[#7e22ce]">Home</a>
-                        <a href="{{ route('services') }}" class="hover:text-[#7e22ce]">Huduma</a>
-                        <a href="#duka" class="hover:text-[#7e22ce]">Duka</a>
-                        <a href="{{ route('about') }}" class="hover:text-[#7e22ce]">Kuhusu Sisi</a>
-                        <a href="{{ route('contact') }}" class="hover:text-[#7e22ce]">Wasiliana Nasi</a>
-                        <a href="#blog" class="hover:text-[#7e22ce]">Blog</a>
-                        <a href="#rasilimali" class="hover:text-[#7e22ce]">Rasilimali</a>
-                        <div class="pt-2 flex flex-col gap-2">
-                            @auth
-                                <a href="{{ route('dashboard') }}" class="px-4 py-2 rounded border text-sm">Dashboard</a>
-                            @else
-                                <a href="{{ route('login') }}" class="px-4 py-2 rounded border text-sm">Ingia</a>
-                                <a href="{{ route('register') }}" class="px-4 py-2 rounded text-sm text-white bg-[#7e22ce] hover:bg-[#6b21a8]">Jisajili</a>
-                            @endauth
+            <!-- Right: Malkia Konnect -->
+            <a href="{{ route('intake.create') }}" class="group relative min-h-[420px] lg:min-h-[520px] overflow-hidden">
+                <img src="{{ asset('young-indian-pregnant-woman-standing-studio-setting_1187-448987-removebg-preview.png') }}" alt="Malkia Konnect" class="absolute inset-0 w-full h-full object-cover bg-white"/>
+                <div class="absolute inset-0 bg-rose-700/60 transition group-hover:bg-rose-700/50"></div>
+                <div class="relative z-10 h-full w-full flex items-center justify-center text-center px-6 py-10">
+                    <div class="max-w-md text-white">
+                        <!-- Icon -->
+                        <div class="mx-auto mb-4 h-12 w-12 grid place-items-center rounded-full bg-white/20">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm-9 7a7 7 0 0110 0"/></svg>
                         </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="relative overflow-hidden">
-        <div class="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-10 items-center px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-            <div>
-                <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight mb-2 animate-fade-up">Karibu Malkia Konnect</h1>
-                <p class="text-xl lg:text-2xl font-semibold text-gray-800 mb-4 animate-fade-up" style="--delay:.05s">"Your Pocket Midwife"</p>
-                <p class="text-lg text-gray-700 mb-2 max-w-2xl animate-fade-up" style="--delay:.08s">Motherhood has no manual, but you don’t have to go through it alone.</p>
-                <p class="text-lg text-gray-700 mb-8 max-w-2xl animate-fade-up" style="--delay:.12s">In just one minute, let us know your needs and we will guide you step by step.</p>
-                <div class="flex flex-wrap gap-3 animate-fade-up" style="--delay:.15s">
-                    <a href="{{ route('intake.create') }}" class="px-6 py-3 rounded-md bg-[#7e22ce] text-white hover:bg-[#6b21a8]">Jaza fomu yetu</a>
-                    <a href="{{ route('login') }}" class="px-6 py-3 rounded-md border border-[#7e22ce] text-[#7e22ce] hover:bg-[#f3e8ff]">Ingia</a>
-                </div>
-                <div class="mt-8 flex items-center gap-4 animate-fade-up" style="--delay:.25s">
-                    <div class="flex -space-x-2">
-                        <img src="https://i.pravatar.cc/48?img=12" class="h-10 w-10 rounded-full ring-2 ring-[#f59e0b]/60" alt=""/>
-                        <img src="https://i.pravatar.cc/48?img=32" class="h-10 w-10 rounded-full ring-2 ring-[#f59e0b]/60" alt=""/>
-                        <img src="https://i.pravatar.cc/48?img=7" class="h-10 w-10 rounded-full ring-2 ring-[#f59e0b]/60" alt=""/>
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-3">Malkia Konnect</h2>
+                        <p class="text-white/90 mb-6">Join our community for support, guidance, and exclusive benefits through WhatsApp.</p>
+                        <div class="inline-flex items-center gap-2 rounded-full bg-white/90 text-rose-700 px-5 py-2.5 group-hover:bg-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                            <span class="font-semibold">Join Now</span>
+                        </div>
                     </div>
-                    <p class="text-sm text-gray-600"><span class="font-semibold">15.7k+</span> wametupatia nyota 5</p>
                 </div>
+            </a>
+        </div>
+
+        <!-- Floating WhatsApp button -->
+        <a href="https://wa.me/255700000000?text=Habari%20Malkia%20Konnect" class="fixed right-4 bottom-4 z-40 h-12 w-12 grid place-items-center rounded-full bg-green-500 hover:bg-green-600 shadow-lg" target="_blank" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white"><path d="M20.52 3.48A11.94 11.94 0 0012 0C5.37 0 0 5.37 0 12c0 2.11.54 4.16 1.57 5.98L0 24l6.2-1.62A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52zM12 22.06a10.05 10.05 0 01-5.12-1.4l-.37-.22-3.68.96.98-3.59-.24-.37A10.04 10.04 0 012 12C2 6.49 6.49 2 12 2s10 4.49 10 10-4.49 10.06-10 10.06zm5.58-7.4c-.31-.16-1.81-.89-2.09-.99-.28-.1-.49-.16-.7.16-.21.32-.8.99-.98 1.2-.18.21-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53-.92-.82-1.54-1.84-1.72-2.15-.18-.31-.02-.48.14-.63.14-.14.31-.36.46-.54.15-.18.2-.31.31-.52.1-.21.05-.39-.03-.55-.08-.16-.7-1.69-.96-2.31-.25-.6-.5-.52-.7-.53h-.6c-.21 0-.54.08-.82.39-.28.32-1.08 1.06-1.08 2.58s1.11 3 1.27 3.21c.16.21 2.19 3.34 5.3 4.68.74.32 1.32.51 1.77.65.74.24 1.41.2 1.94.12.59-.09 1.81-.74 2.06-1.46.26-.73.26-1.35.18-1.49-.08-.14-.29-.23-.6-.39z"/></svg>
+        </a>
+    </section>
+
+    
+
+
+    <!-- Featured Products -->
+    <section id="featured" class="py-16 lg:py-24 bg-gray-50">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl lg:text-4xl font-extrabold text-gray-800">Featured Products</h2>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Carefully designed solutions for every stage of your motherhood journey</p>
             </div>
-            <div x-data="{
-                    slides: [
-                        '{{ asset('african-pregnant-woman-is-sitting-floor-dressed-with-african-pattern-fabric_156889-8 (1).jpg') }}',
-                        '{{ asset('young-indian-pregnant-woman-standing-studio-setting_1187-448987-removebg-preview.png') }}'
+
+            @php
+                $products = [
+                    [
+                        'name' => 'Push to Recover Kit',
+                        'price' => 199000,
+                        'img' => 'https://images.unsplash.com/photo-1590741403575-9d0f362f2c9a?q=80&w=1200&auto=format&fit=crop',
                     ],
-                    i: 0,
-                    next(){ this.i = (this.i + 1) % this.slides.length },
-                }" x-init="setInterval(() => next(), 5000)" class="relative w-full h-[320px] lg:h-[480px] overflow-hidden">
-                <template x-for="(src, idx) in slides" :key="idx">
-                    <img :src="src" alt="Slideshow" class="absolute inset-0 w-full h-full object-cover"
-                         x-show="i === idx"
-                         x-transition:enter="transform transition ease-out duration-700"
-                         x-transition:enter-start="translate-x-full opacity-0"
-                         x-transition:enter-end="translate-x-0 opacity-100"
-                         x-transition:leave="transform transition ease-in duration-700"
-                         x-transition:leave-start="translate-x-0 opacity-100"
-                         x-transition:leave-end="-translate-x-full opacity-0"
-                    />
-                </template>
+                    [
+                        'name' => 'C-Section Heaven Kit',
+                        'price' => 175000,
+                        'img' => 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1200&auto=format&fit=crop',
+                    ],
+                    [
+                        'name' => 'Bump Support Belt',
+                        'price' => 85000,
+                        'img' => 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?q=80&w=1200&auto=format&fit=crop',
+                    ],
+                    [
+                        'name' => 'U-Shape Pregnancy Pillow',
+                        'price' => 120000,
+                        'img' => 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200&auto=format&fit=crop',
+                    ],
+                    [
+                        'name' => 'Nursing Cover',
+                        'price' => 35000,
+                        'img' => 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop',
+                    ],
+                    [
+                        'name' => 'Postpartum Essentials Pack',
+                        'price' => 95000,
+                        'img' => 'https://images.unsplash.com/photo-1591261730498-4b3b8f4a06f6?q=80&w=1200&auto=format&fit=crop',
+                    ],
+                    [
+                        'name' => 'Breastfeeding Pillow',
+                        'price' => 80000,
+                        'img' => 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1200&auto=format&fit=crop',
+                    ],
+                    [
+                        'name' => 'Prenatal Vitamins',
+                        'price' => 45000,
+                        'img' => 'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=1200&auto=format&fit=crop',
+                    ],
+                ];
+            @endphp
+
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                @foreach ($products as $p)
+                    <article class="group bg-white rounded-xl border shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col">
+                        <div class="relative h-40 sm:h-44">
+                            <img src="{{ $p['img'] }}" alt="{{ $p['name'] }}" class="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <p class="absolute inset-x-0 bottom-2 text-center text-white text-xs sm:text-sm font-semibold opacity-90 px-2 line-clamp-1">{{ $p['name'] }}</p>
+                        </div>
+                        <div class="p-3 sm:p-4 flex-1 flex flex-col">
+                            <h3 class="font-semibold mb-1 line-clamp-1">{{ $p['name'] }}</h3>
+                            <p class="text-[#ef4444] font-medium mb-4">TZS {{ number_format($p['price'], 0, '.', ',') }}</p>
+                            <div class="mt-auto">
+                                <button type="button" class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-rose-500 hover:bg-rose-600 text-white text-xs sm:text-sm font-medium px-3 sm:px-4 py-2">
+                                    <span class="material-symbols-outlined text-[18px] leading-none">shopping_cart</span>
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="py-16 lg:py-24 bg-white">
+    <!-- Why Join Malkia Konnect? -->
+    <section id="why-konnect" class="py-16 lg:py-24 bg-white">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
-                <p class="text-sm uppercase tracking-wider text-[#7e22ce]">Maswali Yanayoulizwa</p>
-                <h2 class="text-3xl lg:text-4xl font-extrabold">Maswali na Majibu (FAQ)</h2>
-                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Ikiwa una swali kuhusu {{ config('app.name', 'Malkia Konnect') }}, kuna uwezekano mkubwa majibu yako yapo hapa. Bado una swali? Wasiliana nasi.</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold text-[#85C2BE]">Why Join Malkia Konnect?</h2>
+                <p class="mt-2 text-[#642321] max-w-2xl mx-auto">Get personalized support through WhatsApp from our team of maternity experts</p>
             </div>
 
-            <div class="mx-auto max-w-3xl divide-y rounded-2xl border bg-white">
-                <!-- Item 1 -->
-                <div x-data="{open:false}" class="p-4 sm:p-6">
-                    <button @click="open=!open" class="w-full flex items-start gap-3 text-left">
-                        <span class="mt-1 h-8 w-8 flex items-center justify-center rounded-lg bg-[#7e22ce]/10 text-[#7e22ce]">
-                            <!-- Question mark icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0z"/><path d="M9 13h2v2H9v-2zm1-8a3.5 3.5 0 00-3.5 3.5.75.75 0 001.5 0A2 2 0 0110 6a2 2 0 011.85 1.23c.3.7.16 1.29-.44 1.82-.63.56-1.41.95-1.41 2.2V12h2v-.55c0-.5.43-.77.9-1.13 1.06-.81 1.85-1.92 1.04-3.78A3.5 3.5 0 0010 5z"/></svg>
-                        </span>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between">
-                                <h3 class="font-semibold">Malkia Konnect ni nini?</h3>
-                                <svg :class="open ? 'rotate-180' : ''" class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                            </div>
-                            <div x-show="open" x-transition.scale.origin.top.left class="mt-2 text-sm text-gray-600">
-                                {{ config('app.name', 'Malkia Konnect') }} ni jukwaa linalokupa elimu, jamii, na ushauri wa kitaalamu kuhusu ujauzito na ulezi.
-                            </div>
-                        </div>
-                    </button>
-                </div>
+            @php
+                $benefits = [
+                    [
+                        'title' => '24/7 WhatsApp Support',
+                        'desc'  => 'Get answers to your questions anytime from our team of experts',
+                        'icon'  => 'chat',
+                        'color' => 'text-[#85C2BE] bg-[#85C2BE]/10'
+                    ],
+                    [
+                        'title' => 'Weekly Tips & Guidance',
+                        'desc'  => 'Personalized advice based on your pregnancy stage and needs',
+                        'icon'  => 'calendar',
+                        'color' => 'text-[#F89795] bg-[#F89795]/10'
+                    ],
+                    [
+                        'title' => 'Exclusive Discounts',
+                        'desc'  => 'Special offers and early access to new products',
+                        'icon'  => 'gift',
+                        'color' => 'text-[#85C2BE] bg-[#85C2BE]/10'
+                    ],
+                    [
+                        'title' => 'Trusted Community',
+                        'desc'  => 'Connect with other moms for encouragement and real stories',
+                        'icon'  => 'users',
+                        'color' => 'text-[#F89795] bg-[#F89795]/10'
+                    ],
+                    [
+                        'title' => 'Expert Webinars',
+                        'desc'  => 'Live sessions with midwives, nutritionists and pediatricians',
+                        'icon'  => 'video',
+                        'color' => 'text-[#85C2BE] bg-[#85C2BE]/10'
+                    ],
+                    [
+                        'title' => 'Resources Library',
+                        'desc'  => 'Curated guides, checklists and postpartum care tips',
+                        'icon'  => 'book',
+                        'color' => 'text-[#F89795] bg-[#F89795]/10'
+                    ],
+                ];
+            @endphp
 
-                <!-- Item 2 -->
-                <div x-data="{open:false}" class="p-4 sm:p-6">
-                    <button @click="open=!open" class="w-full flex items-start gap-3 text-left">
-                        <span class="mt-1 h-8 w-8 flex items-center justify-center rounded-lg bg-[#f59e0b]/10 text-[#f59e0b]">
-                            <!-- Shield check icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14A1 1 0 003 18h14a1 1 0 00.894-1.447l-7-14z"/><path d="M9 12l-2-2 1.414-1.414L9 9.172l2.586-2.586L13 8l-4 4z"/></svg>
-                        </span>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between">
-                                <h3 class="font-semibold">Je, taarifa zangu ziko salama?</h3>
-                                <svg :class="open ? 'rotate-180' : ''" class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                            </div>
-                            <div x-show="open" x-transition.scale.origin.top.left class="mt-2 text-sm text-gray-600">
-                                Ndiyo. Tunaheshimu faragha yako na tunatunza taarifa zako kwa usalama kulingana na sera zetu za faragha.
-                            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+                @foreach ($benefits as $b)
+                    <div class="bg-white border rounded-2xl shadow-sm hover:shadow-lg transition p-6 text-center">
+                        <div class="mx-auto mb-4 h-12 w-12 grid place-items-center rounded-xl {{ $b['color'] }}">
+                            @switch($b['icon'])
+                                @case('chat')
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9M7.5 12h6m-6 6h7.5L21 21V6.75A2.25 2.25 0 0018.75 4.5H5.25A2.25 2.25 0 003 6.75v9A2.25 2.25 0 005.25 18h.75"/></svg>
+                                    @break
+                                @case('calendar')
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3.75v3M17.25 3.75v3M3.75 9.75h16.5M4.5 6.75A1.5 1.5 0 016 5.25h12a1.5 1.5 0 011.5 1.5v12A1.5 1.5 0 0118 20.25H6A1.5 1.5 0 013.75 18.75v-12A1.5 1.5 0 016 4.5zM6 4.5V21M9.75 8.25h4.5"/></svg>
+                                    @break
+                                @case('gift')
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5H3.75m0 0A2.25 2.25 0 016 5.25h12a2.25 2.25 0 012.25 2.25m-16.5 0v12A2.25 2.25 0 006 21.75h12a2.25 2.25 0 012.25-2.25v-12m-9 0v14.25m0-14.25S9.75 4.5 8.25 4.5 6 5.812 6 7.5c0 1.688 1.5 3 3 3s3-1.312 3-3zm0 0s1.5-3 3-3 3 1.312 3 3c0 1.688-1.5 3-3 3s-3-1.312-3-3z"/></svg>
+                                    @break
+                                @case('users')
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25a4.5 4.5 0 119 0M3.75 20.25a8.25 8.25 0 0116.5 0"/></svg>
+                                    @break
+                                @case('video')
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41.81 4.5 2.09A6 6 0 0 1 21.5 4C24 4 26 6 26 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    @break
+                                @case('book')
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 4.5h9A2.25 2.25 0 0117.25 6.75v12A2.25 2.25 0 0115 21H6A2.25 2.25 0 013.75 18.75v-12A2.25 2.25 0 016 4.5zM6 4.5V21M9.75 8.25h4.5"/></svg>
+                                    @break
+                            @endswitch
                         </div>
-                    </button>
-                </div>
-
-                <!-- Item 3 -->
-                <div x-data="{open:false}" class="p-4 sm:p-6">
-                    <button @click="open=!open" class="w-full flex items-start gap-3 text-left">
-                        <span class="mt-1 h-8 w-8 flex items-center justify-center rounded-lg bg-[#10b981]/10 text-[#10b981]">
-                            <!-- Sparkles icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l2 4 4 2-4 2-2 4-2-4-4-2 4-2 2-4zm14 2l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3zm-4 8l2 3 3 2-3 2-2 3-2-3-3-2 3-2 2-3z"/></svg>
-                        </span>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between">
-                                <h3 class="font-semibold">Nitaanza vipi haraka?</h3>
-                                <svg :class="open ? 'rotate-180' : ''" class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                            </div>
-                            <div x-show="open" x-transition.scale.origin.top.left class="mt-2 text-sm text-gray-600">
-                                Anza kwa kujaza <a href="{{ route('intake.create') }}" class="text-[#7e22ce] underline">fomu yetu</a>. Tutakushauri hatua inayofuata kulingana na mahitaji yako.
-                            </div>
-                        </div>
-                    </button>
-                </div>
-
-                <!-- Item 4 -->
-                <div x-data="{open:false}" class="p-4 sm:p-6">
-                    <button @click="open=!open" class="w-full flex items-start gap-3 text-left">
-                        <span class="mt-1 h-8 w-8 flex items-center justify-center rounded-lg bg-[#3b82f6]/10 text-[#3b82f6]">
-                            <!-- Video icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M15 8.5V6a2 2 0 00-2-2H3a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-2.5l6 3V5.5l-6 3z"/></svg>
-                        </span>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between">
-                                <h3 class="font-semibold">Je, kuna warsha au video?</h3>
-                                <svg :class="open ? 'rotate-180' : ''" class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                            </div>
-                            <div x-show="open" x-transition.scale.origin.top.left class="mt-2 text-sm text-gray-600">
-                                Ndiyo, tunayo maktaba ya video na warsha zinazoongozwa na wataalamu mara kwa mara.
-                            </div>
-                        </div>
-                    </button>
-                </div>
-
-                <!-- Item 5 -->
-                <div x-data="{open:false}" class="p-4 sm:p-6">
-                    <button @click="open=!open" class="w-full flex items-start gap-3 text-left">
-                        <span class="mt-1 h-8 w-8 flex items-center justify-center rounded-lg bg-[#ef4444]/10 text-[#ef4444]">
-                            <!-- Heart icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41.81 4.5 2.09A6 6 0 0 1 21.5 4C24 4 26 6 26 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                        </span>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between">
-                                <h3 class="font-semibold">Msaada wa baada ya kujifungua upoje?</h3>
-                                <svg :class="open ? 'rotate-180' : ''" class="h-5 w-5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                            </div>
-                            <div x-show="open" x-transition.scale.origin.top.left class="mt-2 text-sm text-gray-600">
-                                Tunakupa mwongozo wa kunyonyesha, usingizi wa mtoto, na ustawi wa akili wa mama.
-                            </div>
-                        </div>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Featured Blog -->
-    <section id="blog" class="py-16 lg:py-24 bg-white">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <p class="text-sm uppercase tracking-wider text-[#7e22ce]">Featured Blog</p>
-                <h2 class="text-3xl lg:text-4xl font-extrabold">Makala Zilizochaguliwa</h2>
-                <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Soma makala fupi kutoka kwa wataalamu wetu. Endelea kusoma ili kupata mwongozo sahihi na salama.</p>
+                        <h3 class="font-semibold text-[#642321] mb-1">{{ $b['title'] }}</h3>
+                        <p class="text-[#642321]/80 text-sm">{{ $b['desc'] }}</p>
+                    </div>
+                @endforeach
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Post 1 -->
-                <article class="group rounded-2xl overflow-hidden border bg-white hover:shadow-lg transition animate-fade-up" style="--delay:.05s">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="{{ asset('african-pregnant-woman-is-sitting-floor-dressed-with-african-pattern-fabric_156889-8 (1).jpg') }}" alt="Mwongozo wa Trimester ya Kwanza" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy" />
-                        <span class="absolute top-3 left-3 text-xs px-2 py-1 rounded bg-[#7e22ce] text-white">Featured</span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-semibold text-lg mb-1">Mwongozo wa Trimester ya Kwanza</h3>
-                        <p class="text-sm text-gray-600 mb-3">Dalili za kawaida, nini cha kula, na vitu muhimu vya kuzingatia katika wiki za mwanzo.</p>
-                        <a href="#" class="inline-flex items-center gap-1 text-[#7e22ce] hover:underline">Soma zaidi
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M12.293 3.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 11-1.414-1.414L14.586 9H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/></svg>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Post 2 -->
-                <article class="group rounded-2xl overflow-hidden border bg-white hover:shadow-lg transition animate-fade-up" style="--delay:.10s">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="{{ asset('young-indian-pregnant-woman-standing-studio-setting_1187-448987-removebg-preview.png') }}" alt="Lishe Bora kwa Mama Mjamzito" class="w-full h-full object-cover group-hover:scale-105 transition duration-300 bg-white" loading="lazy" />
-                        <span class="absolute top-3 left-3 text-xs px-2 py-1 rounded bg-[#7e22ce] text-white">Featured</span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-semibold text-lg mb-1">Lishe Bora kwa Mama Mjamzito</h3>
-                        <p class="text-sm text-gray-600 mb-3">Jedwali la vyakula muhimu, virutubisho vinavyoshauriwa, na jinsi ya kuepuka njaa ya mara kwa mara.</p>
-                        <a href="#" class="inline-flex items-center gap-1 text-[#7e22ce] hover:underline">Soma zaidi
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M12.293 3.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 11-1.414-1.414L14.586 9H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/></svg>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Post 3 -->
-                <article class="group rounded-2xl overflow-hidden border bg-white hover:shadow-lg transition animate-fade-up" style="--delay:.15s">
-                    <div class="relative h-48 overflow-hidden">
-                        <div class="w-full h-full bg-gradient-to-br from-[#7e22ce] to-[#f59e0b]"></div>
-                        <span class="absolute top-3 left-3 text-xs px-2 py-1 rounded bg-[#7e22ce] text-white">Featured</span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-semibold text-lg mb-1">Kujifungua kwa Amani: Maandalizi</h3>
-                        <p class="text-sm text-gray-600 mb-3">Vidokezo vya kisaikolojia na kimwili vinavyosaidia kujiandaa kwa siku ya kujifungua.</p>
-                        <a href="#" class="inline-flex items-center gap-1 text-[#7e22ce] hover:underline">Soma zaidi
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M12.293 3.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 11-1.414-1.414L14.586 9H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/></svg>
-                        </a>
-                    </div>
-                </article>
+            <div class="text-center mt-10">
+                <a href="{{ route('intake.create') }}" class="inline-flex items-center gap-2 rounded-full bg-[#85C2BE] hover:bg-[#74b5b1] text-white font-medium px-5 py-2.5 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                    <span>Join Konnect – It's Free</span>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Features as Progress Steps -->
-    <section id="features" class="py-16 lg:py-24 bg-gray-50">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" x-data="{start:false}" x-init="setTimeout(()=>start=true, 200)">
-            <div class="text-center mb-10">
-                <p class="text-sm uppercase tracking-wider text-[#7e22ce]">How It Helps</p>
-                <h2 class="text-3xl lg:text-4xl font-extrabold">Safari yako kwa hatua</h2>
-                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Tunakuongoza hatua kwa hatua: pata elimu sahihi, ungana na jamii yenye upendo, na onana na wataalamu wa karibu.</p>
-            </div>
-
-            <!-- Horizontal on lg, vertical on mobile -->
-            <div class="relative">
-                <!-- Connector line -->
-                <div class="hidden lg:block absolute top-7 left-0 right-0 h-1 bg-gray-200 rounded-full"></div>
-                <div class="hidden lg:block absolute top-7 left-0 h-1 bg-gradient-to-r from-[#7e22ce] to-[#f59e0b] rounded-full transition-all duration-1000" :style="start ? 'width:100%' : 'width:0%'"></div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                    <!-- Step 1 -->
-                    <div class="flex lg:block items-start gap-4 animate-fade-up" style="--delay:.05s">
-                        <!-- Dot/Number -->
-                        <div class="relative shrink-0">
-                            <div class="h-14 w-14 rounded-full bg-white border-2 border-[#7e22ce] flex items-center justify-center font-extrabold text-[#7e22ce] shadow-sm">1</div>
-                            <!-- Vertical connector for mobile -->
-                            <div class="lg:hidden absolute left-1/2 -bottom-10 -translate-x-1/2 w-1 h-10 bg-gray-200"></div>
-                            <div class="lg:hidden absolute left-1/2 -bottom-10 -translate-x-1/2 w-1 bg-gradient-to-b from-[#7e22ce] to-[#f59e0b] transition-all duration-1000" :style="start ? 'height:40px' : 'height:0px'"></div>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">Elimu sahihi</h3>
-                            <p class="text-gray-600">Makala, video, na kozi fupi za kila hatua ya ujauzito hadi baada ya kujifungua.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="flex lg:block items-start gap-4 animate-fade-up" style="--delay:.12s">
-                        <div class="relative shrink-0">
-                            <div class="h-14 w-14 rounded-full bg-white border-2 border-[#7e22ce] flex items-center justify-center font-extrabold text-[#7e22ce] shadow-sm">2</div>
-                            <div class="lg:hidden absolute left-1/2 -bottom-10 -translate-x-1/2 w-1 h-10 bg-gray-200"></div>
-                            <div class="lg:hidden absolute left-1/2 -bottom-10 -translate-x-1/2 w-1 bg-gradient-to-b from-[#7e22ce] to-[#f59e0b] transition-all duration-1000 delay-200" :style="start ? 'height:40px' : 'height:0px'"></div>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">Jamii yenye upendo</h3>
-                            <p class="text-gray-600">Uliza maswali na shiriki uzoefu; hupaswi kupita safari hii pekee.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="flex lg:block items-start gap-4 animate-fade-up" style="--delay:.19s">
-                        <div class="relative shrink-0">
-                            <div class="h-14 w-14 rounded-full bg-white border-2 border-[#7e22ce] flex items-center justify-center font-extrabold text-[#7e22ce] shadow-sm">3</div>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">Wataalamu wa karibu</h3>
-                            <p class="text-gray-600">Unganishwa na wakunga, madaktari na washauri wa lishe kwa ushauri makini.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fallback when no items -->
-                <div x-show="!items.length" class="mt-6 text-center text-gray-600">
-                    Hakuna testimonials kwa sasa. Tutarudisha taarifa hivi karibuni.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Subscribe -->
-    <section id="newsletter" class="py-16 lg:py-24 bg-gray-50">
+    <!-- Testimonials (Carousel) -->
+    <section id="testimonials" class="relative py-16 lg:py-24" style="background-color:#85C2BE;">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8">
-                <p class="text-sm uppercase tracking-wider text-[#7e22ce]">Stay Updated</p>
-                <h2 class="text-3xl lg:text-4xl font-extrabold">Jisajili kupokea taarifa muhimu</h2>
-                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Pokea makala, vidokezo vya afya ya uzazi na taarifa za warsha moja kwa moja kwenye barua pepe yako.</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold text-white">Hear From Our Community</h2>
+                <p class="mt-2 text-white/90 max-w-2xl mx-auto">Real stories from mothers who've benefited from Malkia products and support</p>
             </div>
 
-            @if (session('newsletter_ok'))
-                <div class="mx-auto max-w-2xl mb-4 rounded-md bg-green-50 text-green-800 px-4 py-3 border border-green-200">
-                    {{ session('newsletter_ok') }}
-                </div>
-            @endif
+            @php
+                $items = [
+                    [
+                        'quote' => 'The Push to Recover Kit made my postpartum journey so much easier. The support and guidance from Malkia Konnect was invaluable!',
+                        'name'  => 'Sarah J.',
+                        'role'  => 'First-time mom',
+                        'avatar'=> 'https://i.pravatar.cc/80?img=32',
+                    ],
+                    [
+                        'quote' => 'As a C-section mom, the recovery kit was a lifesaver. The scar sheets and support binder made all the difference in my healing process.',
+                        'name'  => 'Amina M.',
+                        'role'  => 'C-section recovery',
+                        'avatar'=> 'https://i.pravatar.cc/80?img=47',
+                    ],
+                    [
+                        'quote' => 'The WhatsApp support group felt like having a midwife in my pocket. I got immediate answers to all my questions, day or night!',
+                        'name'  => 'Grace T.',
+                        'role'  => 'Konnect member',
+                        'avatar'=> 'https://i.pravatar.cc/80?img=15',
+                    ],
+                    [
+                        'quote' => 'Weekly tips were so timely and practical. From trimester nutrition to newborn sleep, I felt guided every step.',
+                        'name'  => 'Linda K.',
+                        'role'  => 'Expectant mom',
+                        'avatar'=> 'https://i.pravatar.cc/80?img=23',
+                    ],
+                    [
+                        'quote' => 'Exclusive discounts helped me afford quality products. Value and care in one place — thank you Malkia!',
+                        'name'  => 'Neema P.',
+                        'role'  => 'Community member',
+                        'avatar'=> 'https://i.pravatar.cc/80?img=5',
+                    ],
+                ];
+            @endphp
 
-            <form method="POST" action="{{ route('newsletter.store') }}" class="mx-auto max-w-2xl">
-                @csrf
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <div class="md:col-span-1">
-                        <label class="sr-only">Jina</label>
-                        <input name="name" value="{{ old('name') }}" class="w-full border rounded-md px-3 py-3" placeholder="Jina (hiari)">
-                        @error('name')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="sr-only">Barua pepe</label>
-                        <div class="flex">
-                            <input type="email" name="email" value="{{ old('email') }}" class="flex-1 border rounded-l-md px-3 py-3" placeholder="Ingiza barua pepe yako" required>
-                            <button class="px-6 py-3 rounded-r-md bg-[#7e22ce] text-white hover:bg-[#6b21a8] whitespace-nowrap">Jisajili</button>
-                        </div>
-                        @error('email')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+            <div x-data="{
+                    i: 0,
+                    get max(){ return this.$refs.track?.children.length ?? 0 },
+                    next(){ this.i = (this.i + 1) % this.max; this.scroll() },
+                    prev(){ this.i = (this.i - 1 + this.max) % this.max; this.scroll() },
+                    scroll(){
+                        const track = this.$refs.track;
+                        const card = track?.children[0];
+                        if(!track || !card) return;
+                        const style = getComputedStyle(track);
+                        const gap = parseFloat(style.columnGap || style.gap) || 16;
+                        const w = card.getBoundingClientRect().width + gap;
+                        track.scrollTo({ left: this.i * w, behavior: 'smooth' });
+                    },
+                }"
+                x-init="
+                    $nextTick(()=>{
+                        let t = setInterval(()=>next(), 4500);
+                        $refs.wrapper.addEventListener('mouseenter', ()=>clearInterval(t));
+                        $refs.wrapper.addEventListener('mouseleave', ()=>{ t = setInterval(()=>next(), 4500) });
+                    })
+                "
+                class="relative">
+
+                <!-- Controls removed per request; auto-scroll and swipe still available -->
+
+                <!-- Track -->
+                <div x-ref="wrapper" class="overflow-hidden">
+                    <div x-ref="track" class="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2"
+                         style="scrollbar-width:none" x-on:wheel.passive>
+                        @foreach($items as $t)
+                            <figure class="snap-start shrink-0 w-[90%] sm:w-[48%] lg:w-[32%] bg-white/90 rounded-2xl p-5 text-[#642321] border border-white/70 shadow-md">
+                                <blockquote class="italic text-[#642321]">“{{ $t['quote'] }}”</blockquote>
+                                <div class="mt-4 flex items-center gap-3">
+                                    <img src="{{ $t['avatar'] }}" alt="{{ $t['name'] }}" class="h-9 w-9 rounded-full object-cover ring-2 ring-white/70"/>
+                                    <figcaption>
+                                        <div class="font-semibold">{{ $t['name'] }}</div>
+                                        <div class="text-xs text-[#642321]/70">{{ $t['role'] }}</div>
+                                    </figcaption>
+                                </div>
+                            </figure>
+                        @endforeach
                     </div>
                 </div>
-                <p class="mt-3 text-xs text-gray-500">Kwa kujisajili, unakubali kupokea barua pepe kutoka {{ config('app.name', 'Malkia Konnect') }}. Unaweza kujiondoa wakati wowote.</p>
-            </form>
+            </div>
         </div>
     </section>
 

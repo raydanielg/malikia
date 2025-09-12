@@ -1,0 +1,54 @@
+Malkia Website Design Guidelines (For Designer)
+1. Brand Colors & Visual Language
+- Dominant Color: #85C2BE (Mint) → headers, backgrounds, primary CTAs
+- Accent Colors:
+• #F89795 (Blush pink) → secondary buttons, highlights, badges
+• #642321 (Deep brown) → body text, footer backgrounds
+- Neutrals: #F5F5F5 (gray), #FFFFFF (white)
+Style: Fresh, nurturing, premium. Mint dominates, blush warms, brown grounds.
+2. Global Layout
+- Sticky Header: Logo left, nav center, CTA right (‘Join Konnect’)
+- Footer: Deep brown background, 4 columns (Shop, Support, Company, Social)
+- Mint hover on links, include contact info
+3. Homepage Structure
+1. Hero Section: Split Hero Cards
+- Maternity Products (Mint)
+- Malkia Konnect (Blush)
+2. Best Sellers Slider with categories
+3. Value Proposition: Why Join Konnect cards
+4. Testimonials with gradient background
+5. Educational CTA + Join Konnect
+4. Shop Pages
+- Shop All: product grid
+- Shop by Stage: filter by trimester, postpartum
+- Shop by Solution: filter by needs
+- Bundles & Kits: emphasize savings
+- Pre-Orders: promo banner + form
+5. Konnect Pages
+- Hero: tagline “Midwife in Your Pocket ❤️”
+- How It Works: 3-step cards
+- Free vs Premium (Crown) comparison
+- Sign-up form (name, WhatsApp, due date mandatory)
+- Testimonials carousel
+- Premium Upgrade CTA
+6. Design Principles
+- CTAs: action-oriented (‘Shop Now’, ‘Join Free’)
+- Typography: Inter font, headings bold
+- Buttons: pill-style, hover color shifts
+- Images: authentic Tanzanian mothers, product cutouts
+- Animations: subtle hover, scroll fade-ins
+- Responsiveness: mobile-first, fast loading
+7. Key Lessons to Apply
+- Clear tagline at the top that instantly communicates value
+- Multiple access channels (WhatsApp, SMS, toll-free)
+- Mission and values visible and easy to understand
+- Strong, bold CTAs (not generic)
+- Products + Konnect shown as two main doors
+- Personalization by pregnancy stage for relevance
+8. Deliverables for Designer
+- Wireframes: Homepage, Shop Landing, Konnect Landing, Product Page, Pre-Order Page
+- Style guide: colors, typography, buttons
+- Component library: hero, product cards, testimonial cards, CTAs
+- Mobile-first prototypes
+Key Reminder for Designer
+This site must feel like a hug delivered digitally — calm, supportive, premium — while also being conversion-focused (shop + Konnect sign-ups).
