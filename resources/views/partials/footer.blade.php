@@ -5,7 +5,6 @@
             <div>
                 <div class="flex items-center gap-3 mb-4">
                     <img src="{{ asset('img/logo white hair.png') }}" alt="Logo" class="h-16 w-16 md:h-20 md:w-20 rounded object-cover drop-shadow"/>
-                    <span class="font-semibold">Malkia</span>
                 </div>
                 <p class="text-sm text-white/80 max-w-xs">Supporting mothers through every stage of their journey with quality products and community support.</p>
                 <div class="mt-5 flex items-center gap-3">
@@ -29,11 +28,11 @@
                     Shop
                 </h4>
                 <ul class="space-y-2 text-white/85">
-                    <li><a href="{{ route('services') }}" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> All Products</a></li>
-                    <li><a href="{{ route('services') }}" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> By Pregnancy Stage</a></li>
-                    <li><a href="{{ route('services') }}" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> By Solution</a></li>
-                    <li><a href="{{ route('services') }}" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> Bundles & Kits</a></li>
-                    <li><a href="#" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> Pre-Orders</a></li>
+                    <li><a href="https://shop.malkia.co.tz/categories" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>All Products</span></a></li>
+                    <li><a href="https://shop.malkia.co.tz/categories" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>By Pregnancy Stage</span></a></li>
+                    <li><a href="https://shop.malkia.co.tz/categories" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>By Solution</span></a></li>
+                    <li><a href="https://shop.malkia.co.tz/categories" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>Bundles & Kits</span></a></li>
+                    <li><a href="https://shop.malkia.co.tz/categories" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>Pre-Orders</span></a></li>
                 </ul>
             </div>
 
@@ -45,11 +44,11 @@
                     Support
                 </h4>
                 <ul class="space-y-2 text-white/85">
-                    <li><a href="#" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> FAQs</a></li>
-                    <li><a href="{{ url('/contact') }}" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> Contact Us</a></li>
-                    <li><a href="#" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> Shipping & Returns</a></li>
-                    <li><a href="#" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> Size Guide</a></li>
-                    <li><a href="{{ route('intake.create') }}" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> Join Konnect</a></li>
+                    <li><a href="#" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>FAQs</span></a></li>
+                    <li><a href="{{ url('/contact') }}" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>Contact Us</span></a></li>
+                    <li><a href="#" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>Shipping & Returns</span></a></li>
+                    <li><a href="#" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>Size Guide</span></a></li>
+                    <li><a href="{{ route('intake.create') }}" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>Join Konnect</span></a></li>
                 </ul>
             </div>
 
@@ -61,10 +60,9 @@
                     Company
                 </h4>
                 <ul class="space-y-2 text-white/85">
-                    <li><a href="{{ route('about') }}" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> Our Story</a></li>
-                    <li><a href="#" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> Meet the Team</a></li>
-                    <li><a href="#" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> Careers</a></li>
-                    <li><a href="{{ url('/contact') }}" class="hover:underline inline-flex items-center gap-2"><span class="opacity-70">›</span> Contact</a></li>
+                    <li><a href="{{ route('about') }}" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>Our Story</span></a></li>
+                    <li><a href="{{ route('team') }}" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>Meet the Team</span></a></li>
+                    <li><a href="{{ route('contact') }}" class="group inline-flex items-center gap-2 transition-colors duration-200 hover:text-white"><span class="opacity-70 transition-transform duration-200 group-hover:translate-x-1">›</span> <span>Contact</span></a></li>
                 </ul>
             </div>
         </div>
@@ -72,4 +70,33 @@
         <hr class="mt-10 border-white/20"/>
         <p class="text-center text-sm text-white/80 py-6">© {{ date('Y') }} Malkia Wellness Group Ltd. All rights reserved.</p>
     </div>
+    
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/255714172979?text=Habari%21%20Naomba%20msaada%20kuhusu%20bidhaa%20za%20Malkia." target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp: +255 714 172 979" class="group fixed z-[60] right-4 bottom-4 md:right-6 md:bottom-6">
+        <span class="relative inline-flex items-center justify-center h-14 w-14 md:h-16 md:w-16 rounded-full shadow-lg shadow-black/20" style="background-color:#25D366; color:white;">
+            <!-- WhatsApp SVG Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-7 w-7 md:h-8 md:w-8 drop-shadow">
+                <path fill="currentColor" d="M19.11 17.63c-.26-.13-1.51-.74-1.74-.82c-.23-.08-.4-.13-.57.13c-.17.26-.66.82-.8.99c-.15.17-.3.19-.56.06c-.26-.13-1.1-.41-2.1-1.31c-.78-.7-1.31-1.57-1.47-1.83c-.15-.26-.02-.4.11-.53c.12-.12.26-.3.4-.45c.13-.15.17-.26.26-.43c.09-.17.04-.32-.02-.45c-.06-.13-.57-1.39-.78-1.9c-.2-.49-.41-.42-.57-.43c-.15-.01-.32-.01-.49-.01s-.45.06-.69.32c-.24.26-.91.89-.91 2.18c0 1.28.93 2.53 1.06 2.7c.13.17 1.83 2.79 4.44 3.91c.62.27 1.11.43 1.49.55c.62.2 1.18.17 1.63.1c.5-.08 1.51-.62 1.72-1.22c.21-.6.21-1.11.15-1.22c-.06-.11-.23-.17-.49-.3M16.02 4C9.38 4 4 9.37 4 16.01c0 2.12.56 4.11 1.54 5.83L4 28l6.33-1.65a11.96 11.96 0 0 0 5.69 1.45c6.64 0 12.02-5.38 12.02-12.02C28.04 9.37 22.66 4 16.02 4m0 21.94c-1.97 0-3.8-.58-5.33-1.57l-.38-.24l-3.76.98l1.01-3.66l-.25-.38a9.91 9.91 0 0 1-1.53-5.27c0-5.47 4.45-9.92 9.93-9.92c5.47 0 9.92 4.45 9.92 9.92c0 5.48-4.45 9.92-9.92 9.92"/>
+            </svg>
+            <!-- Pulse ring -->
+            <span class="absolute inset-0 rounded-full ring-2 ring-white/0 group-hover:ring-white/30 transition-all duration-300"></span>
+        </span>
+        <!-- Tooltip label on hover (desktop) -->
+        <span class="hidden md:inline-block ml-2 align-middle text-white/90 text-sm">Chat on WhatsApp</span>
+    </a>
+
+    <!-- Scoped animation for WhatsApp button -->
+    <style>
+      @keyframes malkia-wiggle { 0%, 100% { transform: rotate(0deg) translateZ(0); } 15% { transform: rotate(-8deg) translateZ(0); } 30% { transform: rotate(8deg) translateZ(0); } 45% { transform: rotate(-6deg) translateZ(0); } 60% { transform: rotate(6deg) translateZ(0); } 75% { transform: rotate(-3deg) translateZ(0); } 90% { transform: rotate(3deg) translateZ(0); } }
+      .group:hover .drop-shadow { filter: drop-shadow(0 4px 10px rgba(0,0,0,.25)); }
+      /* periodic subtle wiggle */
+      a[aria-label="WhatsApp"] span { animation: malkia-wiggle 1s ease-in-out infinite; animation-delay: 2s; animation-iteration-count: infinite; animation-play-state: running; }
+      /* reduce motion preference */
+      @media (prefers-reduced-motion: reduce) {
+        a[aria-label="WhatsApp"] span { animation: none !important; }
+      }
+      /* Pause wiggle on hover to not distract during interaction */
+      a[aria-label="WhatsApp"]:hover span { animation-play-state: paused; transform: scale(1.05); }
+    </style>
+
 </footer>

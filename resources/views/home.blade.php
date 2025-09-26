@@ -53,10 +53,6 @@
             </a>
         </div>
 
-        <!-- Floating WhatsApp button -->
-        <a href="https://wa.me/255700000000?text=Habari%20Malkia%20Konnect" class="fixed right-4 bottom-4 z-40 h-12 w-12 grid place-items-center rounded-full bg-green-500 hover:bg-green-600 shadow-lg" target="_blank" aria-label="WhatsApp">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white"><path d="M20.52 3.48A11.94 11.94 0 0012 0C5.37 0 0 5.37 0 12c0 2.11.54 4.16 1.57 5.98L0 24l6.2-1.62A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52zM12 22.06a10.05 10.05 0 01-5.12-1.4l-.37-.22-3.68.96.98-3.59-.24-.37A10.04 10.04 0 012 12C2 6.49 6.49 2 12 2s10 4.49 10 10-4.49 10.06-10 10.06zm5.58-7.4c-.31-.16-1.81-.89-2.09-.99-.28-.1-.49-.16-.7.16-.21.32-.8.99-.98 1.2-.18.21-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53-.92-.82-1.54-1.84-1.72-2.15-.18-.31-.02-.48.14-.63.14-.14.31-.36.46-.54.15-.18.2-.31.31-.52.1-.21.05-.39-.03-.55-.08-.16-.7-1.69-.96-2.31-.25-.6-.5-.52-.7-.53h-.6c-.21 0-.54.08-.82.39-.28.32-1.08 1.06-1.08 2.58s1.11 3 1.27 3.21c.16.21 2.19 3.34 5.3 4.68.74.32 1.32.51 1.77.65.74.24 1.41.2 1.94.12.59-.09 1.81-.74 2.06-1.46.26-.73.26-1.35.18-1.49-.08-.14-.29-.23-.6-.39z"/></svg>
-        </a>
     </section>
 
     
@@ -67,75 +63,75 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
                 <h2 class="text-3xl lg:text-4xl font-extrabold text-gray-800">Featured Products</h2>
-                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Carefully designed solutions for every stage of your motherhood journey</p>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Bidhaa bora kwa safari yako ya ujauzito na uzazi kutoka Malkia</p>
             </div>
 
             @php
-                $products = [
-                    [
-                        'name' => 'Push to Recover Kit',
-                        'price' => 199000,
-                        'img' => 'https://images.unsplash.com/photo-1590741403575-9d0f362f2c9a?q=80&w=1200&auto=format&fit=crop',
-                    ],
-                    [
-                        'name' => 'C-Section Heaven Kit',
-                        'price' => 175000,
-                        'img' => 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1200&auto=format&fit=crop',
-                    ],
-                    [
-                        'name' => 'Bump Support Belt',
-                        'price' => 85000,
-                        'img' => 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?q=80&w=1200&auto=format&fit=crop',
-                    ],
-                    [
-                        'name' => 'U-Shape Pregnancy Pillow',
-                        'price' => 120000,
-                        'img' => 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200&auto=format&fit=crop',
-                    ],
-                    [
-                        'name' => 'Nursing Cover',
-                        'price' => 35000,
-                        'img' => 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop',
-                    ],
-                    [
-                        'name' => 'Postpartum Essentials Pack',
-                        'price' => 95000,
-                        'img' => 'https://images.unsplash.com/photo-1591261730498-4b3b8f4a06f6?q=80&w=1200&auto=format&fit=crop',
-                    ],
-                    [
-                        'name' => 'Breastfeeding Pillow',
-                        'price' => 80000,
-                        'img' => 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1200&auto=format&fit=crop',
-                    ],
-                    [
-                        'name' => 'Prenatal Vitamins',
-                        'price' => 45000,
-                        'img' => 'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=1200&auto=format&fit=crop',
-                    ],
+                $images = [
+                    'IMG-20250919-WA0020.jpg',
+                    'IMG-20250919-WA0026.jpg',
+                    'IMG-20250919-WA0028.jpg',
+                    'IMG-20250919-WA0030.jpg',
+                    'IMG-20250919-WA0032.jpg',
+                    'IMG-20250919-WA0035.jpg',
+                    'IMG-20250919-WA0037.jpg',
                 ];
             @endphp
 
-            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-                @foreach ($products as $p)
-                    <article class="group bg-white rounded-xl border shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col">
-                        <div class="relative h-40 sm:h-44">
-                            <img src="{{ $p['img'] }}" alt="{{ $p['name'] }}" class="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                            <p class="absolute inset-x-0 bottom-2 text-center text-white text-xs sm:text-sm font-semibold opacity-90 px-2 line-clamp-1">{{ $p['name'] }}</p>
-                        </div>
-                        <div class="p-3 sm:p-4 flex-1 flex flex-col">
-                            <h3 class="font-semibold mb-1 line-clamp-1">{{ $p['name'] }}</h3>
-                            <p class="text-[#ef4444] font-medium mb-4">TZS {{ number_format($p['price'], 0, '.', ',') }}</p>
-                            <div class="mt-auto">
-                                <button type="button" class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-rose-500 hover:bg-rose-600 text-white text-xs sm:text-sm font-medium px-3 sm:px-4 py-2">
-                                    <span class="material-symbols-outlined text-[18px] leading-none">shopping_cart</span>
-                                    <span>Add to Cart</span>
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-                @endforeach
+            <div class="overflow-hidden">
+                <div class="flex gap-4 sm:gap-6 animate-malkia-marquee will-change-transform">
+                    <!-- Marquee group A -->
+                    <div class="flex gap-4 sm:gap-6 shrink-0">
+                        @foreach ($images as $img)
+                            <article class="group bg-white rounded-2xl border shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col min-w-[220px] sm:min-w-[260px] md:min-w-[280px]">
+                                <div class="relative h-56 sm:h-64 md:h-72 lg:h-80 bg-gray-100 overflow-hidden">
+                                    @php $ver = @filemtime(public_path('mimba/' . $img)) ?: time(); @endphp
+                                    <a href="https://shop.malkia.co.tz" target="_blank" rel="noopener" aria-label="Open shop.malkia.co.tz">
+                                        <img src="{{ url('mimba/' . $img) }}?v={{ $ver }}" alt="Malkia product image" class="absolute inset-0 w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy" decoding="async"/>
+                                    </a>
+                                </div>
+                                <div class="p-3 sm:p-4">
+                                    <a href="https://shop.malkia.co.tz" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-rose-500 hover:bg-rose-600 text-white text-xs sm:text-sm font-medium px-3 sm:px-4 py-2">
+                                        <span>Shop Now</span>
+                                    </a>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
+
+                    <!-- Marquee group B (duplicate for seamless loop) -->
+                    <div class="flex gap-4 sm:gap-6 shrink-0" aria-hidden="true">
+                        @foreach ($images as $img)
+                            <article class="group bg-white rounded-2xl border shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col min-w-[220px] sm:min-w-[260px] md:min-w-[280px]">
+                                <div class="relative h-56 sm:h-64 md:h-72 lg:h-80 bg-gray-100 overflow-hidden">
+                                    @php $ver = @filemtime(public_path('mimba/' . $img)) ?: time(); @endphp
+                                    <a href="https://shop.malkia.co.tz" target="_blank" rel="noopener" aria-label="Open shop.malkia.co.tz">
+                                        <img src="{{ url('mimba/' . $img) }}?v={{ $ver }}" alt="Malkia product image" class="absolute inset-0 w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy" decoding="async"/>
+                                    </a>
+                                </div>
+                                <div class="p-3 sm:p-4">
+                                    <a href="https://shop.malkia.co.tz" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-rose-500 hover:bg-rose-600 text-white text-xs sm:text-sm font-medium px-3 sm:px-4 py-2">
+                                        <span>Shop Now</span>
+                                    </a>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
+                </div>
             </div>
+
+            <!-- Scoped marquee styles -->
+            <style>
+              @keyframes malkia-marquee {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(50%); }
+              }
+              .animate-malkia-marquee { animation: malkia-marquee 40s linear infinite; }
+              .animate-malkia-marquee:hover { animation-play-state: paused; }
+              @media (prefers-reduced-motion: reduce) {
+                .animate-malkia-marquee { animation: none; }
+              }
+            </style>
         </div>
     </section>
 

@@ -47,6 +47,13 @@ class LoginRequest extends FormRequest
         if (! Auth::attempt([$field => $identifier, 'password' => $this->string('password')], $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
+            // If it's an AJAX request, return JSON error
+            if ($this->ajax() || $this->wantsJson()) {
+                throw ValidationException::withMessages([
+                    'login' => trans('auth.failed'),
+                ])->status(422);
+            }
+
             throw ValidationException::withMessages([
                 'login' => trans('auth.failed'),
             ]);

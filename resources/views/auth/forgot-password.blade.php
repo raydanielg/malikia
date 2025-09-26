@@ -1,52 +1,44 @@
 <x-guest-layout :showTopLogo="false" :fullWidth="true">
-    <div class="w-full h-full grid grid-cols-1 lg:grid-cols-2">
-        <!-- Left: Instruction + form (white) -->
-        <div class="relative bg-white border-r border-gray-200 flex items-center justify-center p-6 lg:p-10">
-            <div class="w-full max-w-lg">
-                <h1 class="text-2xl font-semibold mb-3">Rekebisha nenosiri</h1>
-                <p class="mb-6 text-sm text-gray-600">Weka barua pepe yako na tutakutumia kiungo cha kurekebisha nenosiri. Angalia kwenye <strong>Inbox</strong> au <strong>Spam</strong>.</p>
+    <div class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div class="w-full max-w-md">
+            <!-- Logo/Branding -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Malkia Konnect</h1>
+                <p class="text-gray-600 mt-2">Weka barua pepe yako kwa ajili ya kubadili nenosiri</p>
+            </div>
 
-                <!-- Session Status -->
-                <x-auth-session-status class="mb-4" :status="session('status')" />
+            <!-- Status Message -->
+            <x-auth-session-status class="mb-6 p-4 bg-green-50 text-green-700 rounded-lg" :status="session('status')" />
 
-                <form method="POST" action="{{ route('password.email') }}" class="space-y-4">
+            <!-- Form -->
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <form method="POST" action="{{ route('password.email') }}" class="space-y-5">
                     @csrf
 
-                    <div>
-                        <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    <div class="space-y-1">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Barua pepe</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <input id="email" name="email" type="email" required autofocus 
+                                class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                                placeholder="weka barua pepe yako">
+                        </div>
+                        <x-input-error :messages="$errors->get('email')" class="mt-1" />
                     </div>
 
-                    <button type="submit" class="w-full inline-flex justify-center items-center rounded-md bg-[#7e22ce] text-white font-medium py-2.5 hover:bg-[#6b21a8] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7e22ce]">
-                        Tuma kiungo cha kurekebisha
-                    </button>
+                    <div class="flex items-center justify-between">
+                        <a href="{{ route('login') }}" class="text-sm text-purple-600 hover:underline">
+                            Rudi kwenye ukurasa wa kuingia
+                        </a>
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-purple-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-purple-700 focus:bg-purple-700 active:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            Tuma kiungo cha kubadili nenosiri
+                        </button>
+                    </div>
                 </form>
-
-                <p class="mt-4 text-sm text-gray-600">Kumbuka nenosiri? <a href="{{ route('login') }}" class="text-[#7e22ce] hover:underline">Rudi kwenye kuingia</a></p>
-            </div>
-        </div>
-
-        <!-- Right: Brand panel (purple + yellow) -->
-        <div class="relative text-white flex items-center" style="background: radial-gradient(1200px 600px at 80% 20%, rgba(245,158,11,0.25), transparent 50%), linear-gradient(135deg, #6b21a8 0%, #7e22ce 35%, #7e22ce 60%, #f59e0b 120%);">
-            <div class="max-w-2xl px-8 lg:px-16">
-                <div class="inline-flex items-center gap-3 mb-2">
-                    <span class="text-xl font-semibold tracking-wide animate-fade-up">{{ config('app.name', 'Malkia Konnect') }}</span>
-                </div>
-                <h2 class="text-3xl lg:text-5xl font-extrabold leading-tight mb-3 animate-fade-up" style="--delay:.08s">Usalama wa akaunti yako ni muhimu.</h2>
-                <div class="h-1 w-24 bg-[#f59e0b] rounded mb-4"></div>
-                <p class="text-white/90 lg:text-lg mb-6 animate-fade-up" style="--delay:.15s">Tunakulinda kupitia hatua rahisi za kubadilisha nenosiri. Ukikwama, timu yetu iko tayari kukusaidia.</p>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 opacity-0 animate-fade-up" style="--delay:.20s">
-                        <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-yellow-200 text-yellow-900 animate-pop">✓</span>
-                        <span class="text-white/95 lg:text-lg">Haraka na rahisi kutumia.</span>
-                    </li>
-                    <li class="flex items-start gap-3 opacity-0 animate-fade-up" style="--delay:.30s">
-                        <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-yellow-200 text-yellow-900 animate-pop">✓</span>
-                        <span class="text-white/95 lg:text-lg">Kiungo salama cha kubadilisha nenosiri.</span>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 </x-guest-layout>

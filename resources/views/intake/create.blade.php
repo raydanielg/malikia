@@ -18,15 +18,9 @@
     </header>
 
     <main class="py-10">
-        @php(
-            $initialStep = 1
-        )
-        @php(
-            $initialStep = $errors->hasAny(['pregnancy_stage','due_date','previous_pregnancies']) ? 2 : $initialStep
-        )
-        @php(
-            $initialStep = $errors->hasAny(['concerns','interests','interests.*']) ? 3 : $initialStep
-        )
+        @php($initialStep = 1)@endphp
+        @php($initialStep = $errors->hasAny(['pregnancy_stage','due_date','previous_pregnancies']) ? 2 : $initialStep)@endphp
+        @php($initialStep = $errors->hasAny(['concerns','interests','interests.*']) ? 3 : $initialStep)@endphp
         <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8" x-data="{step: {{ $initialStep }}, total:3}">
             <!-- Title & progress (centered) -->
             <div class="mb-6 text-center">
@@ -165,8 +159,8 @@
                         <div>
                             <label class="block text-sm font-medium">Ungependa nini zaidi?</label>
                             <div class="mt-2 grid grid-cols-2 sm:grid-cols-3 gap-2">
-                                @php($opts = ['Elimu/kozi', 'Warsha', 'Ushauri wa daktari', 'Ushauri wa lishe', 'Jamii/Group', 'Huduma baada ya kujifungua'])
-                                @php($oldInterests = old('interests', []))
+                                @php($opts = ['Elimu/kozi', 'Warsha', 'Ushauri wa daktari', 'Ushauri wa lishe', 'Jamii/Group', 'Huduma baada ya kujifungua'])@endphp
+                                @php($oldInterests = old('interests', []))@endphp
                                 @foreach($opts as $opt)
                                     <label class="inline-flex items-center gap-2 text-sm">
                                         <span class="text-[#f59e0b]">

@@ -36,6 +36,14 @@ class MotherIntakeController extends Controller
             $validated['user_id'] = $request->user()->id;
         }
 
+        // Set default status values (in case columns don't exist yet)
+        if (!isset($validated['status'])) {
+            $validated['status'] = MotherIntake::STATUS_PENDING;
+        }
+        if (!isset($validated['priority'])) {
+            $validated['priority'] = MotherIntake::PRIORITY_MEDIUM;
+        }
+
         $intake = MotherIntake::create($validated);
 
         // Notify admin
