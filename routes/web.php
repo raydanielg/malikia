@@ -38,12 +38,15 @@ Route::middleware(['auth', 'verified'])->prefix('panel')->name('panel.')->group(
     Route::post('/intake/{intake}/complete', [App\Http\Controllers\PanelController::class, 'markAsCompleted'])->name('intake.complete');
     Route::post('/intake/{intake}/review', [App\Http\Controllers\PanelController::class, 'markAsReviewed'])->name('intake.review');
     Route::get('/intake/{intake}', [App\Http\Controllers\PanelController::class, 'showDetails'])->name('intake.details');
+    Route::get('/intakes', [App\Http\Controllers\PanelController::class, 'listIntakes'])->name('intakes.index');
     Route::get('/export/excel', [App\Http\Controllers\PanelController::class, 'exportExcel'])->name('export.excel');
     Route::get('/export/csv', [App\Http\Controllers\PanelController::class, 'exportCSV'])->name('export.csv');
 
     // User management routes
     Route::post('/user/{user}/toggle-status', [App\Http\Controllers\PanelController::class, 'toggleUserStatus'])->name('user.toggle');
     Route::get('/user/{user}', [App\Http\Controllers\PanelController::class, 'showUserDetails'])->name('user.details');
+    Route::get('/users', [App\Http\Controllers\PanelController::class, 'usersIndex'])->name('users.index');
+    Route::post('/users', [App\Http\Controllers\PanelController::class, 'usersStore'])->name('users.store');
 
     // System management routes
     Route::post('/send-notification', [App\Http\Controllers\PanelController::class, 'sendNotification'])->name('notification.send');

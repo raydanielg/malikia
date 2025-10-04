@@ -94,7 +94,7 @@
                 </button>
                 <ul id="dropdown-forms" class="hidden py-2 space-y-2 pl-4">
                     <li>
-                        <a href="{{ route('panel') }}#form-responses" class="flex items-center p-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+                        <a href="{{ route('panel.intakes.index') }}" class="flex items-center p-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
                             <svg class="w-4 h-4 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                             </svg>
@@ -102,14 +102,6 @@
                             @if(App\Models\MotherIntake::count() > 0)
                                 <span class="ml-auto bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">{{ App\Models\MotherIntake::count() }}</span>
                             @endif
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('panel') }}#form-customization" class="flex items-center p-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
-                            <svg class="w-4 h-4 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
-                            </svg>
-                            Customize Fomu
                         </a>
                     </li>
                     <li>

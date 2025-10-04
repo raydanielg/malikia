@@ -8,6 +8,17 @@
         </a>
     </div>
 
+    @if(session('success'))
+        <div class="mb-4 rounded-lg bg-green-50 border border-green-200 text-green-800 px-4 py-3">
+            <div class="text-sm font-medium">{{ session('success') }}</div>
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="mb-4 rounded-lg bg-red-50 border border-red-200 text-red-800 px-4 py-3">
+            <div class="text-sm font-medium">{{ session('error') }}</div>
+        </div>
+    @endif
+
     <div class="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
         <div class="px-6 py-4 bg-gray-50 border-b">
             <h1 class="text-xl font-semibold text-gray-800">Majibu ya Fomu</h1>

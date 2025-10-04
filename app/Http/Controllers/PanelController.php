@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Hash;
 use App\Exports\MotherIntakesExport;
 
 class PanelController extends Controller
@@ -52,37 +53,110 @@ class PanelController extends Controller
         return view('panel.dashboard', compact('stats', 'statusCounts', 'priorityCounts', 'intakes', 'recentIntakes'));
     }
 
-    public function markAsCompleted(Request $request, MotherIntake $intake): JsonResponse
+    // Users management: all users are admins in this app
+    public function usersIndex(Request $request)
+    {
+        $q = (string) $request->get('q', '');
+        $users = User::query()
+            ->when($q !== '', function ($qb) use ($q) {
+                $qb->where(function ($sub) use ($q) {
+                    $sub->where('name', 'like', "%$q%")
+                        ->orWhere('email', 'like', "%$q%")
+                        ->orWhere('phone', 'like', "%$q%" );
+                });
+            })
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
+
+        return view('panel.users-index', compact('users', 'q'));
+    }
+
+    public function usersStore(Request $request)
+    {
+        $data = $request->validate([
+            'name' => ['required','string','max:255'],
+            'email' => ['required','email','max:255','unique:users,email'],
+            'phone' => ['nullable','string','max:50'],
+            'password' => ['nullable','string','min:6'],
+        ]);
+
+        $password = $data['password'] ?? str()->password(10);
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'] ?? null,
+            'password' => Hash::make($password),
+            'email_verified_at' => now(),
+        ]);
+
+        return redirect()->back()->with('success', 'Mtumiaji mpya ameongezwa. Nenosiri: '.$password);
+    }
+
+    public function listIntakes(Request $request)
+    {
+        $q = (string) $request->get('q', '');
+        $status = (string) $request->get('status', '');
+        $priority = (string) $request->get('priority', '');
+        $stage = (string) $request->get('journey_stage', '');
+        $perPage = (int) max(5, min(100, (int) $request->get('per_page', 15)));
+
+        $intakes = MotherIntake::query()
+            ->when($q !== '', function ($qbuilder) use ($q) {
+                $qbuilder->where(function ($sub) use ($q) {
+                    $sub->where('full_name', 'like', "%$q%")
+                        ->orWhere('phone', 'like', "%$q%")
+                        ->orWhere('hospital_planned', 'like', "%$q%")
+                        ->orWhere('journey_stage', 'like', "%$q%")
+                        ;
+                });
+            })
+            ->when($status !== '', fn($qb) => $qb->where('status', $status))
+            ->when($priority !== '', fn($qb) => $qb->where('priority', $priority))
+            ->when($stage !== '', fn($qb) => $qb->where('journey_stage', $stage))
+            ->latest()
+            ->paginate($perPage)
+            ->withQueryString();
+
+        return view('panel.intakes-index', compact('intakes', 'q', 'status', 'priority', 'stage', 'perPage'));
+    }
+
+    public function markAsCompleted(Request $request, MotherIntake $intake)
     {
         try {
             $intake->markAsCompleted();
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Fomu imekamilika kikamilifu!'
-            ]);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Fomu imekamilika kikamilifu!'
+                ]);
+            }
+            return redirect()->back()->with('success', 'Fomu imekamilika kikamilifu!');
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Kosa: ' . $e->getMessage()
-            ], 500);
+            if ($request->expectsJson()) {
+                return response()->json(['success' => false, 'message' => 'Tatizo limetokea.'], 500);
+            }
+            return redirect()->back()->with('error', 'Tatizo limetokea.');
         }
     }
 
-    public function markAsReviewed(Request $request, MotherIntake $intake): JsonResponse
+    public function markAsReviewed(Request $request, MotherIntake $intake)
     {
         try {
-            $intake->markAsReviewed(Auth::id());
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Fomu imepitiwa kikamilifu!'
-            ]);
+            $intake->markAsReviewed(\Auth::id());
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Fomu imepitiwa kikamilifu!'
+                ]);
+            }
+            return redirect()->back()->with('success', 'Fomu imepitiwa kikamilifu!');
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Kosa: ' . $e->getMessage()
-            ], 500);
+            if ($request->expectsJson()) {
+                return response()->json(['success' => false, 'message' => 'Tatizo limetokea.'], 500);
+            }
+            return redirect()->back()->with('error', 'Tatizo limetokea.');
         }
     }
 

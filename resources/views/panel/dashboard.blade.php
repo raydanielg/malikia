@@ -81,6 +81,22 @@
     <div class="p-6">
         <div class="mb-8">
             <p class="text-gray-600 mb-6">Karibu katika paneli ya usimamizi wa Malkia Konnect. Hapa unaweza kusimamia fomu, kupitia majibu, na kufuatilia maendeleo ya watumiaji wetu.</p>
+            @if(session('success'))
+                <div class="mb-4 rounded-lg bg-green-50 border border-green-200 text-green-800 px-4 py-3">
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <div class="text-sm font-medium">{{ session('success') }}</div>
+                    </div>
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="mb-4 rounded-lg bg-red-50 border border-red-200 text-red-800 px-4 py-3">
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                        <div class="text-sm font-medium">{{ session('error') }}</div>
+                    </div>
+                </div>
+            @endif
         </div>
 
         <!-- Form Responses Section -->
@@ -194,28 +210,34 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex space-x-2">
                                             @if(($intake->status ?? 'pending') !== 'completed')
-                                            <button onclick="markAsCompleted({{ $intake->id }})" class="text-green-600 hover:text-green-900 p-1 rounded" title="Weka kama Imekamilika">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                </svg>
-                                            </button>
+                                            <form method="POST" action="{{ route('panel.intake.complete', $intake) }}">
+                                                @csrf
+                                                <button type="submit" class="text-green-600 hover:text-green-900 p-1 rounded" title="Weka kama Imekamilika">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                    </svg>
+                                                </button>
+                                            </form>
                                             @endif
 
                                             @if(($intake->status ?? 'pending') !== 'reviewed')
-                                            <button onclick="markAsReviewed({{ $intake->id }})" class="text-purple-600 hover:text-purple-900 p-1 rounded" title="Weka kama Imepitiwa">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                                </svg>
-                                            </button>
+                                            <form method="POST" action="{{ route('panel.intake.review', $intake) }}">
+                                                @csrf
+                                                <button type="submit" class="text-purple-600 hover:text-purple-900 p-1 rounded" title="Weka kama Imepitiwa">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                                    </svg>
+                                                </button>
+                                            </form>
                                             @endif
 
-                                            <button onclick="viewDetails({{ $intake->id }})" class="text-blue-600 hover:text-blue-900 p-1 rounded" title="Angalia Maelezo">
+                                            <a href="{{ route('panel.intake.details', $intake) }}" class="text-blue-600 hover:text-blue-900 p-1 rounded" title="Angalia Maelezo">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                                 </svg>
-                                            </button>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
