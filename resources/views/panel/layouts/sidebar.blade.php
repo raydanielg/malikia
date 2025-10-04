@@ -162,11 +162,11 @@
                         Haraka Hatua
                     </h4>
                     <div class="space-y-2">
-                        <button onclick="exportFormData()" class="w-full text-left text-xs bg-blue-50 text-blue-700 rounded-lg p-2 hover:bg-blue-100 transition-colors">
+                        <a href="{{ route('panel.export.excel') }}" class="block w-full text-left text-xs bg-blue-50 text-blue-700 rounded-lg p-2 hover:bg-blue-100 transition-colors">
                             <div class="font-medium">Export Data</div>
                             <div class="text-blue-500">Pakua ripoti ya Excel</div>
-                        </button>
-                        <button onclick="sendNotification()" class="w-full text-left text-xs bg-green-50 text-green-700 rounded-lg p-2 hover:bg-green-100 transition-colors">
+                        </a>
+                        <button type="button" onclick="sendNotification()" class="w-full text-left text-xs bg-green-50 text-green-700 rounded-lg p-2 hover:bg-green-100 transition-colors">
                             <div class="font-medium">Tuma Arifa</div>
                             <div class="text-green-500">Watumiaji wote</div>
                         </button>
@@ -233,10 +233,26 @@
 
 <script>
 function exportFormData() {
-    window.location.href = '{{ route("panel") }}#export-data';
+    window.location.href = '{{ route("panel.export.excel") }}';
 }
 
-function sendNotification() {
-    alert('Kipengele cha kutuma arifa kitapatikana hivi karibuni!');
+async function sendNotification() {
+    try {
+        const res = await fetch('{{ route('panel.notification.send') }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json'
+            }
+        });
+        const data = await res.json();
+        if (data && data.success) {
+            alert(data.message || 'Arifa imetumwa kikamilifu!');
+        } else {
+            alert((data && data.message) || 'Imeshindikana kutuma arifa.');
+        }
+    } catch (e) {
+        alert('Hitilafu imetokea wakati wa kutuma arifa.');
+    }
 }
 </script>
