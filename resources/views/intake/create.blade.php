@@ -7,6 +7,46 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="antialiased text-gray-900">
+    <style>
+        .loader {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          display: inline-block;
+          position: relative;
+          border: 3px solid;
+          border-color: #FFF #FFF transparent transparent;
+          box-sizing: border-box;
+          animation: rotation 1s linear infinite;
+        }
+        .loader::after,
+        .loader::before {
+          content: '';
+          box-sizing: border-box;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          border: 3px solid;
+          border-color: transparent transparent #FF3D00 #FF3D00;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          box-sizing: border-box;
+          animation: rotationBack 0.5s linear infinite;
+          transform-origin: center center;
+        }
+        .loader::before {
+          width: 32px;
+          height: 32px;
+          border-color: #FFF #FFF transparent transparent;
+          animation: rotation 1.5s linear infinite;
+        }
+        @keyframes rotation { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+        @keyframes rotationBack { 0% { transform: rotate(0deg);} 100% { transform: rotate(-360deg);} }
+    </style>
     <!-- Background video (blurred) -->
     <div class="fixed inset-0 z-0 overflow-hidden" x-data="{ vids: ['{{ asset('0_Pregnant_Doctor_3840x2160.mp4') }}','{{ asset('5123981_People_Women_3840x2160.mp4') }}'], i: 0 }" x-init="
         const v = $refs.bgv;
@@ -40,6 +80,7 @@
                         journey_q: 'Where are you on your motherhood Journey? (Choose one)',
                         pregnant: 'A • I am currently pregnant',
                         hospital_q: 'In which hospital do you plan to deliver your baby?',
+                        pregnancy_weeks_q: 'How many weeks pregnant are you?',
                         postpartum: 'B • I have already delivered',
                         baby_weeks_q: 'How many weeks old is your baby?',
                         ttc: 'C • I am trying to conceive',
@@ -57,6 +98,7 @@
                         journey_q: 'Upo wapi kwenye safari ya uzazi? (Chagua moja)',
                         pregnant: 'A • Mimi ni mjamzito kwa sasa',
                         hospital_q: 'Unapanga kujifungua hospitali gani?',
+                        pregnancy_weeks_q: 'Una ujauzito wa wiki ngapi?',
                         postpartum: 'B • Tayari nimejifungua',
                         baby_weeks_q: 'Mtoto wako ana wiki ngapi?',
                         ttc: 'C • Ninajaribu kupata ujauzito',
@@ -65,8 +107,23 @@
                         consent2_body: 'Mafunzo na ushauri kutoka Malkia Konnect ni kwa ajili ya elimu tu. Hayachukui nafasi ya daktari, mkunga au huduma za dharura. Nita wasiliana na kituo cha afya mara moja nikipata dalili zisizo za kawaida.',
                         submit: 'Tuma'
                     }
+                },
+                success: false,
+                phone: '',
+                init() {
+                    this.lang = localStorage.getItem('lang') || 'en';
+                    // Blade session fallback
+                    const bladeSuccess = {{ session('intake_success') ? 'true' : 'false' }};
+                    const bladePhone = '{{ session('intake_phone', '') }}';
+                    if (bladeSuccess) { this.success = true; this.phone = bladePhone; return; }
+                    // URL params fallback: ?success=1&phone=...
+                    const p = new URLSearchParams(window.location.search);
+                    if (p.get('success') === '1') {
+                        this.success = true;
+                        this.phone = p.get('phone') || '';
+                    }
                 }
-            }" x-init="lang = localStorage.getItem('lang') || 'en'">
+            }" x-init="init()">
             <!-- Section 1: Welcome copy -->
             <div class="text-center mb-8">
                 <div class="flex justify-end mb-3">
@@ -80,9 +137,57 @@
                 <p class="text-[#7e22ce] mt-1 font-medium text-sm sm:text-base" x-text="t[lang].tagline"></p>
             </div>
 
+            <!-- Success modal popup -->
+            <div x-show="success" x-transition.opacity class="fixed inset-0 z-50 flex items-center justify-center">
+                <div class="absolute inset-0 bg-black/50"></div>
+                <div class="relative bg-white rounded-2xl shadow-2xl w-[90%] max-w-md p-6 text-center">
+                    <h2 class="text-2xl font-bold mb-2">Congratulations!</h2>
+                    <p class="text-gray-700">We have received your details.</p>
+                    <p class="mt-2 text-sm text-gray-600">WhatsApp: <span class="font-semibold" x-text="phone"></span></p>
+                    <div class="mt-6 flex justify-center gap-3">
+                        <button type="button" @click="success=false" class="px-5 py-2 rounded-md border">Close</button>
+                        <a href="/" class="px-5 py-2 rounded-md bg-[#7e22ce] text-white hover:bg-[#6b21a8]">Go Home</a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Section 2: Simple Intake Form -->
-            <form method="POST" action="{{ route('intake.store') }}" class="bg-white/70 backdrop-blur-md border rounded-2xl p-5 sm:p-6 shadow-xl mx-auto max-w-3xl"
-                  x-data="{ stage: '{{ old('journey_stage', '') }}' }">
+            <form x-show="!success" method="POST" action="{{ route('intake.store') }}" class="relative bg-white/70 backdrop-blur-md border rounded-2xl p-5 sm:p-6 shadow-xl mx-auto max-w-3xl"
+                  x-data="{
+                      stage: '{{ old('journey_stage', '') }}',
+                      submitting:false,
+                      errors:{},
+                      async submitForm(e){
+                          this.submitting = true;
+                          this.errors = {};
+                          const form = e.target;
+                          const url = form.getAttribute('action');
+                          const fd = new FormData(form);
+                          const csrf = form.querySelector('input[name=_token]')?.value;
+                          try {
+                              const res = await fetch(url, {
+                                  method: 'POST',
+                                  headers: { 'X-CSRF-TOKEN': csrf || '', 'Accept': 'application/json' },
+                                  body: fd,
+                                  redirect: 'follow',
+                              });
+                              if (res.status === 422) {
+                                  const data = await res.json();
+                                  this.errors = data.errors || {};
+                                  this.submitting = false;
+                                  return;
+                              }
+                              // Treat any other 2xx/3xx as success
+                              this.phone = fd.get('phone') || '';
+                              this.success = true;
+                          } catch (err) {
+                              console.error(err);
+                          } finally {
+                              this.submitting = false;
+                          }
+                      }
+                  }"
+                  @submit.prevent="submitForm($event)">
                 @csrf
 
                 <!-- Full name -->
@@ -90,6 +195,7 @@
                     <label class="block text-sm sm:text-base font-medium"><span x-text="t[lang].full_name"></span> <span class="text-red-600">*</span></label>
                     <input name="full_name" required class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" :placeholder="lang==='en' ? 'e.g. Asha Mwita' : 'mf. Asha Mwita'" value="{{ old('full_name') }}" />
                     @error('full_name')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                    <template x-if="errors.full_name"><p class="text-sm text-red-600 mt-1" x-text="errors.full_name[0]"></p></template>
                 </div>
 
                 <!-- WhatsApp Phone -->
@@ -97,6 +203,7 @@
                     <label class="block text-sm sm:text-base font-medium"><span x-text="t[lang].phone"></span> <span class="text-red-600">*</span></label>
                     <input name="phone" required class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" :placeholder="lang==='en' ? 'e.g. 07xxxxxxx or +2557xxxxxxx' : 'mf. 07xxxxxxx au +2557xxxxxxx'" value="{{ old('phone') }}" />
                     @error('phone')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                    <template x-if="errors.phone"><p class="text-sm text-red-600 mt-1" x-text="errors.phone[0]"></p></template>
                 </div>
 
                 <!-- Journey stage -->
@@ -110,10 +217,11 @@
                             </span>
                         </label>
                         <div x-show="stage==='pregnant'" x-transition class="ml-6">
-                            <label class="block text-sm sm:text-base font-medium mt-2"><span x-text="t[lang].hospital_q"></span> <span class="text-red-600">*</span></label>
-                            <input name="hospital_planned" :required="stage==='pregnant'" class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" placeholder="e.g. Muhimbili National Hospital" value="{{ old('hospital_planned') }}" />
-                            @error('hospital_planned')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                            <label class="block text-sm sm:text-base font-medium mt-2"><span x-text="t[lang].pregnancy_weeks_q"></span> <span class="text-red-600">*</span></label>
+                            <input type="number" name="pregnancy_weeks" :required="stage==='pregnant'" min="1" max="42" class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" placeholder="e.g. 22" value="{{ old('pregnancy_weeks') }}" />
+                            @error('pregnancy_weeks')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
                         </div>
+                        <template x-if="errors.pregnancy_weeks"><p class="text-sm text-red-600 mt-1 ml-6" x-text="errors.pregnancy_weeks[0]"></p></template>
 
                         <label class="flex items-start gap-2 p-3 border rounded-md cursor-pointer hover:bg-gray-50">
                             <input class="mt-1" type="radio" name="journey_stage" value="postpartum" x-model="stage" {{ old('journey_stage')==='postpartum' ? 'checked' : '' }} required />
@@ -133,6 +241,13 @@
                                 <span class="font-medium" x-text="t[lang].ttc"></span>
                             </span>
                         </label>
+                        <!-- Hospital question moved to bottom of options -->
+                        <div x-show="stage==='pregnant'" x-transition class="ml-6">
+                            <label class="block text-sm sm:text-base font-medium mt-4"><span x-text="t[lang].hospital_q"></span> 🏥 <span class="text-red-600">*</span></label>
+                            <input name="hospital_planned" :required="stage==='pregnant'" class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" placeholder="e.g. Muhimbili National Hospital" value="{{ old('hospital_planned') }}" />
+                            @error('hospital_planned')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                            <template x-if="errors.hospital_planned"><p class="text-sm text-red-600 mt-1" x-text="errors.hospital_planned[0]"></p></template>
+                        </div>
                     </div>
                     @error('journey_stage')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
 
@@ -143,6 +258,7 @@
                         <span class="text-sm sm:text-base"><span x-text="t[lang].consent1"></span> <span class="text-red-600">*</span></span>
                     </label>
                     @error('agree_comms')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                    <template x-if="errors.agree_comms"><p class="text-sm text-red-600 mt-1" x-text="errors.agree_comms[0]"></p></template>
                 </div>
 
                 <div class="mb-4">
@@ -154,11 +270,19 @@
                         </span>
                     </label>
                     @error('disclaimer_ack')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                    <template x-if="errors.disclaimer_ack"><p class="text-sm text-red-600 mt-1" x-text="errors.disclaimer_ack[0]"></p></template>
                 </div>
 
                 <!-- Submit -->
                 <div class="mt-6 flex justify-end">
-                    <button class="inline-flex w-full sm:w-auto justify-center px-5 py-2.5 rounded-md bg-[#7e22ce] text-white hover:bg-[#6b21a8] shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7e22ce]/50" x-text="t[lang].submit"></button>
+                    <button class="inline-flex w-full sm:w-auto justify-center px-5 py-2.5 rounded-md bg-[#7e22ce] text-white hover:bg-[#6b21a8] shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7e22ce]/50"
+                            :class="submitting ? 'opacity-70 cursor-not-allowed' : ''"
+                            x-text="t[lang].submit" :disabled="submitting"></button>
+                </div>
+                <!-- Submitting overlay -->
+                <div x-show="submitting" x-transition.opacity class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/40 backdrop-blur-sm rounded-2xl">
+                    <span class="loader"></span>
+                    <span class="text-white font-medium">Submitting...</span>
                 </div>
             </form>
         </div>
