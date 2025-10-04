@@ -21,9 +21,15 @@
                 background-color: rgba(0, 0, 0, 0.8);
             }
         }
+
+        /* Using Tailwind's animate-spin for a general loader; no custom CSS needed */
     </style>
 </head>
 <body class="h-full bg-custom">
+    <!-- Page Loader Overlay -->
+    <div id="pageLoader" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/30">
+        <div class="h-12 w-12 border-4 border-white/40 border-t-white rounded-full animate-spin"></div>
+    </div>
     <div class="min-h-screen flex items-center justify-center p-4">
         <div class="w-full max-w-sm bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
             <div class="p-6">
@@ -37,6 +43,16 @@
                     <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
                         Sign in to continue
                     </p>
+                    <details class="mt-3">
+                        <summary class="cursor-pointer text-sm text-gray-600 dark:text-gray-300">View credentials (for testing)</summary>
+                        <div class="mt-2 text-left text-xs text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 rounded p-3">
+                            <!-- Demo credentials from database/seeders/UserDemoSeeder.php -->
+                            <div class="space-y-1">
+                                <div><span class="font-medium">Email:</span> info@malkia.co.tz</div>
+                                <div><span class="font-medium">Password:</span> 12345678</div>
+                            </div>
+                        </div>
+                    </details>
                 </div>
 
                 <form class="space-y-4" id="loginForm" action="{{ route('login') }}" method="POST">
@@ -141,6 +157,7 @@
             const alertContainer = document.getElementById('alertContainer');
             const alertMessage = document.getElementById('alertMessage');
             const submitButton = loginForm.querySelector('button[type="submit"]');
+            const pageLoader = document.getElementById('pageLoader');
 
             // Show alert function
             function showAlert(message, type = 'error') {
@@ -166,6 +183,7 @@
                 const originalText = submitButton.textContent;
                 submitButton.textContent = 'Signing in...';
                 submitButton.disabled = true;
+                pageLoader.classList.remove('hidden');
 
                 // Get form data
                 const formData = new FormData(loginForm);
@@ -215,6 +233,7 @@
                     // Reset button state
                     submitButton.textContent = originalText;
                     submitButton.disabled = false;
+                    pageLoader.classList.add('hidden');
                 });
             });
 

@@ -20,6 +20,16 @@ class MotherIntakeController extends Controller
             'full_name' => ['required', 'string', 'max:255'],
             // Ruhusu format yoyote ya simu (alama kama +, -, nafasi, mabano) na mpaka herufi 25
             'phone' => ['nullable', 'string', 'max:25'],
+
+            // New form fields
+            'journey_stage' => ['required', 'in:pregnant,postpartum,ttc'],
+            'pregnancy_weeks' => ['nullable', 'integer', 'min:1', 'max:42'],
+            'baby_weeks_old' => ['nullable', 'integer', 'min:0', 'max:52'],
+            'hospital_planned' => ['nullable', 'string', 'max:255'],
+            'agree_comms' => ['nullable', 'boolean'],
+            'disclaimer_ack' => ['nullable', 'boolean'],
+
+            // Legacy/additional optional fields (kept for compatibility)
             'email' => ['nullable', 'email', 'max:255'],
             'age' => ['nullable', 'integer', 'min:12', 'max:60'],
             'pregnancy_stage' => ['nullable', 'string', 'max:50'],
@@ -42,6 +52,23 @@ class MotherIntakeController extends Controller
         }
         if (!isset($validated['priority'])) {
             $validated['priority'] = MotherIntake::PRIORITY_MEDIUM;
+        }
+
+        // Normalize booleans
+        $validated['agree_comms'] = (bool) ($request->boolean('agree_comms'));
+        $validated['disclaimer_ack'] = (bool) ($request->boolean('disclaimer_ack'));
+
+        // Clear stage-specific fields to avoid inconsistent data
+        if (($validated['journey_stage'] ?? null) === 'pregnant') {
+            // keep pregnancy_weeks and hospital_planned; nullify baby_weeks_old
+            $validated['baby_weeks_old'] = $validated['baby_weeks_old'] ?? null;
+        } elseif (($validated['journey_stage'] ?? null) === 'postpartum') {
+            // keep baby_weeks_old; nullify pregnancy_weeks and hospital_planned (if not needed)
+            $validated['pregnancy_weeks'] = null;
+        } else { // ttc
+            $validated['pregnancy_weeks'] = null;
+            $validated['baby_weeks_old'] = null;
+            $validated['hospital_planned'] = null;
         }
 
         $intake = MotherIntake::create($validated);

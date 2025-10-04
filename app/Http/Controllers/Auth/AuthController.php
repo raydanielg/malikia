@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -23,12 +24,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Handle an authentication attempt.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    /**
      * Handle an incoming authentication request.
      */
     public function login(LoginRequest $request)
@@ -42,7 +37,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Login successful!',
-                'redirect' => route('panel', absolute: false)
+                'redirect' => route('panel', [], false)
             ]);
         }
 
@@ -118,3 +113,5 @@ class AuthController extends Controller
             ? redirect()->route('login')->with('status', __($status))
             : back()->withErrors(['email' => [__($status)]]);
     }
+
+}

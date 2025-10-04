@@ -13,6 +13,12 @@ class MotherIntake extends Model
     protected $fillable = [
         'full_name',
         'phone',
+        'journey_stage',
+        'pregnancy_weeks',
+        'baby_weeks_old',
+        'hospital_planned',
+        'agree_comms',
+        'disclaimer_ack',
         'email',
         'age',
         'pregnancy_stage',

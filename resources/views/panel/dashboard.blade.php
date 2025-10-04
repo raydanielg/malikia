@@ -1008,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function exportToExcel() {
     const link = document.createElement('a');
-    link.href = '/panel/export/excel';
+    link.href = "{{ route('panel.export.excel') }}";
     link.download = 'form-responses-' + new Date().toISOString().split('T')[0] + '.xlsx';
     document.body.appendChild(link);
     link.click();
@@ -1030,7 +1030,7 @@ function refreshData() {
 
 function exportToCSV() {
     const link = document.createElement('a');
-    link.href = '/panel/export/csv';
+    link.href = "{{ route('panel.export.csv') }}";
     link.download = 'form-responses-' + new Date().toISOString().split('T')[0] + '.csv';
     document.body.appendChild(link);
     link.click();
