@@ -27,19 +27,19 @@
                         <!-- Quick Stats in Header -->
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
                             <div class="bg-white bg-opacity-15 backdrop-blur-sm rounded-lg p-4 text-center">
-                                <div class="text-2xl font-bold text-white">{{ App\Models\MotherIntake::count() }}</div>
+                                <div class="text-2xl font-bold text-white">{{ $stats['total'] ?? 0 }}</div>
                                 <div class="text-pink-100 text-sm">Jumla ya Fomu</div>
                             </div>
                             <div class="bg-white bg-opacity-15 backdrop-blur-sm rounded-lg p-4 text-center">
-                                <div class="text-2xl font-bold text-white">{{ App\Models\MotherIntake::where('status', 'pending')->count() }}</div>
+                                <div class="text-2xl font-bold text-white">{{ $stats['pending'] ?? 0 }}</div>
                                 <div class="text-pink-100 text-sm">Zinasubiri</div>
                             </div>
                             <div class="bg-white bg-opacity-15 backdrop-blur-sm rounded-lg p-4 text-center">
-                                <div class="text-2xl font-bold text-white">{{ App\Models\MotherIntake::where('status', 'completed')->count() }}</div>
+                                <div class="text-2xl font-bold text-white">{{ $stats['completed'] ?? 0 }}</div>
                                 <div class="text-pink-100 text-sm">Zimekamilika</div>
                             </div>
                             <div class="bg-white bg-opacity-15 backdrop-blur-sm rounded-lg p-4 text-center">
-                                <div class="text-2xl font-bold text-white">{{ App\Models\MotherIntake::distinct('phone')->count() }}</div>
+                                <div class="text-2xl font-bold text-white">{{ $stats['unique_users'] ?? 0 }}</div>
                                 <div class="text-pink-100 text-sm">Watumiaji</div>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200" id="forms-table-body">
-                                @foreach(App\Models\MotherIntake::latest()->get() as $intake)
+                                @foreach($intakes as $intake)
                                 <tr class="hover:bg-gray-50 form-row" data-status="{{ $intake->status ?? 'pending' }}">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
@@ -225,7 +225,7 @@
                     </div>
 
                     <div class="mt-4 flex justify-between items-center">
-                        <p class="text-sm text-gray-500">Jumla ya majibu: {{ App\Models\MotherIntake::count() }}</p>
+                        <p class="text-sm text-gray-500">Jumla ya majibu: {{ $stats['total'] ?? 0 }}</p>
                         <div class="flex space-x-2">
                             <button onclick="exportToExcel()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-sm flex items-center">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -380,12 +380,7 @@
                             <h4 class="font-semibold text-gray-800 mb-4">Mgawanyo wa Hali</h4>
                             <div class="space-y-3">
                                 @php
-                                    $statuses = [
-                                        'pending' => App\Models\MotherIntake::where('status', 'pending')->count(),
-                                        'in_progress' => App\Models\MotherIntake::where('status', 'in_progress')->count(),
-                                        'completed' => App\Models\MotherIntake::where('status', 'completed')->count(),
-                                        'reviewed' => App\Models\MotherIntake::where('status', 'reviewed')->count(),
-                                    ];
+                                    $statuses = $statusCounts ?? [];
                                     $total = array_sum($statuses);
                                 @endphp
 
@@ -408,12 +403,7 @@
                             <h4 class="font-semibold text-gray-800 mb-4">Mgawanyo wa Kipaumbele</h4>
                             <div class="space-y-3">
                                 @php
-                                    $priorities = [
-                                        'low' => App\Models\MotherIntake::where('priority', 'low')->count(),
-                                        'medium' => App\Models\MotherIntake::where('priority', 'medium')->count(),
-                                        'high' => App\Models\MotherIntake::where('priority', 'high')->count(),
-                                        'urgent' => App\Models\MotherIntake::where('priority', 'urgent')->count(),
-                                    ];
+                                    $priorities = $priorityCounts ?? [];
                                     $total = array_sum($priorities);
                                 @endphp
 
@@ -436,7 +426,7 @@
                     <div class="bg-gray-50 rounded-lg p-4">
                         <h4 class="font-semibold text-gray-800 mb-4">Shughuli za Hivi Karibuni</h4>
                         <div class="space-y-3">
-                            @foreach(App\Models\MotherIntake::latest()->take(5)->get() as $intake)
+                            @foreach($recentIntakes as $intake)
                             <div class="flex items-center justify-between p-3 bg-white rounded-lg">
                                 <div class="flex items-center">
                                     <div class="w-10 h-10 bg-gradient-to-br from-pink-400 to-purple-600 rounded-full flex items-center justify-center">

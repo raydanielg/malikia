@@ -14,7 +14,42 @@ class PanelController extends Controller
 {
     public function index()
     {
-        return view('panel.dashboard');
+        // Precompute dashboard data to avoid querying in Blade
+        $total = MotherIntake::count();
+        $pending = MotherIntake::where('status', 'pending')->count();
+        $inProgress = MotherIntake::where('status', 'in_progress')->count();
+        $completed = MotherIntake::where('status', 'completed')->count();
+        $reviewed = MotherIntake::where('status', 'reviewed')->count();
+
+        $uniqueUsers = MotherIntake::distinct('phone')->count('phone');
+
+        $statusCounts = [
+            'pending' => $pending,
+            'in_progress' => $inProgress,
+            'completed' => $completed,
+            'reviewed' => $reviewed,
+        ];
+
+        $priorityCounts = [
+            'low' => MotherIntake::where('priority', 'low')->count(),
+            'medium' => MotherIntake::where('priority', 'medium')->count(),
+            'high' => MotherIntake::where('priority', 'high')->count(),
+            'urgent' => MotherIntake::where('priority', 'urgent')->count(),
+        ];
+
+        $intakes = MotherIntake::latest()->get();
+        $recentIntakes = MotherIntake::latest()->take(5)->get();
+
+        $stats = [
+            'total' => $total,
+            'pending' => $pending,
+            'in_progress' => $inProgress,
+            'completed' => $completed,
+            'reviewed' => $reviewed,
+            'unique_users' => $uniqueUsers,
+        ];
+
+        return view('panel.dashboard', compact('stats', 'statusCounts', 'priorityCounts', 'intakes', 'recentIntakes'));
     }
 
     public function markAsCompleted(Request $request, MotherIntake $intake): JsonResponse
