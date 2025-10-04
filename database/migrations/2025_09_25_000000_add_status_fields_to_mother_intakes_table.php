@@ -34,18 +34,18 @@ return new class extends Migration
                 $table->enum('priority', ['low', 'medium', 'high', 'urgent'])->default('medium')->after('notes');
             }
 
-            if (!Schema::hasColumn('mother_intakes', 'user_id')) {
-                $table->unsignedBigInteger('user_id')->nullable()->after('priority');
+            // user_id is managed by a dedicated earlier migration (2025_09_10_001100_add_user_id_to_mother_intakes_table)
+
+            // Add foreign keys (ignore if they already exist)
+            if (Schema::hasColumn('mother_intakes', 'reviewed_by')) {
+                try {
+                    $table->foreign('reviewed_by')->references('id')->on('users')->onDelete('set null');
+                } catch (\Exception $e) {
+                    // FK may already exist; ignore
+                }
             }
 
-            // Add foreign keys only if they don't exist
-            if (Schema::hasColumn('mother_intakes', 'reviewed_by') && !Schema::hasColumn('mother_intakes', 'reviewed_by_foreign')) {
-                $table->foreign('reviewed_by')->references('id')->on('users')->onDelete('set null');
-            }
-
-            if (Schema::hasColumn('mother_intakes', 'user_id') && !Schema::hasColumn('mother_intakes', 'user_id_foreign')) {
-                $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            }
+            // user_id foreign key is handled in its own migration
 
             // Add indexes only if they don't exist
             if (Schema::hasColumns('mother_intakes', ['status', 'priority'])) {
@@ -64,22 +64,16 @@ return new class extends Migration
                 }
             }
 
-            if (Schema::hasColumn('mother_intakes', 'user_id')) {
-                try {
-                    $table->index('user_id');
-                } catch (\Exception $e) {
-                    // Index might already exist
-                }
-            }
+            // user_id index handled elsewhere
         });
     }
 
     public function down(): void
     {
         Schema::table('mother_intakes', function (Blueprint $table) {
-            // Drop foreign keys
-            $table->dropForeign(['reviewed_by']);
-            $table->dropForeign(['user_id']);
+            // Drop foreign keys (ignore if missing)
+            try { $table->dropForeign(['reviewed_by']); } catch (\Exception $e) {}
+            try { $table->dropForeign(['user_id']); } catch (\Exception $e) {}
 
             // Drop indexes
             $table->dropIndex(['status', 'priority']);
