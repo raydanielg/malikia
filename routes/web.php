@@ -42,6 +42,11 @@ Route::middleware(['auth', 'verified'])->prefix('panel')->name('panel.')->group(
     Route::get('/export/excel', [App\Http\Controllers\PanelController::class, 'exportExcel'])->name('export.excel');
     Route::get('/export/csv', [App\Http\Controllers\PanelController::class, 'exportCSV'])->name('export.csv');
 
+    // Reports
+    Route::get('/reports', [App\Http\Controllers\PanelController::class, 'reports'])->name('reports');
+    Route::get('/reports/csv', [App\Http\Controllers\PanelController::class, 'reportsCsv'])->name('reports.csv');
+    Route::get('/reports/pdf', [App\Http\Controllers\PanelController::class, 'reportsPdf'])->name('reports.pdf');
+
     // User management routes
     Route::post('/user/{user}/toggle-status', [App\Http\Controllers\PanelController::class, 'toggleUserStatus'])->name('user.toggle');
     Route::get('/user/{user}', [App\Http\Controllers\PanelController::class, 'showUserDetails'])->name('user.details');

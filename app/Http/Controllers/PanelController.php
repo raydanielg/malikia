@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
 use App\Exports\MotherIntakesExport;
+use Carbon\Carbon;
 
 class PanelController extends Controller
 {
@@ -51,6 +52,174 @@ class PanelController extends Controller
         ];
 
         return view('panel.dashboard', compact('stats', 'statusCounts', 'priorityCounts', 'intakes', 'recentIntakes'));
+    }
+
+    public function reports(Request $request)
+    {
+        $from = $request->get('from');
+        $to = $request->get('to');
+
+        $fromDate = $from ? Carbon::parse($from)->startOfDay() : Carbon::now()->subDays(30)->startOfDay();
+        $toDate = $to ? Carbon::parse($to)->endOfDay() : Carbon::now()->endOfDay();
+
+        $base = MotherIntake::query()->whereBetween('created_at', [$fromDate, $toDate]);
+
+        // Totals
+        $total = (clone $base)->count();
+        $byStatus = [
+            'pending' => (clone $base)->where('status', 'pending')->count(),
+            'in_progress' => (clone $base)->where('status', 'in_progress')->count(),
+            'completed' => (clone $base)->where('status', 'completed')->count(),
+            'reviewed' => (clone $base)->where('status', 'reviewed')->count(),
+        ];
+
+        $byPriority = [
+            'low' => (clone $base)->where('priority', 'low')->count(),
+            'medium' => (clone $base)->where('priority', 'medium')->count(),
+            'high' => (clone $base)->where('priority', 'high')->count(),
+            'urgent' => (clone $base)->where('priority', 'urgent')->count(),
+        ];
+
+        $byStage = [
+            'pregnant' => (clone $base)->where('journey_stage', 'pregnant')->count(),
+            'postpartum' => (clone $base)->where('journey_stage', 'postpartum')->count(),
+            'ttc' => (clone $base)->where('journey_stage', 'ttc')->count(),
+        ];
+
+        // Daily timeseries
+        $period = new \DatePeriod($fromDate, new \DateInterval('P1D'), $toDate->copy()->addDay());
+        $labels = [];
+        $series = [];
+        foreach ($period as $day) {
+            $count = (clone $base)->whereDate('created_at', $day->format('Y-m-d'))->count();
+            if ($count > 0) {
+                $labels[] = $day->format('Y-m-d');
+                $series[] = $count;
+            }
+        }
+
+        // Recent rows limited for preview
+        $recent = (clone $base)->latest()->take(20)->get();
+
+        return view('panel.reports', [
+            'from' => $fromDate->toDateString(),
+            'to' => $toDate->toDateString(),
+            'total' => $total,
+            'byStatus' => $byStatus,
+            'byPriority' => $byPriority,
+            'byStage' => $byStage,
+            'labels' => $labels,
+            'series' => $series,
+            'recent' => $recent,
+        ]);
+    }
+
+    public function reportsCsv(Request $request)
+    {
+        $from = $request->get('from');
+        $to = $request->get('to');
+        $fromDate = $from ? Carbon::parse($from)->startOfDay() : Carbon::now()->subDays(30)->startOfDay();
+        $toDate = $to ? Carbon::parse($to)->endOfDay() : Carbon::now()->endOfDay();
+
+        $rows = MotherIntake::query()
+            ->whereBetween('created_at', [$fromDate, $toDate])
+            ->orderByDesc('id')
+            ->get();
+
+        $filename = 'report_'.now()->format('Ymd_His').'.csv';
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ];
+
+        $callback = function () use ($rows) {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+            fputcsv($handle, ['ID','Name','Phone','Journey Stage','Status','Priority','Created At']);
+            foreach ($rows as $r) {
+                fputcsv($handle, [
+                    $r->id,
+                    $r->full_name,
+                    $r->phone,
+                    $r->journey_stage,
+                    $r->status,
+                    $r->priority,
+                    optional($r->created_at)->toDateTimeString(),
+                ]);
+            }
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    public function reportsPdf(Request $request)
+    {
+        $from = $request->get('from');
+        $to = $request->get('to');
+        $fromDate = $from ? Carbon::parse($from)->startOfDay() : Carbon::now()->subDays(30)->startOfDay();
+        $toDate = $to ? Carbon::parse($to)->endOfDay() : Carbon::now()->endOfDay();
+
+        $base = MotherIntake::query()->whereBetween('created_at', [$fromDate, $toDate]);
+        $total = (clone $base)->count();
+        $byStatus = [
+            'pending' => (clone $base)->where('status','pending')->count(),
+            'in_progress' => (clone $base)->where('status','in_progress')->count(),
+            'completed' => (clone $base)->where('status','completed')->count(),
+            'reviewed' => (clone $base)->where('status','reviewed')->count(),
+        ];
+        $byPriority = [
+            'low' => (clone $base)->where('priority','low')->count(),
+            'medium' => (clone $base)->where('priority','medium')->count(),
+            'high' => (clone $base)->where('priority','high')->count(),
+            'urgent' => (clone $base)->where('priority','urgent')->count(),
+        ];
+        $byStage = [
+            'pregnant' => (clone $base)->where('journey_stage','pregnant')->count(),
+            'postpartum' => (clone $base)->where('journey_stage','postpartum')->count(),
+            'ttc' => (clone $base)->where('journey_stage','ttc')->count(),
+        ];
+
+        // Build simple daily series (max 60 points to keep PDF light)
+        $period = new \DatePeriod($fromDate, new \DateInterval('P1D'), $toDate->copy()->addDay());
+        $labels = [];
+        $series = [];
+        foreach ($period as $day) {
+            $count = (clone $base)->whereDate('created_at', $day->format('Y-m-d'))->count();
+            if ($count > 0) {
+                $labels[] = $day->format('Y-m-d');
+                $series[] = $count;
+            }
+        }
+
+        $recentReviewed = (clone $base)->where('status','reviewed')->latest()->take(10)->get(['full_name','phone','created_at']);
+
+        $data = [
+            'from' => $fromDate->toDateString(),
+            'to' => $toDate->toDateString(),
+            'total' => $total,
+            'completed' => $byStatus['completed'] ?? 0,
+            'reviewed' => $byStatus['reviewed'] ?? 0,
+            'byStatus' => $byStatus,
+            'byPriority' => $byPriority,
+            'byStage' => $byStage,
+            'labels' => $labels,
+            'series' => $series,
+            'recentReviewed' => $recentReviewed,
+        ];
+
+        // If dompdf available use it, otherwise return a simple HTML download
+        if (class_exists(\Barryvdh\DomPDF\Facade\Pdf::class)) {
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('panel.reports-pdf', $data);
+            return $pdf->download('report_'.now()->format('Ymd_His').'.pdf');
+        }
+
+        $html = view('panel.reports-pdf', $data)->render();
+        $filename = 'report_'.now()->format('Ymd_His').'.html';
+        return response($html, 200, [
+            'Content-Type' => 'text/html; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"'
+        ]);
     }
 
     // Users management: all users are admins in this app
