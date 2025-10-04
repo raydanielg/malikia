@@ -167,6 +167,15 @@ class PanelController extends Controller
 
     public function exportExcel()
     {
+        // If Excel package (or its interfaces) is unavailable in this environment, fallback to CSV
+        $excelAvailable = class_exists(\Maatwebsite\Excel\Facades\Excel::class)
+            && interface_exists(\Maatwebsite\Excel\Concerns\FromQuery::class);
+
+        if (!$excelAvailable) {
+            // Graceful fallback without erroring in production
+            return $this->exportCSV();
+        }
+
         // Download as real Excel file
         return Excel::download(new MotherIntakesExport(), 'mother_intakes.xlsx');
     }
