@@ -38,6 +38,7 @@ Route::middleware(['auth', 'verified'])->prefix('panel')->name('panel.')->group(
     Route::post('/intake/{intake}/complete', [App\Http\Controllers\PanelController::class, 'markAsCompleted'])->name('intake.complete');
     Route::post('/intake/{intake}/review', [App\Http\Controllers\PanelController::class, 'markAsReviewed'])->name('intake.review');
     Route::get('/intake/{intake}', [App\Http\Controllers\PanelController::class, 'showDetails'])->name('intake.details');
+    Route::delete('/intake/{intake}', [App\Http\Controllers\PanelController::class, 'destroy'])->name('intake.destroy');
     Route::get('/intakes', [App\Http\Controllers\PanelController::class, 'listIntakes'])->name('intakes.index');
     Route::get('/export/excel', [App\Http\Controllers\PanelController::class, 'exportExcel'])->name('export.excel');
     Route::get('/export/csv', [App\Http\Controllers\PanelController::class, 'exportCSV'])->name('export.csv');

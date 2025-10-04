@@ -97,7 +97,14 @@
                     <td class="px-6 py-4 capitalize">{{ $intake->priority ?? 'medium' }}</td>
                     <td class="px-6 py-4 text-sm text-gray-500">{{ optional($intake->created_at)->format('Y-m-d H:i') }}</td>
                     <td class="px-6 py-4">
-                        <a href="{{ route('panel.intake.details', $intake) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-semibold">Angalia</a>
+                        <div class="flex items-center gap-3">
+                            <a href="{{ route('panel.intake.details', $intake) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-semibold">Angalia</a>
+                            <form method="POST" action="{{ route('panel.intake.destroy', $intake) }}" onsubmit="return confirm('Una uhakika unataka kufuta rekodi hii? Hatua hii haiwezi kubatilishwa.');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:text-red-800 text-sm font-semibold">Futa</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @empty

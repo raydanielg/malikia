@@ -54,6 +54,22 @@ class PanelController extends Controller
         return view('panel.dashboard', compact('stats', 'statusCounts', 'priorityCounts', 'intakes', 'recentIntakes'));
     }
 
+    public function destroy(Request $request, MotherIntake $intake)
+    {
+        try {
+            $intake->delete();
+            if ($request->expectsJson()) {
+                return response()->json(['success' => true, 'message' => 'Kumbukumbu imefutwa kikamilifu.']);
+            }
+            return redirect()->route('panel.intakes.index')->with('success', 'Kumbukumbu imefutwa kikamilifu.');
+        } catch (\Exception $e) {
+            if ($request->expectsJson()) {
+                return response()->json(['success' => false, 'message' => 'Imeshindikana kufuta rekodi.'], 500);
+            }
+            return redirect()->back()->with('error', 'Imeshindikana kufuta rekodi.');
+        }
+    }
+
     public function reports(Request $request)
     {
         $from = $request->get('from');

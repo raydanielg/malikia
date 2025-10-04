@@ -24,24 +24,24 @@ class AuthController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * Log the user out of the application.
      */
-    public function login(LoginRequest $request)
+    public function logout(Request $request)
     {
-        $request->authenticate();
+        Auth::guard('web')->logout();
 
-        $request->session()->regenerate();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        // If it's an AJAX request, return JSON response
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'success' => true,
-                'message' => 'Login successful!',
-                'redirect' => route('panel', [], false)
+                'message' => 'Umetoka kwenye mfumo.',
+                'redirect' => route('login', [], false)
             ]);
         }
 
-        return redirect()->route('panel');
+        return redirect()->route('login');
     }
 
     /**
