@@ -24,6 +24,55 @@ class AuthController extends Controller
     }
 
     /**
+     * Handle an incoming authentication request.
+     */
+    public function login(LoginRequest $request)
+    {
+        try {
+            // Validate and attempt authentication
+            $request->authenticate();
+
+            // Regenerate session to prevent fixation
+            $request->session()->regenerate();
+
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Umeingia kwenye mfumo.',
+                    'redirect' => route('panel', [], false),
+                ]);
+            }
+
+            return redirect()->intended(route('panel'));
+        } catch (ValidationException $e) {
+            // For AJAX requests, return JSON with 422
+            if ($request->ajax() || $request->wantsJson()) {
+                $message = $e->validator?->errors()->first('login') ?? __('auth.failed');
+                return response()->json([
+                    'success' => false,
+                    'message' => $message,
+                ], 422);
+            }
+
+            throw $e;
+        } catch (\Throwable $e) {
+            // Log the unexpected error and respond gracefully
+            report($e);
+
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'An error occurred. Please try again.',
+                ], 500);
+            }
+
+            return back()->withErrors([
+                'login' => 'An error occurred. Please try again.',
+            ]);
+        }
+    }
+
+    /**
      * Log the user out of the application.
      */
     public function logout(Request $request)
