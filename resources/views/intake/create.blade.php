@@ -134,7 +134,7 @@
                 </div>
                 <p class="text-xs sm:text-sm uppercase tracking-wide text-gray-600" x-text="t[lang].welcome"></p>
                 <h1 class="text-2xl sm:text-3xl font-extrabold mt-1" x-text="t[lang].title"></h1>
-                <p class="text-[#7e22ce] mt-1 font-medium text-sm sm:text-base" x-text="t[lang].tagline"></p>
+                <p class="text-[#7e22ce] mt-1 font-semibold text-lg sm:text-xl md:text-2xl tracking-wide" x-text="t[lang].tagline"></p>
             </div>
 
             <!-- Success modal popup -->
