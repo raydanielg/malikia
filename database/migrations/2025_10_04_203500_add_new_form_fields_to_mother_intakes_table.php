@@ -12,7 +12,11 @@ return new class extends Migration {
             $table->unsignedTinyInteger('pregnancy_weeks')->nullable()->after('journey_stage');
             $table->unsignedTinyInteger('baby_weeks_old')->nullable()->after('pregnancy_weeks');
             $table->string('hospital_planned')->nullable()->after('baby_weeks_old');
-            $table->boolean('agree_comms')->default(false)->after('hospital_planned');
+            $table->string('hospital_alternative')->nullable()->after('hospital_planned');
+            $table->string('delivery_hospital')->nullable()->after('hospital_alternative');
+            $table->string('birth_hospital')->nullable()->after('delivery_hospital');
+            $table->string('ttc_duration')->nullable()->after('birth_hospital');
+            $table->boolean('agree_comms')->default(false)->after('ttc_duration');
             $table->boolean('disclaimer_ack')->default(false)->after('agree_comms');
         });
     }
@@ -25,6 +29,10 @@ return new class extends Migration {
                 'pregnancy_weeks',
                 'baby_weeks_old',
                 'hospital_planned',
+                'hospital_alternative',
+                'delivery_hospital',
+                'birth_hospital',
+                'ttc_duration',
                 'agree_comms',
                 'disclaimer_ack',
             ]);

@@ -31,6 +31,8 @@
                 <dl class="space-y-3 text-sm">
                     <div class="flex justify-between"><dt class="text-gray-500">Jina Kamili</dt><dd class="text-gray-900">{{ $intake->full_name ?? '-' }}</dd></div>
                     <div class="flex justify-between"><dt class="text-gray-500">Namba ya Simu</dt><dd class="text-gray-900">{{ $intake->phone ?? '-' }}</dd></div>
+                    @if($intake->email)<div class="flex justify-between"><dt class="text-gray-500">Barua Pepe</dt><dd class="text-gray-900">{{ $intake->email }}</dd></div>@endif
+                    @if($intake->age)<div class="flex justify-between"><dt class="text-gray-500">Umri</dt><dd class="text-gray-900">{{ $intake->age }} miaka</dd></div>@endif
                 </dl>
             </div>
 
@@ -38,21 +40,36 @@
                 <h2 class="text-sm font-semibold text-gray-700 mb-3">Safari ya Uzazi</h2>
                 <dl class="space-y-3 text-sm">
                     <div class="flex justify-between"><dt class="text-gray-500">Hatua</dt><dd class="text-gray-900">{{ ucfirst($intake->journey_stage ?? '-') }}</dd></div>
+
                     @if(($intake->journey_stage ?? '') === 'pregnant')
-                        <div class="flex justify-between"><dt class="text-gray-500">Wiki za Ujauzito</dt><dd class="text-gray-900">{{ $intake->pregnancy_weeks ?? '-' }}</dd></div>
                         <div class="flex justify-between"><dt class="text-gray-500">Hospitali Unayopanga</dt><dd class="text-gray-900">{{ $intake->hospital_planned ?? '-' }}</dd></div>
+                        @if($intake->hospital_alternative)<div class="flex justify-between"><dt class="text-gray-500">Hospitali Mbadala</dt><dd class="text-gray-900">{{ $intake->hospital_alternative }}</dd></div>@endif
+                        <div class="flex justify-between"><dt class="text-gray-500">Wiki za Ujauzito</dt><dd class="text-gray-900">{{ $intake->pregnancy_weeks ?? '-' }}</dd></div>
                     @elseif(($intake->journey_stage ?? '') === 'postpartum')
+                        <div class="flex justify-between"><dt class="text-gray-500">Hospitali ya Kujifungulia</dt><dd class="text-gray-900">{{ $intake->delivery_hospital ?? '-' }}</dd></div>
+                        @if($intake->birth_hospital)<div class="flex justify-between"><dt class="text-gray-500">Hospitali Halisi ya Kuzaliwa</dt><dd class="text-gray-900">{{ $intake->birth_hospital }}</dd></div>@endif
                         <div class="flex justify-between"><dt class="text-gray-500">Wiki za Mtoto</dt><dd class="text-gray-900">{{ $intake->baby_weeks_old ?? '-' }}</dd></div>
+                    @elseif(($intake->journey_stage ?? '') === 'ttc')
+                        <div class="flex justify-between"><dt class="text-gray-500">Muda wa Kujaribu Kupata Mtoto</dt><dd class="text-gray-900">{{ $intake->ttc_duration ?? '-' }}</dd></div>
                     @endif
                 </dl>
             </div>
 
             <div class="md:col-span-2">
-                <h2 class="text-sm font-semibold text-gray-700 mb-3">Ridhaa</h2>
+                <h2 class="text-sm font-semibold text-gray-700 mb-3">Ridhaa na Taarifa Zaidi</h2>
                 <dl class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     <div class="flex justify-between"><dt class="text-gray-500">Ninakubali kupokea ushauri (WhatsApp/SMS)</dt><dd class="text-gray-900">{{ ($intake->agree_comms ?? false) ? 'Ndiyo' : 'Hapana' }}</dd></div>
                     <div class="flex justify-between"><dt class="text-gray-500">Ninakubali tamko la ufafanuzi</dt><dd class="text-gray-900">{{ ($intake->disclaimer_ack ?? false) ? 'Ndiyo' : 'Hapana' }}</dd></div>
+                    @if($intake->location)<div class="flex justify-between"><dt class="text-gray-500">Mahali</dt><dd class="text-gray-900">{{ $intake->location }}</dd></div>@endif
+                    @if($intake->previous_pregnancies)<div class="flex justify-between"><dt class="text-gray-500">Mimba za Awali</dt><dd class="text-gray-900">{{ $intake->previous_pregnancies }}</dd></div>@endif
                 </dl>
+
+                @if($intake->notes)
+                <div class="mt-6">
+                    <h3 class="text-sm font-semibold text-gray-700 mb-2">Maelezo ya Ziada</h3>
+                    <div class="bg-gray-50 p-3 rounded text-sm text-gray-700">{{ $intake->notes }}</div>
+                </div>
+                @endif
             </div>
         </div>
 

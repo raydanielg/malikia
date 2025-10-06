@@ -377,7 +377,7 @@ class PanelController extends Controller
 
         $columns = [
             'ID', 'Full Name', 'Phone',
-            'Journey Stage', 'Pregnancy Weeks', 'Baby Weeks Old', 'Hospital Planned', 'Agree Comms', 'Disclaimer Ack',
+            'Journey Stage', 'Pregnancy Weeks', 'Baby Weeks Old', 'Hospital Planned', 'Hospital Alternative', 'Delivery Hospital', 'Birth Hospital', 'TTC Duration', 'Agree Comms', 'Disclaimer Ack',
             'Email', 'Age', 'Pregnancy Stage', 'Due Date', 'Location',
             'Previous Pregnancies', 'Concerns', 'Interests', 'Status', 'Reviewed By', 'Reviewed At',
             'Completed At', 'Notes', 'Priority', 'User ID', 'Created At', 'Updated At'
@@ -401,6 +401,10 @@ class PanelController extends Controller
                         $r->pregnancy_weeks,
                         $r->baby_weeks_old,
                         $r->hospital_planned,
+                        $r->hospital_alternative,
+                        $r->delivery_hospital,
+                        $r->birth_hospital,
+                        $r->ttc_duration,
                         $r->agree_comms ? 'Yes' : 'No',
                         $r->disclaimer_ack ? 'Yes' : 'No',
                         $r->email,
