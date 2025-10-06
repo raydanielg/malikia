@@ -89,8 +89,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Intake form
-Route::get('/fomu', [MotherIntakeController::class, 'create'])->name('intake.create');
-Route::post('/fomu', [MotherIntakeController::class, 'store'])->name('intake.store');
+Route::get('/join', [MotherIntakeController::class, 'create'])->name('intake.create');
+Route::post('/join', [MotherIntakeController::class, 'store'])->name('intake.store');
 Route::get('/asante', [MotherIntakeController::class, 'thankyou'])->name('intake.thankyou');
 
 // Newsletter

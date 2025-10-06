@@ -17,15 +17,24 @@ class MotherIntakeController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'full_name' => ['required', 'string', 'max:255'],
+            'full_name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\.\-]+$/'],
             // Ruhusu format yoyote ya simu (alama kama +, -, nafasi, mabano) na mpaka herufi 25
-            'phone' => ['nullable', 'string', 'max:25'],
+            'phone' => [
+                'nullable',
+                'string',
+                'max:25',
+                'regex:/^\+?\d{10,15}$/',
+                'unique:mother_intakes,phone'
+            ],
 
             // New form fields
             'journey_stage' => ['required', 'in:pregnant,postpartum,ttc'],
             'pregnancy_weeks' => ['nullable', 'integer', 'min:1', 'max:42'],
             'baby_weeks_old' => ['nullable', 'integer', 'min:0', 'max:52'],
-            'hospital_planned' => ['nullable', 'string', 'max:255'],
+            'hospital_planned' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\'\-()&]*$/'],
+            'delivery_hospital' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\'\-()&]*$/'],
+            // TTC duration field (how long trying to conceive)
+            'ttc_duration' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\']*$/', 'required_if:journey_stage,ttc'],
             'agree_comms' => ['nullable', 'boolean'],
             'disclaimer_ack' => ['nullable', 'boolean'],
 
@@ -68,7 +77,15 @@ class MotherIntakeController extends Controller
         } else { // ttc
             $validated['pregnancy_weeks'] = null;
             $validated['baby_weeks_old'] = null;
-            $validated['hospital_planned'] = null;
+        }
+
+        // If TTC, capture trying duration into notes (to avoid DB schema changes)
+        if (($validated['journey_stage'] ?? null) === 'ttc') {
+            $duration = $request->string('ttc_duration');
+            if ($duration) {
+                $prefix = isset($validated['notes']) && $validated['notes'] ? rtrim($validated['notes']) . "\n" : '';
+                $validated['notes'] = $prefix . "Trying to conceive for: {$duration}.";
+            }
         }
 
         $intake = MotherIntake::create($validated);

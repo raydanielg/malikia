@@ -193,7 +193,8 @@
                 <!-- Full name -->
                 <div class="mb-4">
                     <label class="block text-sm sm:text-base font-medium"><span x-text="t[lang].full_name"></span> <span class="text-red-600">*</span></label>
-                    <input name="full_name" required class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" :placeholder="lang==='en' ? 'e.g. Asha Mwita' : 'mf. Asha Mwita'" value="{{ old('full_name') }}" />
+                    <input name="full_name" required class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" :placeholder="lang==='en' ? 'e.g. Asha Mwita' : 'mf. Asha Mwita'" value="{{ old('full_name') }}" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'\.\-]+$"
+                           title="Tafadhali andika majina pekee (herufi, nafasi na alama za kawaida)" inputmode="text" autocomplete="name" />
                     @error('full_name')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
                     <template x-if="errors.full_name"><p class="text-sm text-red-600 mt-1" x-text="errors.full_name[0]"></p></template>
                 </div>
@@ -201,7 +202,7 @@
                 <!-- WhatsApp Phone -->
                 <div class="mb-4">
                     <label class="block text-sm sm:text-base font-medium"><span x-text="t[lang].phone"></span> <span class="text-red-600">*</span></label>
-                    <input name="phone" required class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" :placeholder="lang==='en' ? 'e.g. 07xxxxxxx or +2557xxxxxxx' : 'mf. 07xxxxxxx au +2557xxxxxxx'" value="{{ old('phone') }}" />
+                    <input type="tel" name="phone" required class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" :placeholder="lang==='en' ? 'e.g. 07xxxxxxx or +2557xxxxxxx' : 'mf. 07xxxxxxx au +2557xxxxxxx'" value="{{ old('phone') }}" inputmode="tel" pattern="^\+?\d{10,15}$" maxlength="16" title="Weka namba ya simu sahihi: tarakimu 10-15, unaweza kuanza na +" />
                     @error('phone')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
                     <template x-if="errors.phone"><p class="text-sm text-red-600 mt-1" x-text="errors.phone[0]"></p></template>
                 </div>
@@ -209,19 +210,27 @@
                 <!-- Journey stage -->
                 <div class="mb-4">
                     <label class="block text-sm sm:text-base font-medium"><span x-text="t[lang].journey_q"></span> <span class="text-red-600">*</span></label>
-                    <div class="mt-2 grid gap-2">
+                    <div class="mt-2 space-y-4" x-data="{ selectedOption: '{{ old('journey_stage', '') }}' }">
                         <label class="flex items-start gap-2 p-3 border rounded-md cursor-pointer hover:bg-gray-50">
                             <input class="mt-1" type="radio" name="journey_stage" value="pregnant" x-model="stage" {{ old('journey_stage')==='pregnant' ? 'checked' : '' }} required />
                             <span class="leading-6">
                                 <span class="font-medium" x-text="t[lang].pregnant"></span>
                             </span>
                         </label>
-                        <div x-show="stage==='pregnant'" x-transition class="ml-6">
-                            <label class="block text-sm sm:text-base font-medium mt-2"><span x-text="t[lang].pregnancy_weeks_q"></span> <span class="text-red-600">*</span></label>
-                            <input type="number" name="pregnancy_weeks" :required="stage==='pregnant'" min="1" max="42" class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" placeholder="e.g. 22" value="{{ old('pregnancy_weeks') }}" />
+                        <!-- Hospital question moved to bottom of options -->
+                        <div x-show="stage==='pregnant'" x-transition class="ml-6 p-4 border rounded-lg bg-gray-50">
+                            <label class="block text-sm font-medium text-gray-700 mb-2"><span x-text="t[lang].hospital_q"></span> <span class="text-red-600">*</span></label>
+
+                            <!-- First hospital input field -->
+                            <input name="hospital_planned" :required="stage==='pregnant'" class="w-full border rounded-md px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-gray-500" placeholder="e.g. Muhimbili National Hospital" value="{{ old('hospital_planned') }}" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,'\-()&]+$" title="Ingiza jina la hospitali" />
+                            @error('hospital_planned')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                            <template x-if="errors.hospital_planned"><p class="text-sm text-red-600 mt-1" x-text="errors.hospital_planned[0]"></p></template>
+
+                            <label class="block text-sm font-medium text-gray-700 mb-2"><span x-text="t[lang].pregnancy_weeks_q"></span> <span class="text-red-600">*</span></label>
+                            <input type="number" name="pregnancy_weeks" :required="stage==='pregnant'" min="1" max="42" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500" placeholder="e.g. 22" value="{{ old('pregnancy_weeks') }}" />
                             @error('pregnancy_weeks')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                            <template x-if="errors.pregnancy_weeks"><p class="text-sm text-red-600 mt-1" x-text="errors.pregnancy_weeks[0]"></p></template>
                         </div>
-                        <template x-if="errors.pregnancy_weeks"><p class="text-sm text-red-600 mt-1 ml-6" x-text="errors.pregnancy_weeks[0]"></p></template>
 
                         <label class="flex items-start gap-2 p-3 border rounded-md cursor-pointer hover:bg-gray-50">
                             <input class="mt-1" type="radio" name="journey_stage" value="postpartum" x-model="stage" {{ old('journey_stage')==='postpartum' ? 'checked' : '' }} required />
@@ -229,9 +238,15 @@
                                 <span class="font-medium" x-text="t[lang].postpartum"></span>
                             </span>
                         </label>
-                        <div x-show="stage==='postpartum'" x-transition class="ml-6">
-                            <label class="block text-sm sm:text-base font-medium mt-2"><span x-text="t[lang].baby_weeks_q"></span> <span class="text-red-600">*</span></label>
-                            <input type="number" name="baby_weeks_old" :required="stage==='postpartum'" min="0" max="52" class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" placeholder="e.g. 6" value="{{ old('baby_weeks_old') }}" />
+                        <div x-show="stage==='postpartum'" x-transition class="ml-6 p-4 border rounded-lg bg-gray-50">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">In which hospital did you deliver your baby? <span class="text-red-600">*</span></label>
+
+                            <!-- Delivery hospital input field -->
+                            <input name="delivery_hospital" :required="stage==='postpartum'" class="w-full border rounded-md px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-gray-500" placeholder="e.g. Muhimbili National Hospital" value="{{ old('delivery_hospital') }}" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,'\-()&]+$" title="Ingiza jina la hospitali uliyojifungulia" />
+                            @error('delivery_hospital')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+
+                            <label class="block text-sm font-medium text-gray-700 mb-2"><span x-text="t[lang].baby_weeks_q"></span> <span class="text-red-600">*</span></label>
+                            <input type="number" name="baby_weeks_old" :required="stage==='postpartum'" min="0" max="52" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500" placeholder="e.g. 6" value="{{ old('baby_weeks_old') }}" />
                             @error('baby_weeks_old')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
                         </div>
 
@@ -241,12 +256,13 @@
                                 <span class="font-medium" x-text="t[lang].ttc"></span>
                             </span>
                         </label>
-                        <!-- Hospital question moved to bottom of options -->
-                        <div x-show="stage==='pregnant'" x-transition class="ml-6">
-                            <label class="block text-sm sm:text-base font-medium mt-4"><span x-text="t[lang].hospital_q"></span> 🏥 <span class="text-red-600">*</span></label>
-                            <input name="hospital_planned" :required="stage==='pregnant'" class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" placeholder="e.g. Muhimbili National Hospital" value="{{ old('hospital_planned') }}" />
-                            @error('hospital_planned')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
-                            <template x-if="errors.hospital_planned"><p class="text-sm text-red-600 mt-1" x-text="errors.hospital_planned[0]"></p></template>
+                        <div x-show="stage==='ttc'" x-transition class="ml-6 p-4 border rounded-lg bg-gray-50">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">For how long have you been trying to conceive? <span class="text-red-600">*</span></label>
+
+                            <!-- TTC duration input field -->
+                            <input name="ttc_duration" :required="stage==='ttc'" class="w-full border rounded-md px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-gray-500" placeholder="e.g. 3 months, 1 year, 6 weeks" value="{{ old('ttc_duration') }}" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,']+$" title="Ingiza muda uliotumia kujaribu kupata ujauzito" />
+                            @error('ttc_duration')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                            <p class="text-sm text-gray-600 mt-2">Examples: "3 days", "1 hour", "3 weeks", "6 months", "2 years"</p>
                         </div>
                     </div>
                     @error('journey_stage')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
