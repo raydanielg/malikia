@@ -28,7 +28,6 @@
                     <a href="{{ route('dashboard') }}" class="px-4 py-2 rounded border text-sm">Dashboard</a>
                 @else
                     <a href="{{ route('login') }}" class="px-4 py-2 rounded border text-sm">Ingia</a>
-                    <a href="{{ route('register') }}" class="px-4 py-2 rounded text-sm text-white bg-[#7e22ce] hover:bg-[#6b21a8]">Jisajili</a>
                 @endauth
             </div>
         </div>
