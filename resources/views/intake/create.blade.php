@@ -80,10 +80,15 @@
                         journey_q: 'Where are you on your motherhood Journey? (Choose one)',
                         pregnant: 'A • I am currently pregnant',
                         hospital_q: 'In which hospital do you plan to deliver your baby?',
+                        hospital_placeholder: 'e.g. Muhimbili National Hospital',
                         pregnancy_weeks_q: 'How many weeks pregnant are you?',
                         postpartum: 'B • I have already delivered',
+                        delivery_hospital_q: 'In which hospital did you deliver your baby?',
+                        delivery_hospital_placeholder: 'e.g. Muhimbili National Hospital',
                         baby_weeks_q: 'How many weeks old is your baby?',
                         ttc: 'C • I am trying to conceive',
+                        ttc_duration_q: 'For how long have you been trying to conceive?',
+                        ttc_duration_placeholder: 'e.g. 3 months, 1 year, 6 weeks',
                         consent1: 'I agree to receive WhatsApp/SMS tips & reminders from Malkia Konnect.',
                         consent2_title: 'I understand that',
                         consent2_body: 'Training and advice from Malkia Konnect are for educational purposes only. They do not replace a doctor, midwife, or emergency services. I will contact a health facility immediately if I experience unusual symptoms.',
@@ -98,10 +103,15 @@
                         journey_q: 'Upo wapi kwenye safari ya uzazi? (Chagua moja)',
                         pregnant: 'A • Mimi ni mjamzito kwa sasa',
                         hospital_q: 'Unapanga kujifungua hospitali gani?',
+                        hospital_placeholder: 'mf. Hospitali ya Taifa Muhimbili',
                         pregnancy_weeks_q: 'Una ujauzito wa wiki ngapi?',
                         postpartum: 'B • Tayari nimejifungua',
+                        delivery_hospital_q: 'Ulijifungua hospitali gani?',
+                        delivery_hospital_placeholder: 'mf. Hospitali ya Taifa Muhimbili',
                         baby_weeks_q: 'Mtoto wako ana wiki ngapi?',
                         ttc: 'C • Ninajaribu kupata ujauzito',
+                        ttc_duration_q: 'Umejaribu kupata ujauzito kwa muda gani?',
+                        ttc_duration_placeholder: 'mf. miezi 3, mwaka 1, wiki 6',
                         consent1: 'Nakubali kupokea ushauri na vikumbusho kupitia WhatsApp/SMS kutoka Malkia Konnect.',
                         consent2_title: 'Ninaelewa kwamba',
                         consent2_body: 'Mafunzo na ushauri kutoka Malkia Konnect ni kwa ajili ya elimu tu. Hayachukui nafasi ya daktari, mkunga au huduma za dharura. Nita wasiliana na kituo cha afya mara moja nikipata dalili zisizo za kawaida.',
@@ -222,7 +232,7 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2"><span x-text="t[lang].hospital_q"></span> <span class="text-red-600">*</span></label>
 
                             <!-- First hospital input field -->
-                            <input name="hospital_planned" :required="stage==='pregnant'" class="w-full border rounded-md px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-gray-500" placeholder="e.g. Muhimbili National Hospital" value="{{ old('hospital_planned') }}" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,'\-()&]+$" title="Ingiza jina la hospitali" />
+                            <input name="hospital_planned" :required="stage==='pregnant'" class="w-full border rounded-md px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-gray-500" :placeholder="lang==='en' ? t.en.hospital_placeholder : t.sw.hospital_placeholder" value="{{ old('hospital_planned') }}" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,'\-()&]+$" title="Ingiza jina la hospitali" />
                             @error('hospital_planned')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
                             <template x-if="errors.hospital_planned"><p class="text-sm text-red-600 mt-1" x-text="errors.hospital_planned[0]"></p></template>
 
@@ -239,10 +249,10 @@
                             </span>
                         </label>
                         <div x-show="stage==='postpartum'" x-transition class="ml-6 p-4 border rounded-lg bg-gray-50">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">In which hospital did you deliver your baby? <span class="text-red-600">*</span></label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2"><span x-text="t[lang].delivery_hospital_q"></span> <span class="text-red-600">*</span></label>
 
                             <!-- Delivery hospital input field -->
-                            <input name="delivery_hospital" :required="stage==='postpartum'" class="w-full border rounded-md px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-gray-500" placeholder="e.g. Muhimbili National Hospital" value="{{ old('delivery_hospital') }}" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,'\-()&]+$" title="Ingiza jina la hospitali uliyojifungulia" />
+                            <input name="delivery_hospital" :required="stage==='postpartum'" class="w-full border rounded-md px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-gray-500" :placeholder="lang==='en' ? t.en.delivery_hospital_placeholder : t.sw.delivery_hospital_placeholder" value="{{ old('delivery_hospital') }}" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,'\-()&]+$" title="Ingiza jina la hospitali uliyojifungulia" />
                             @error('delivery_hospital')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
 
                             <label class="block text-sm font-medium text-gray-700 mb-2"><span x-text="t[lang].baby_weeks_q"></span> <span class="text-red-600">*</span></label>
@@ -257,13 +267,12 @@
                             </span>
                         </label>
                         <div x-show="stage==='ttc'" x-transition class="ml-6 p-4 border rounded-lg bg-gray-50">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">For how long have you been trying to conceive? <span class="text-red-600">*</span></label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2"><span x-text="t[lang].ttc_duration_q"></span> <span class="text-red-600">*</span></label>
 
                             <!-- TTC duration input field -->
-                            <input name="ttc_duration" :required="stage==='ttc'" class="w-full border rounded-md px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-gray-500" placeholder="e.g. 3 months, 1 year, 6 weeks" value="{{ old('ttc_duration') }}" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,']+$" title="Ingiza muda uliotumia kujaribu kupata ujauzito" />
+                            <input name="ttc_duration" :required="stage==='ttc'" class="w-full border rounded-md px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-gray-500" :placeholder="lang==='en' ? t.en.ttc_duration_placeholder : t.sw.ttc_duration_placeholder" value="{{ old('ttc_duration') }}" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,']+$" title="Ingiza muda uliotumia kujaribu kupata ujauzito" />
                             @error('ttc_duration')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
-                            <p class="text-sm text-gray-600 mt-2">Examples: "3 days", "1 hour", "3 weeks", "6 months", "2 years"</p>
-                        </div>
+                            </div>
                     </div>
                     @error('journey_stage')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
 
@@ -315,9 +324,14 @@
                 journey_q: 'Where are you on your motherhood Journey? (Choose one)',
                 pregnant: 'A • I am currently pregnant',
                 hospital_q: 'In which hospital do you plan to deliver your baby?',
+                hospital_placeholder: 'e.g. Muhimbili National Hospital',
                 postpartum: 'B • I have already delivered',
+                delivery_hospital_q: 'In which hospital did you deliver your baby?',
+                delivery_hospital_placeholder: 'e.g. Muhimbili National Hospital',
                 baby_weeks_q: 'How many weeks old is your baby?',
                 ttc: 'C • I am trying to conceive',
+                ttc_duration_q: 'For how long have you been trying to conceive?',
+                ttc_duration_placeholder: 'e.g. 3 months, 1 year, 6 weeks',
                 consent1: 'I agree to receive WhatsApp/SMS tips & reminders from Malkia Konnect.',
                 consent2_title: 'I understand that',
                 consent2_body: 'Training and advice from Malkia Konnect are for educational purposes only. They do not replace a doctor, midwife, or emergency services. I will contact a health facility immediately if I experience unusual symptoms.',
@@ -332,9 +346,14 @@
                 journey_q: 'Upo wapi kwenye safari ya uzazi? (Chagua moja)',
                 pregnant: 'A • Mimi ni mjamzito kwa sasa',
                 hospital_q: 'Unapanga kujifungua hospitali gani?',
+                hospital_placeholder: 'mf. Hospitali ya Taifa Muhimbili',
                 postpartum: 'B • Tayari nimejifungua',
+                delivery_hospital_q: 'Ulijifungua hospitali gani?',
+                delivery_hospital_placeholder: 'mf. Hospitali ya Taifa Muhimbili',
                 baby_weeks_q: 'Mtoto wako ana wiki ngapi?',
                 ttc: 'C • Ninajaribu kupata ujauzito',
+                ttc_duration_q: 'Umejaribu kupata ujauzito kwa muda gani?',
+                ttc_duration_placeholder: 'mf. miezi 3, mwaka 1, wiki 6',
                 consent1: 'Nakubali kupokea ushauri na vikumbusho kupitia WhatsApp/SMS kutoka Malkia Konnect.',
                 consent2_title: 'Ninaelewa kwamba',
                 consent2_body: 'Mafunzo na ushauri kutoka Malkia Konnect ni kwa ajili ya elimu tu. Hayachukui nafasi ya daktari, mkunga au huduma za dharura. Nita wasiliana na kituo cha afya mara moja nikipata dalili zisizo za kawaida.',
