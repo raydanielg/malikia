@@ -7,27 +7,32 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>[x-cloak]{ display:none !important; }</style>
 </head>
-<body class="antialiased text-gray-900 bg-gradient-to-br from-rose-50 via-white to-teal-50 min-h-screen flex items-center justify-center py-8 px-4">
-    <main class="w-full max-w-3xl">
-        <div class="mb-6 text-center">
-            <p class="inline-flex items-center gap-2 rounded-full bg-rose-50 text-rose-700 text-xs font-medium px-3 py-1 border border-rose-100">
-                <span class="h-2 w-2 rounded-full bg-rose-500"></span>
-                Tunathamini maoni yako
-            </p>
-            <h1 class="mt-3 text-2xl sm:text-3xl font-extrabold text-gray-900">
-                Tusaidie kuboresha Malkia Konnect
-            </h1>
-            <p class="mt-2 text-sm text-gray-600">
-                Survey hii itachukua takribani dakika 2–3 tu. Majibu yako yanatusaidia kuboresha bidhaa na huduma zetu.
-            </p>
-        </div>
+<body class="antialiased text-gray-900">
+    <div class="relative min-h-screen flex items-center justify-center py-8 px-4 overflow-hidden bg-black">
+        <video
+            class="absolute inset-0 w-full h-full object-cover opacity-70"
+            autoplay
+            muted
+            loop
+            playsinline
+        >
+            <source src="{{ asset('puberty/0_Woman_Purple_3840x2160.mp4') }}" type="video/mp4">
+            <source src="{{ asset('puberty/7188347_Woman_Women_3840x2160.mp4') }}" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-br from-rose-900/70 via-rose-700/40 to-teal-900/70 mix-blend-multiply"></div>
 
-        <section x-data="{ step: 1, maxStep: 4 }" class="space-y-4">
-            @if (session('survey_ok'))
-                <div class="mb-5 rounded-xl bg-green-50 text-green-800 px-4 py-3 border border-green-200 text-sm">
-                    {{ session('survey_ok') }}
-                </div>
-            @endif
+        <main class="relative z-10 w-full max-w-3xl">
+            <div class="mb-6 text-center">
+                <p class="inline-flex items-center gap-2 rounded-full bg-rose-50 text-rose-700 text-xs font-medium px-3 py-1 border border-rose-100">
+                    <span class="h-2 w-2 rounded-full bg-rose-500"></span>
+                    Tunathamini maoni yako
+                </p>
+                <h1 class="mt-3 text-2xl sm:text-3xl font-extrabold text-gray-50">
+                    Tusaidie kuboresha Malkia Konnect
+                </h1>
+                <p class="mt-2 text-sm text-rose-50/90">
+                    Survey hii itachukua takribani dakika 2–3 tu. Majibu yako yanatusaidia kuboresha bidhaa na huduma zetu.
+                </p>
 
             <div class="flex items-center justify-between gap-4 mb-2">
                 <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden">
