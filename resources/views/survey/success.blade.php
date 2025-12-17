@@ -25,9 +25,9 @@
         }
     </style>
 </head>
-<body class="antialiased bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
-    <div class="min-h-screen flex items-center justify-center px-4 py-12">
-        <div class="max-w-2xl w-full text-center space-y-8 fade-in">
+<body class="antialiased bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 text-gray-900">
+    <div class="min-h-screen flex items-center justify-center px-3 sm:px-4 py-10 sm:py-12">
+        <div class="max-w-2xl w-full text-center space-y-8 sm:space-y-10 fade-in">
             <!-- Success Icon -->
             <div class="flex justify-center">
                 <div class="relative scale-in">
@@ -41,22 +41,22 @@
             </div>
 
             <!-- Success Message -->
-            <div class="space-y-4">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900">
+            <div class="space-y-4 sm:space-y-5">
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900">
                     Hongera! 
                     <span class="bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent">Umefanikiwa</span>
                 </h1>
-                <p class="text-xl sm:text-2xl text-gray-700 font-semibold">
+                <p class="text-lg sm:text-2xl text-gray-800 font-semibold">
                     Asante sana kwa kushiriki kwenye dodoso letu!
                 </p>
-                <p class="text-base sm:text-lg text-gray-600 max-w-xl mx-auto leading-relaxed">
-                    Maoni yako ni muhimu sana kwetu na yatatusaidia kuboresha bidhaa na huduma za <span class="font-bold text-purple-600">Malkia Konnect</span> ili zikidhi mahitaji yako vizuri zaidi.
+                <p class="text-sm sm:text-base md:text-lg text-gray-700 max-w-xl mx-auto leading-relaxed">
+                    Maoni yako ni muhimu sana kwetu na yatatusaidia kuboresha bidhaa na huduma za <span class="font-bold text-purple-700">Malkia Konnect</span> ili zikidhi mahitaji yako vizuri zaidi.
                 </p>
             </div>
 
             <!-- Stats/Info Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
-                <div class="bg-white rounded-xl shadow-lg p-6 border-2 border-purple-100">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 max-w-3xl mx-auto">
+                <div class="bg-white rounded-xl shadow-md sm:shadow-lg p-5 sm:p-6 border border-purple-100">
                     <div class="flex justify-center mb-3">
                         <div class="bg-purple-100 rounded-full p-3">
                             <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,11 +64,11 @@
                             </svg>
                         </div>
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-700">Majibu Yamesave</h3>
-                    <p class="text-xs text-gray-500 mt-1">Majibu yako yamehifadhiwa salama</p>
+                    <h3 class="text-sm font-semibold text-gray-800">Majibu Yamesave</h3>
+                    <p class="text-xs text-gray-600 mt-1">Majibu yako yamehifadhiwa salama</p>
                 </div>
                 
-                <div class="bg-white rounded-xl shadow-lg p-6 border-2 border-pink-100">
+                <div class="bg-white rounded-xl shadow-md sm:shadow-lg p-5 sm:p-6 border border-pink-100">
                     <div class="flex justify-center mb-3">
                         <div class="bg-pink-100 rounded-full p-3">
                             <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,11 +76,11 @@
                             </svg>
                         </div>
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-700">Muda Uliotumia</h3>
-                    <p class="text-xs text-gray-500 mt-1">Dakika 2-3 tu - Asante!</p>
+                    <h3 class="text-sm font-semibold text-gray-800">Muda Uliotumia</h3>
+                    <p class="text-xs text-gray-600 mt-1">Dakika 2-3 tu - Asante!</p>
                 </div>
                 
-                <div class="bg-white rounded-xl shadow-lg p-6 border-2 border-rose-100">
+                <div class="bg-white rounded-xl shadow-md sm:shadow-lg p-5 sm:p-6 border border-rose-100">
                     <div class="flex justify-center mb-3">
                         <div class="bg-rose-100 rounded-full p-3">
                             <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,8 +88,8 @@
                             </svg>
                         </div>
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-700">Thamani Yako</h3>
-                    <p class="text-xs text-gray-500 mt-1">Maoni yako yanathaminiwa sana</p>
+                    <h3 class="text-sm font-semibold text-gray-800">Thamani Yako</h3>
+                    <p class="text-xs text-gray-600 mt-1">Maoni yako yanathaminiwa sana</p>
                 </div>
             </div>
 
