@@ -29,10 +29,14 @@ Route::get('/team', function () {
     return view('team.index');
 })->name('team');
 
-// Survey page
+// Survey pages
 Route::get('/survey', function () {
     return view('survey.index');
 })->name('survey');
+
+Route::get('/survey/success', function () {
+    return view('survey.success');
+})->name('survey.success');
 
 Route::post('/survey', function (Request $request) {
     $validated = $request->validate([
@@ -79,7 +83,8 @@ Route::post('/survey', function (Request $request) {
         'user_agent' => $request->userAgent(),
     ]);
 
-    return back()->with('survey_ok', 'Asante sana kwa kushiriki kwenye dodoso letu la taulo za kike! 🎉 Maoni yako yatatusaidia kuboresha bidhaa na huduma zetu.');
+    // Redirect to success page
+    return redirect()->route('survey.success');
 })->name('survey.submit');
 
 // Contact

@@ -35,38 +35,101 @@
         }
     </style>
 </head>
-<body class="antialiased text-gray-900">
-    <div class="relative min-h-screen flex items-center justify-center py-6 sm:py-10 px-3 sm:px-4 overflow-hidden bg-black">
-        <video
-            class="absolute inset-0 w-full h-full object-cover opacity-50 blur-lg scale-110"
-            autoplay
-            muted
-            loop
-            playsinline
-        >
-            <source src="{{ asset('puberty/0_Woman_Purple_3840x2160.mp4') }}" type="video/mp4">
-            <source src="{{ asset('puberty/7188347_Woman_Women_3840x2160.mp4') }}" type="video/mp4">
-        </video>
-        <div class="absolute inset-0 bg-gradient-to-br from-rose-900/85 via-rose-700/50 to-teal-900/85 mix-blend-multiply"></div>
-
-        <main class="relative z-10 w-full max-w-3xl mx-auto">
-            <div class="mb-8 text-center space-y-3">
-                <p class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-rose-100 to-pink-100 text-rose-800 text-xs sm:text-sm font-semibold px-4 py-2 border-2 border-rose-200/50 shadow-lg backdrop-blur-sm">
-                    <span class="h-2.5 w-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+<body class="antialiased text-gray-900 bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <div class="min-h-screen py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+        <main class="w-full max-w-4xl mx-auto">
+            <!-- Header Section -->
+            <div class="mb-8 text-center space-y-4">
+                <div class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-rose-500 to-purple-600 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 shadow-lg">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
                     Tunathamini maoni yako
-                </p>
-                <h1 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(251,113,133,0.3);">
-                    Tusaidie kuboresha <span class="bg-gradient-to-r from-rose-300 via-pink-200 to-rose-300 bg-clip-text text-transparent">Malkia Konnect</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">
+                    Tusaidie kuboresha <span class="bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">Malkia Konnect</span>
                 </h1>
-                <p class="mt-3 text-sm sm:text-base text-white/95 font-medium max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] leading-relaxed">
-                    Survey hii itachukua takribani <span class="text-rose-200 font-bold">dakika 2–3</span> tu. Majibu yako yanatusaidia kuboresha bidhaa na huduma zetu.
+                <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    Survey hii itachukua takribani <span class="text-rose-600 font-bold">dakika 2–3</span> tu. Majibu yako yanatusaidia kuboresha bidhaa na huduma zetu.
                 </p>
+                <div class="flex items-center justify-center gap-2 text-sm text-gray-500">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>Majibu yako yanasave automatically</span>
+                </div>
             </div>
 
             <section x-data="{ 
                 step: 1, 
                 maxStep: 4,
                 celebrating: false,
+                formData: {},
+                init() {
+                    // Load saved data from localStorage
+                    const saved = localStorage.getItem('malkia_survey_data');
+                    if (saved) {
+                        try {
+                            this.formData = JSON.parse(saved);
+                            this.restoreFormData();
+                        } catch (e) {
+                            console.error('Error loading saved data:', e);
+                        }
+                    }
+                    
+                    // Auto-save on input change
+                    this.$watch('formData', () => {
+                        this.saveFormData();
+                    });
+                },
+                saveFormData() {
+                    const form = document.querySelector('form');
+                    if (!form) return;
+                    
+                    const formData = new FormData(form);
+                    const data = {};
+                    
+                    for (let [key, value] of formData.entries()) {
+                        if (key.endsWith('[]')) {
+                            const baseKey = key.slice(0, -2);
+                            if (!data[baseKey]) data[baseKey] = [];
+                            data[baseKey].push(value);
+                        } else {
+                            data[key] = value;
+                        }
+                    }
+                    
+                    localStorage.setItem('malkia_survey_data', JSON.stringify(data));
+                },
+                restoreFormData() {
+                    const form = document.querySelector('form');
+                    if (!form || !this.formData) return;
+                    
+                    Object.keys(this.formData).forEach(key => {
+                        const value = this.formData[key];
+                        
+                        if (Array.isArray(value)) {
+                            value.forEach(v => {
+                                const checkbox = form.querySelector(`input[name='${key}[]'][value='${v}']`);
+                                if (checkbox) checkbox.checked = true;
+                            });
+                        } else {
+                            const input = form.querySelector(`[name='${key}']`);
+                            if (input) {
+                                if (input.type === 'radio') {
+                                    const radio = form.querySelector(`input[name='${key}'][value='${value}']`);
+                                    if (radio) radio.checked = true;
+                                } else {
+                                    input.value = value;
+                                }
+                            }
+                        }
+                    });
+                },
+                clearSavedData() {
+                    localStorage.removeItem('malkia_survey_data');
+                    this.formData = {};
+                },
                 celebrate() {
                     this.celebrating = true;
                     this.createConfetti();
@@ -87,7 +150,9 @@
                         }, i * 30);
                     }
                 }
-            }" class="space-y-4">
+            }" 
+            @input.debounce.500ms="saveFormData()"
+            class="space-y-4">
             <div class="flex items-center justify-between gap-4 mb-2">
                 <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden">
                     <div class="h-full bg-[#7e22ce] transition-all duration-300" :style="`width: ${(step / maxStep) * 100}%`"></div>
