@@ -8,6 +8,7 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     $testimonials = Testimonial::query()->latest()->take(10)->get();
@@ -26,6 +27,27 @@ Route::get('/about', function () {
 Route::get('/team', function () {
     return view('team.index');
 })->name('team');
+
+// Survey page
+Route::get('/survey', function () {
+    return view('survey.index');
+})->name('survey');
+
+Route::post('/survey', function (Request $request) {
+    $validated = $request->validate([
+        'full_name' => ['required', 'string', 'max:255'],
+        'phone' => ['nullable', 'string', 'max:25'],
+        'email' => ['nullable', 'email', 'max:255'],
+        'journey_stage' => ['required', 'in:pregnant,postpartum,ttc'],
+        'experience_rating' => ['required', 'integer', 'min:1', 'max:5'],
+        'recommend_score' => ['nullable', 'integer', 'min:0', 'max:10'],
+        'feedback' => ['nullable', 'string', 'max:5000'],
+    ]);
+
+    // For now we just acknowledge; storage/notifications can be added later
+
+    return back()->with('survey_ok', 'Asante kwa kushiriki kwenye survey yetu. Maoni yako yatatusaidia kuboresha huduma zetu.');
+})->name('survey.submit');
 
 // Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
