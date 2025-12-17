@@ -21,8 +21,8 @@
             <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full" style="display: none;"></div>
 
             <div x-show="dropdownOpen" class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl" style="display: none;">
-                <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">My Profile</a>
-                <a href="{{ route('profile.edit') }}#update-password" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Change Password</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">My Profile</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Change Password</a>
                 <hr class="border-gray-200">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
