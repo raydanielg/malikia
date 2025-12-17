@@ -44,7 +44,7 @@
                     <div class="absolute inset-0 rounded-full blur-3xl opacity-40 bg-gradient-to-br from-gray-200 via-rose-100 to-gray-50"></div>
                     <div class="relative bg-white rounded-full shadow-2xl flex items-center justify-center w-40 h-40 sm:w-48 sm:h-48">
                         <img
-                            src="{{ asset('WhatsApp Image 2025-12-17 at 8.34.39 PM.jpeg') }}"
+                            src="{{ asset('image.png') }}"
                             alt="Malkia Konnect survey"
                             class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover shadow-md"
                             loading="lazy"
@@ -54,16 +54,12 @@
             </div>
 
             <!-- Success Message -->
-            <div class="space-y-4 sm:space-y-5">
-                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900">
-                    Hongera! 
-                    <span class="bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent">Umefanikiwa</span>
+            <div class="space-y-3 sm:space-y-4">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">
+                    Asante mama 🤍
                 </h1>
-                <p class="text-lg sm:text-2xl text-gray-800 font-semibold">
-                    Asante sana kwa kushiriki kwenye dodoso letu!
-                </p>
                 <p class="text-sm sm:text-base md:text-lg text-gray-700 max-w-xl mx-auto leading-relaxed">
-                    Maoni yako ni muhimu sana kwetu na yatatusaidia kuboresha bidhaa na huduma za <span class="font-bold text-purple-700">Malkia Konnect</span> ili zikidhi mahitaji yako vizuri zaidi.
+                    Sauti yako imepokelewa. Ulichoshiriki leo kitasaidia kuboresha taulo za kike kwa wanawake wengi zaidi.
                 </p>
             </div>
 
