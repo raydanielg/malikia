@@ -33,7 +33,9 @@
                 <p class="mt-2 text-sm text-rose-50/90">
                     Survey hii itachukua takribani dakika 2–3 tu. Majibu yako yanatusaidia kuboresha bidhaa na huduma zetu.
                 </p>
+            </div>
 
+            <section x-data="{ step: 1, maxStep: 4 }" class="space-y-4">
             <div class="flex items-center justify-between gap-4 mb-2">
                 <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden">
                     <div class="h-full bg-[#7e22ce] transition-all duration-300" :style="`width: ${(step / maxStep) * 100}%`"></div>
