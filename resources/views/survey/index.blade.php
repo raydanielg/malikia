@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('survey.submit') }}" class="bg-white/95 backdrop-blur-sm border border-white/60 rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 space-y-6">
+            <form method="POST" action="{{ route('survey.submit') }}" class="bg-white border border-gray-200 rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8 space-y-6">
                 @csrf
 
                 <div class="rounded-2xl bg-rose-50/60 border border-rose-100 p-3 sm:p-4 flex items-center gap-3 sm:gap-4">
