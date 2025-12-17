@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MotherIntake;
+use App\Models\SurveyResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
 use App\Exports\MotherIntakesExport;
+use App\Exports\SurveyResponsesExport;
 use Carbon\Carbon;
 
 class PanelController extends Controller
@@ -573,5 +575,93 @@ class PanelController extends Controller
             'urgent' => 'Haraka',
             default => ucfirst($priority ?? 'medium'),
         };
+    }
+
+    // Survey Responses Management Methods
+    
+    public function surveysIndex(Request $request)
+    {
+        $query = SurveyResponse::query();
+        
+        // Filter by age group
+        if ($request->filled('age_group')) {
+            $query->where('age_group', $request->age_group);
+        }
+        
+        // Filter by flow level
+        if ($request->filled('flow_level')) {
+            $query->where('flow_level', $request->flow_level);
+        }
+        
+        // Filter by price range
+        if ($request->filled('price_range')) {
+            $query->where('price_range', $request->price_range);
+        }
+        
+        // Filter by date range
+        if ($request->filled('from')) {
+            $query->whereDate('created_at', '>=', $request->from);
+        }
+        if ($request->filled('to')) {
+            $query->whereDate('created_at', '<=', $request->to);
+        }
+        
+        // Search by brand
+        if ($request->filled('search')) {
+            $query->where('current_brand', 'like', '%' . $request->search . '%');
+        }
+        
+        $surveys = $query->latest()->paginate(20);
+        
+        // Stats for dashboard
+        $stats = [
+            'total' => SurveyResponse::count(),
+            'today' => SurveyResponse::whereDate('created_at', today())->count(),
+            'this_week' => SurveyResponse::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count(),
+            'this_month' => SurveyResponse::whereMonth('created_at', now()->month)->count(),
+        ];
+        
+        // Age group distribution
+        $ageGroups = SurveyResponse::selectRaw('age_group, COUNT(*) as count')
+            ->groupBy('age_group')
+            ->pluck('count', 'age_group');
+        
+        // Flow level distribution
+        $flowLevels = SurveyResponse::selectRaw('flow_level, COUNT(*) as count')
+            ->groupBy('flow_level')
+            ->pluck('count', 'flow_level');
+        
+        return view('panel.surveys.index', compact('surveys', 'stats', 'ageGroups', 'flowLevels'));
+    }
+    
+    public function surveyDetails(SurveyResponse $survey)
+    {
+        return view('panel.surveys.details', compact('survey'));
+    }
+    
+    public function surveysExportExcel()
+    {
+        return Excel::download(new SurveyResponsesExport, 'survey-responses-' . now()->format('Y-m-d') . '.xlsx');
+    }
+    
+    public function surveysExportCsv()
+    {
+        return Excel::download(new SurveyResponsesExport, 'survey-responses-' . now()->format('Y-m-d') . '.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+    
+    public function surveyDestroy(Request $request, SurveyResponse $survey)
+    {
+        try {
+            $survey->delete();
+            if ($request->expectsJson()) {
+                return response()->json(['success' => true, 'message' => 'Survey response imefutwa kikamilifu.']);
+            }
+            return redirect()->route('panel.surveys.index')->with('success', 'Survey response imefutwa kikamilifu.');
+        } catch (\Exception $e) {
+            if ($request->expectsJson()) {
+                return response()->json(['success' => false, 'message' => 'Imeshindikana kufuta rekodi.'], 500);
+            }
+            return redirect()->back()->with('error', 'Imeshindikana kufuta rekodi.');
+        }
     }
 }

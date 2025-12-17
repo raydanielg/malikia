@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\MotherIntakeController;
 use App\Models\Testimonial;
+use App\Models\SurveyResponse;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
@@ -71,9 +72,14 @@ Route::post('/survey', function (Request $request) {
         'other_comments' => ['nullable', 'string', 'max:2000'],
     ]);
 
-    // For now we just acknowledge; storage/notifications can be added later
+    // Save survey response to database
+    $surveyResponse = SurveyResponse::create([
+        ...$validated,
+        'ip_address' => $request->ip(),
+        'user_agent' => $request->userAgent(),
+    ]);
 
-    return back()->with('survey_ok', 'Asante kwa kushiriki kwenye dodoso letu la taulo za kike. Maoni yako yatatusaidia kuboresha bidhaa yetu.');
+    return back()->with('survey_ok', 'Asante sana kwa kushiriki kwenye dodoso letu la taulo za kike! 🎉 Maoni yako yatatusaidia kuboresha bidhaa na huduma zetu.');
 })->name('survey.submit');
 
 // Contact
@@ -108,6 +114,13 @@ Route::middleware(['auth', 'verified'])->prefix('panel')->name('panel.')->group(
     Route::get('/system-health', [App\Http\Controllers\PanelController::class, 'systemHealth'])->name('system.health');
     Route::post('/clear-cache', [App\Http\Controllers\PanelController::class, 'clearCache'])->name('cache.clear');
     Route::get('/backup-database', [App\Http\Controllers\PanelController::class, 'backupDatabase'])->name('backup.database');
+    
+    // Survey responses management
+    Route::get('/surveys', [App\Http\Controllers\PanelController::class, 'surveysIndex'])->name('surveys.index');
+    Route::get('/survey/{survey}', [App\Http\Controllers\PanelController::class, 'surveyDetails'])->name('survey.details');
+    Route::get('/surveys/export/excel', [App\Http\Controllers\PanelController::class, 'surveysExportExcel'])->name('surveys.export.excel');
+    Route::get('/surveys/export/csv', [App\Http\Controllers\PanelController::class, 'surveysExportCsv'])->name('surveys.export.csv');
+    Route::delete('/survey/{survey}', [App\Http\Controllers\PanelController::class, 'surveyDestroy'])->name('survey.destroy');
 });
 
 // Authentication Routes
