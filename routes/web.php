@@ -86,9 +86,11 @@ Route::post('/survey', function (Request $request) {
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-Route::get('/panel', [App\Http\Controllers\PanelController::class, 'index'])->name('panel');
+// Panel Routes - All require authentication
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/panel', [App\Http\Controllers\PanelController::class, 'index'])->name('panel');
+});
 
-// Panel Routes
 Route::middleware(['auth', 'verified'])->prefix('panel')->name('panel.')->group(function () {
     Route::post('/intake/{intake}/complete', [App\Http\Controllers\PanelController::class, 'markAsCompleted'])->name('intake.complete');
     Route::post('/intake/{intake}/review', [App\Http\Controllers\PanelController::class, 'markAsReviewed'])->name('intake.review');
