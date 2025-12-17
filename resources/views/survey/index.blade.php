@@ -3,7 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Survey - {{ config('app.name', 'Malkia Konnect') }}</title>
+    <title>Survey - Malkia Konnect</title>
+
+    {{-- Primary SEO Meta Tags --}}
+    <meta name="title" content="Survey - Malkia Konnect">
+    <meta name="description" content="Nimeshiriki maoni yangu kuhusu taulo za kike. Kama pedi zimewahi kukuangusha, huu ni wakati wako wa kusema kupitia dodoso la Malkia Konnect.">
+
+    {{-- Open Graph / Facebook / WhatsApp --}}
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://malkia.co.tz/survey">
+    <meta property="og:title" content="Survey - Malkia Konnect">
+    <meta property="og:description" content="Nimeshiriki maoni yangu kuhusu taulo za kike. Kama pedi zimewahi kukuangusha, huu ni wakati wako wa kusema.">
+    <meta property="og:image" content="{{ asset('WhatsApp Image 2025-12-17 at 8.34.39 PM.jpeg') }}">
+    <meta property="og:image:alt" content="Malkia Konnect survey - taulo za kike">
+
+    {{-- Twitter --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Survey - Malkia Konnect">
+    <meta name="twitter:description" content="Nimeshiriki maoni yangu kuhusu taulo za kike. Kama pedi zimewahi kukuangusha, huu ni wakati wako wa kusema.">
+    <meta name="twitter:image" content="{{ asset('WhatsApp Image 2025-12-17 at 8.34.39 PM.jpeg') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         [x-cloak]{ display:none !important; }
