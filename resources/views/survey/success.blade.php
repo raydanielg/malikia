@@ -33,31 +33,22 @@
             animation: sharePulse 1.6s ease-out infinite;
         }
 
-        @keyframes heartBeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.05); }
-            50% { transform: scale(1.12); }
-            75% { transform: scale(1.05); }
-        }
-
-        .heart-beat {
-            animation: heartBeat 1.8s ease-in-out infinite;
-        }
     </style>
 </head>
 <body class="antialiased bg-gradient-to-br from-white via-rose-50 to-pink-50 text-gray-900">
     <div class="min-h-screen flex items-center justify-center px-3 sm:px-4 py-10 sm:py-12">
         <div class="max-w-2xl w-full text-center space-y-8 sm:space-y-10 fade-in">
-            <!-- Success Icon -->
+            <!-- Success Icon / Image Card -->
             <div class="flex justify-center">
                 <div class="relative scale-in">
-                    <div class="absolute inset-0 bg-gradient-to-r from-rose-400 to-pink-500 rounded-full blur-3xl opacity-60"></div>
-                    <div class="relative bg-white rounded-full p-2 shadow-xl flex items-center justify-center">
-                        <div class="bg-gradient-to-r from-rose-500 to-pink-600 rounded-full p-8 shadow-2xl flex items-center justify-center heart-beat">
-                            <svg class="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                            </svg>
-                        </div>
+                    <div class="absolute inset-0 rounded-full blur-3xl opacity-40 bg-gradient-to-br from-gray-200 via-rose-100 to-gray-50"></div>
+                    <div class="relative bg-white rounded-full shadow-2xl flex items-center justify-center w-40 h-40 sm:w-48 sm:h-48">
+                        <img
+                            src="{{ asset('WhatsApp Image 2025-12-17 at 8.34.39 PM.jpeg') }}"
+                            alt="Malkia Konnect survey"
+                            class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover shadow-md"
+                            loading="lazy"
+                        >
                     </div>
                 </div>
             </div>
