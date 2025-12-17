@@ -41,6 +41,74 @@
             <form method="POST" action="{{ route('survey.submit') }}" class="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 lg:p-8 space-y-6">
                 @csrf
 
+                <div class="rounded-2xl bg-rose-50/60 border border-rose-100 p-3 sm:p-4 flex items-center gap-3 sm:gap-4">
+                    <div class="relative h-16 w-16 sm:h-20 sm:w-20 rounded-xl overflow-hidden bg-rose-100 flex-shrink-0">
+                        <img
+                            x-show="step === 1"
+                            x-cloak
+                            src="{{ asset('puberty/young-african-american-woman-holding-sanitary-napkin-isolated-beige-background-having-some-great-idea-concept-creativity_1187-228077.jpg') }}"
+                            alt="Mwanamke mwenye taulo za kike"
+                            class="absolute inset-0 h-full w-full object-cover transform scale-105"
+                            loading="lazy"
+                        >
+                        <img
+                            x-show="step === 2"
+                            x-cloak
+                            src="{{ asset('puberty/puberty-girl-choosing-sanitary-pads-tampons_1308-132920.jpg') }}"
+                            alt="Msichana akichagua taulo za kike"
+                            class="absolute inset-0 h-full w-full object-cover transform scale-105"
+                            loading="lazy"
+                        >
+                        <img
+                            x-show="step === 3"
+                            x-cloak
+                            src="{{ asset('puberty/hesitant-dark-skinned-woman-holds-unused-clean-sanitary-napkin-tampon-chooses-best-intimate-product-menstruation-cares-about-health-isolated-blue-wall-women-hygiene-gynecology-concept_273609-38307.jpg') }}"
+                            alt="Mwanamke akifikiria kuhusu pedi"
+                            class="absolute inset-0 h-full w-full object-cover transform scale-105"
+                            loading="lazy"
+                        >
+                        <img
+                            x-show="step === 4"
+                            x-cloak
+                            src="{{ asset('puberty/satisfied-lovely-woman-with-crisp-hairstyle-holds-sanitary-napkin_273609-30559.jpg') }}"
+                            alt="Mwanamke mwenye furaha na taulo za kike"
+                            class="absolute inset-0 h-full w-full object-cover transform scale-105"
+                            loading="lazy"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-tr from-rose-900/40 via-rose-700/10 to-transparent"></div>
+                    </div>
+
+                    <div class="flex-1 text-[11px] sm:text-xs text-rose-900 space-y-1">
+                        <p x-show="step === 1" x-cloak class="font-semibold">
+                            Hatua 1: Tuambie kidogo kuhusu wewe na periods zako.
+                        </p>
+                        <p x-show="step === 1" x-cloak>
+                            Hii inatusaidia kuelewa mahitaji ya damu kidogo, ya kati au nyingi ili kubuni pedi sahihi.
+                        </p>
+
+                        <p x-show="step === 2" x-cloak class="font-semibold">
+                            Hatua 2: Brand unayotumia na kile unachopenda.
+                        </p>
+                        <p x-show="step === 2" x-cloak>
+                            Tunataka kujua nini kinakufanya uiamini pedi fulani – bei, usalama, au faraja.
+                        </p>
+
+                        <p x-show="step === 3" x-cloak class="font-semibold">
+                            Hatua 3: Vitu unavyokataa kabisa kwenye pedi.
+                        </p>
+                        <p x-show="step === 3" x-cloak>
+                            Muwasho, kuvuja au plastiki nyingi? Tuambie ili tuweze kuepuka hayo kwenye bidhaa.
+                        </p>
+
+                        <p x-show="step === 4" x-cloak class="font-semibold">
+                            Hatua 4: Ndoto yako ya pedi bora.
+                        </p>
+                        <p x-show="step === 4" x-cloak>
+                            Hapa ndipo unaweka maoni ya mwisho – tunataka pedi inayokuaminisha kila mwezi.
+                        </p>
+                    </div>
+                </div>
+
                 <div x-show="step === 1" x-cloak class="space-y-4">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                         <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-[#7e22ce]/10 text-[#7e22ce] text-xs font-bold">1</span>
