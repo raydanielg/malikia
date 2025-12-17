@@ -163,7 +163,7 @@
                     }
                 }
             }" 
-            @input.debounce.500ms="saveFormData()"
+            x-on:input.debounce.500ms="saveFormData()"
             class="space-y-4">
             <div class="flex items-center justify-between gap-4 mb-2">
                 <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden">
