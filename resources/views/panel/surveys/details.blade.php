@@ -11,7 +11,7 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-3xl font-bold text-white mb-1">📋 Survey Response #{{ $survey->id }}</h1>
+                    <h1 class="text-3xl font-bold text-white mb-1">Survey Response #{{ $survey->id }}</h1>
                     <p class="text-pink-100 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -47,7 +47,7 @@
             <svg class="w-5 h-5 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <h3 class="text-lg font-bold text-gray-800">ℹ️ Metadata</h3>
+            <h3 class="text-lg font-bold text-gray-800">Metadata</h3>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="flex items-start">
@@ -57,7 +57,7 @@
                     </svg>
                 </div>
                 <div>
-                    <div class="text-xs text-gray-600 mb-1">📅 Tarehe</div>
+                    <div class="text-xs text-gray-600 mb-1">Tarehe</div>
                     <div class="text-sm font-bold text-gray-900">{{ $survey->created_at->format('d/m/Y H:i:s') }}</div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                     </svg>
                 </div>
                 <div>
-                    <div class="text-xs text-gray-600 mb-1">🌐 IP Address</div>
+                    <div class="text-xs text-gray-600 mb-1">IP Address</div>
                     <div class="text-sm font-bold text-gray-900">{{ $survey->ip_address ?? 'N/A' }}</div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                     </svg>
                 </div>
                 <div>
-                    <div class="text-xs text-gray-600 mb-1">💻 User Agent</div>
+                    <div class="text-xs text-gray-600 mb-1">User Agent</div>
                     <div class="text-sm font-bold text-gray-900 truncate" title="{{ $survey->user_agent }}">
                         {{ Str::limit($survey->user_agent ?? 'N/A', 35) }}
                     </div>

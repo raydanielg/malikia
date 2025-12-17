@@ -11,7 +11,7 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-3xl font-bold text-white mb-1">📋 Survey Responses</h1>
+                    <h1 class="text-3xl font-bold text-white mb-1">Survey Responses</h1>
                     <p class="text-pink-100">Dodoso la Taulo za Kike - Majibu yote</p>
                 </div>
             </div>
@@ -37,7 +37,7 @@
         <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg p-5 text-white hover:shadow-xl transition-all hover:scale-105">
             <div class="flex items-center justify-between">
                 <div>
-                    <div class="text-sm opacity-90 mb-1">📊 Jumla</div>
+                    <div class="text-sm opacity-90 mb-1">Jumla</div>
                     <div class="text-3xl font-bold">{{ $stats['total'] }}</div>
                 </div>
                 <div class="bg-white bg-opacity-20 rounded-full p-3">
@@ -50,7 +50,7 @@
         <div class="bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl shadow-lg p-5 text-white hover:shadow-xl transition-all hover:scale-105">
             <div class="flex items-center justify-between">
                 <div>
-                    <div class="text-sm opacity-90 mb-1">📅 Leo</div>
+                    <div class="text-sm opacity-90 mb-1">Leo</div>
                     <div class="text-3xl font-bold">{{ $stats['today'] }}</div>
                 </div>
                 <div class="bg-white bg-opacity-20 rounded-full p-3">
@@ -63,7 +63,7 @@
         <div class="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl shadow-lg p-5 text-white hover:shadow-xl transition-all hover:scale-105">
             <div class="flex items-center justify-between">
                 <div>
-                    <div class="text-sm opacity-90 mb-1">📆 Wiki Hii</div>
+                    <div class="text-sm opacity-90 mb-1">Wiki Hii</div>
                     <div class="text-3xl font-bold">{{ $stats['this_week'] }}</div>
                 </div>
                 <div class="bg-white bg-opacity-20 rounded-full p-3">
@@ -76,7 +76,7 @@
         <div class="bg-gradient-to-br from-rose-500 to-pink-600 rounded-xl shadow-lg p-5 text-white hover:shadow-xl transition-all hover:scale-105">
             <div class="flex items-center justify-between">
                 <div>
-                    <div class="text-sm opacity-90 mb-1">🗓️ Mwezi Huu</div>
+                    <div class="text-sm opacity-90 mb-1">Mwezi Huu</div>
                     <div class="text-3xl font-bold">{{ $stats['this_month'] }}</div>
                 </div>
                 <div class="bg-white bg-opacity-20 rounded-full p-3">
@@ -94,7 +94,7 @@
             <svg class="w-5 h-5 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
             </svg>
-            <h3 class="text-lg font-semibold text-gray-800">🔍 Vichujio (Filters)</h3>
+            <h3 class="text-lg font-semibold text-gray-800">Vichujio (Filters)</h3>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div>

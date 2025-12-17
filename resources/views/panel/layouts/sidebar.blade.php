@@ -16,7 +16,12 @@
             <div class="bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl p-4 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs opacity-90 mb-1">📋 Fomu Zilizopokelewa</p>
+                        <p class="text-xs opacity-90 mb-1 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Fomu Zilizopokelewa
+                        </p>
                         <p class="text-3xl font-bold">{{ App\Models\MotherIntake::count() }}</p>
                     </div>
                     <div class="bg-white bg-opacity-20 rounded-full p-3">
@@ -30,7 +35,12 @@
             <div class="bg-gradient-to-r from-blue-500 to-cyan-600 rounded-xl p-4 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs opacity-90 mb-1">👥 Wajawazito Waliojisajili</p>
+                        <p class="text-xs opacity-90 mb-1 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            Wajawazito Waliojisajili
+                        </p>
                         <p class="text-3xl font-bold">{{ App\Models\MotherIntake::distinct('phone')->count() }}</p>
                     </div>
                     <div class="bg-white bg-opacity-20 rounded-full p-3">
@@ -44,7 +54,12 @@
             <div class="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl p-4 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs opacity-90 mb-1">⏳ Zinasubiri Mapitio</p>
+                        <p class="text-xs opacity-90 mb-1 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Zinasubiri Mapitio
+                        </p>
                         <p class="text-3xl font-bold">{{ App\Models\MotherIntake::where('status', 'pending')->count() }}</p>
                     </div>
                     <div class="bg-white bg-opacity-20 rounded-full p-3">
@@ -58,7 +73,12 @@
             <div class="bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl p-4 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs opacity-90 mb-1">✅ Zimekamilika</p>
+                        <p class="text-xs opacity-90 mb-1 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Zimekamilika
+                        </p>
                         <p class="text-3xl font-bold">{{ App\Models\MotherIntake::where('status', 'completed')->count() }}</p>
                     </div>
                     <div class="bg-white bg-opacity-20 rounded-full p-3">
@@ -73,7 +93,12 @@
             <div class="bg-gradient-to-r from-rose-500 to-pink-600 rounded-xl p-4 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs opacity-90 mb-1">📊 Survey Responses</p>
+                        <p class="text-xs opacity-90 mb-1 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                            </svg>
+                            Survey Responses
+                        </p>
                         <p class="text-3xl font-bold">{{ App\Models\SurveyResponse::count() }}</p>
                     </div>
                     <div class="bg-white bg-opacity-20 rounded-full p-3">
