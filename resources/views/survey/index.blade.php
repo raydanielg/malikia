@@ -22,16 +22,16 @@
         <div class="absolute inset-0 bg-gradient-to-br from-rose-900/80 via-rose-700/45 to-teal-900/80 mix-blend-multiply"></div>
 
         <main class="relative z-10 w-full max-w-3xl mx-auto">
-            <div class="mb-6 text-center">
-                <p class="inline-flex items-center gap-2 rounded-full bg-rose-50 text-rose-700 text-xs font-medium px-3 py-1 border border-rose-100">
-                    <span class="h-2 w-2 rounded-full bg-rose-500"></span>
+            <div class="mb-8 text-center space-y-3">
+                <p class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-rose-100 to-pink-100 text-rose-800 text-xs sm:text-sm font-semibold px-4 py-2 border-2 border-rose-200/50 shadow-lg backdrop-blur-sm">
+                    <span class="h-2.5 w-2.5 rounded-full bg-rose-500 animate-pulse"></span>
                     Tunathamini maoni yako
                 </p>
-                <h1 class="mt-3 text-2xl sm:text-3xl font-extrabold text-gray-50">
-                    Tusaidie kuboresha Malkia Konnect
+                <h1 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(251,113,133,0.3);">
+                    Tusaidie kuboresha <span class="bg-gradient-to-r from-rose-300 via-pink-200 to-rose-300 bg-clip-text text-transparent">Malkia Konnect</span>
                 </h1>
-                <p class="mt-2 text-sm text-rose-50/90">
-                    Survey hii itachukua takribani dakika 2–3 tu. Majibu yako yanatusaidia kuboresha bidhaa na huduma zetu.
+                <p class="mt-3 text-sm sm:text-base text-white/95 font-medium max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] leading-relaxed">
+                    Survey hii itachukua takribani <span class="text-rose-200 font-bold">dakika 2–3</span> tu. Majibu yako yanatusaidia kuboresha bidhaa na huduma zetu.
                 </p>
             </div>
 
