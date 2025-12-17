@@ -40,12 +40,6 @@
         <main class="w-full max-w-4xl mx-auto">
             <!-- Header Section -->
             <div class="mb-8 text-center space-y-4">
-                <div class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-rose-500 to-purple-600 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 shadow-lg">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    Tunathamini maoni yako
-                </div>
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">
                     Hello mama!
                 </h1>
