@@ -35,18 +35,45 @@ Route::get('/survey', function () {
 
 Route::post('/survey', function (Request $request) {
     $validated = $request->validate([
-        'full_name' => ['required', 'string', 'max:255'],
-        'phone' => ['nullable', 'string', 'max:25'],
-        'email' => ['nullable', 'email', 'max:255'],
-        'journey_stage' => ['required', 'in:pregnant,postpartum,ttc'],
-        'experience_rating' => ['required', 'integer', 'min:1', 'max:5'],
-        'recommend_score' => ['nullable', 'integer', 'min:0', 'max:10'],
-        'feedback' => ['nullable', 'string', 'max:5000'],
+        // Sehemu ya 1: Kuhusu wewe
+        'age_group' => ['required', 'string', 'max:50'],
+        'flow_level' => ['required', 'string', 'max:50'],
+
+        // Sehemu ya 2: Unachotumia sasa
+        'current_brand' => ['required', 'string', 'max:255'],
+        'reasons' => ['nullable', 'array'],
+        'reasons.*' => ['string', 'max:50'],
+
+        // Sehemu ya 3: Taulo nzuri ni ipi?
+        'important_features' => ['nullable', 'array'],
+        'important_features.*' => ['string', 'max:50'],
+        'pad_type' => ['nullable', 'string', 'max:50'],
+        'wings_preference' => ['nullable', 'string', 'max:50'],
+        'scented_preference' => ['nullable', 'string', 'max:50'],
+        'scented_reason' => ['nullable', 'string', 'max:500'],
+        'irritation_frequency' => ['nullable', 'string', 'max:50'],
+
+        // Sehemu ya 4: Mambo ya kuepuka
+        'dislikes' => ['nullable', 'array'],
+        'dislikes.*' => ['string', 'max:50'],
+        'stopped_brand' => ['nullable', 'string', 'max:10'],
+        'stopped_brand_explain' => ['nullable', 'string', 'max:1000'],
+
+        // Sehemu ya 5: Bei & thamani
+        'price_range' => ['required', 'string', 'max:50'],
+        'pay_more' => ['nullable', 'string', 'max:20'],
+        'good_pad_definition' => ['nullable', 'string', 'max:500'],
+
+        // Sehemu ya 6: Maoni ya kweli
+        'ideal_pad' => ['nullable', 'string', 'max:2000'],
+        'unresolved_problem' => ['nullable', 'string', 'max:2000'],
+        'try_new_brand' => ['required', 'string', 'max:20'],
+        'other_comments' => ['nullable', 'string', 'max:2000'],
     ]);
 
     // For now we just acknowledge; storage/notifications can be added later
 
-    return back()->with('survey_ok', 'Asante kwa kushiriki kwenye survey yetu. Maoni yako yatatusaidia kuboresha huduma zetu.');
+    return back()->with('survey_ok', 'Asante kwa kushiriki kwenye dodoso letu la taulo za kike. Maoni yako yatatusaidia kuboresha bidhaa yetu.');
 })->name('survey.submit');
 
 // Contact
