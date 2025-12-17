@@ -2,40 +2,87 @@
 
 @section('content')
 <div class="max-w-5xl mx-auto p-6">
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <h1 class="text-2xl font-bold text-gray-800">Survey Response #{{ $survey->id }}</h1>
-            <p class="text-sm text-gray-500">Majibu ya dodoso la taulo za kike - {{ $survey->created_at->format('d/m/Y H:i') }}</p>
-        </div>
-        <div class="flex items-center gap-2">
-            <a href="{{ route('panel.surveys.index') }}" class="px-4 py-2 rounded-md bg-gray-600 text-white text-sm font-semibold hover:bg-gray-700">
-                ← Rudi
-            </a>
-            <form method="POST" action="{{ route('panel.survey.destroy', $survey) }}" onsubmit="return confirm('Una uhakika unataka kufuta?');" class="inline">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="px-4 py-2 rounded-md bg-red-600 text-white text-sm font-semibold hover:bg-red-700">
-                    🗑️ Futa
-                </button>
-            </form>
+    <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 rounded-2xl shadow-xl p-6 mb-6">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+            <div class="flex items-center mb-4 lg:mb-0">
+                <div class="bg-white bg-opacity-20 rounded-2xl p-4 mr-4">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-bold text-white mb-1">📋 Survey Response #{{ $survey->id }}</h1>
+                    <p class="text-pink-100 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        {{ $survey->created_at->format('d/m/Y H:i') }}
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="{{ route('panel.surveys.index') }}" class="flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-gray-700 font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Rudi
+                </a>
+                <form method="POST" action="{{ route('panel.survey.destroy', $survey) }}" onsubmit="return confirm('Una uhakika unataka kufuta?');" class="inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="flex items-center gap-2 px-5 py-3 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition-all shadow-lg hover:shadow-xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                        Futa
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Metadata Card -->
-    <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg shadow border border-purple-200 p-4 mb-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-                <div class="text-xs text-gray-600">Tarehe</div>
-                <div class="text-sm font-semibold text-gray-900">{{ $survey->created_at->format('d/m/Y H:i:s') }}</div>
+    <div class="bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 rounded-xl shadow-lg border-2 border-purple-200 p-6 mb-6">
+        <div class="flex items-center mb-4">
+            <svg class="w-5 h-5 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-lg font-bold text-gray-800">ℹ️ Metadata</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="flex items-start">
+                <div class="bg-purple-100 rounded-lg p-3 mr-3">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-xs text-gray-600 mb-1">📅 Tarehe</div>
+                    <div class="text-sm font-bold text-gray-900">{{ $survey->created_at->format('d/m/Y H:i:s') }}</div>
+                </div>
             </div>
-            <div>
-                <div class="text-xs text-gray-600">IP Address</div>
-                <div class="text-sm font-semibold text-gray-900">{{ $survey->ip_address ?? 'N/A' }}</div>
+            <div class="flex items-start">
+                <div class="bg-blue-100 rounded-lg p-3 mr-3">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-xs text-gray-600 mb-1">🌐 IP Address</div>
+                    <div class="text-sm font-bold text-gray-900">{{ $survey->ip_address ?? 'N/A' }}</div>
+                </div>
             </div>
-            <div>
-                <div class="text-xs text-gray-600">User Agent</div>
-                <div class="text-sm font-semibold text-gray-900 truncate" title="{{ $survey->user_agent }}">
-                    {{ Str::limit($survey->user_agent ?? 'N/A', 40) }}
+            <div class="flex items-start">
+                <div class="bg-green-100 rounded-lg p-3 mr-3">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-xs text-gray-600 mb-1">💻 User Agent</div>
+                    <div class="text-sm font-bold text-gray-900 truncate" title="{{ $survey->user_agent }}">
+                        {{ Str::limit($survey->user_agent ?? 'N/A', 35) }}
+                    </div>
                 </div>
             </div>
         </div>
