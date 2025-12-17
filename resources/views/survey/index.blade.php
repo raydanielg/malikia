@@ -7,21 +7,21 @@
 
     {{-- Primary SEO Meta Tags --}}
     <meta name="title" content="Survey - Malkia Konnect">
-    <meta name="description" content="Nimeshiriki maoni yangu kuhusu taulo za kike. Kama pedi zimewahi kukuangusha, huu ni wakati wako wa kusema kupitia dodoso la Malkia Konnect.">
+    <meta name="description" content="Nimeshiriki maoni yangu kuhusu pedi za kike. Kama pedi zimewahi kukuangusha, huu ni wakati wako wa kusema kupitia dodoso la Malkia Konnect.">
 
     {{-- Open Graph / Facebook / WhatsApp --}}
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://malkia.co.tz/survey">
     <meta property="og:title" content="Survey - Malkia Konnect">
-    <meta property="og:description" content="Nimeshiriki maoni yangu kuhusu taulo za kike. Kama pedi zimewahi kukuangusha, huu ni wakati wako wa kusema.">
-    <meta property="og:image" content="{{ asset('WhatsApp Image 2025-12-17 at 8.34.39 PM.jpeg') }}">
-    <meta property="og:image:alt" content="Malkia Konnect survey - taulo za kike">
+    <meta property="og:description" content="Nimeshiriki maoni yangu kuhusu pedi za kike. Kama pedi zimewahi kukuangusha, huu ni wakati wako wa kusema.">
+    <meta property="og:image" content="{{ url(asset('WhatsApp Image 2025-12-17 at 8.34.39 PM.jpeg')) }}">
+    <meta property="og:image:alt" content="Malkia Konnect survey - pedi za kike">
 
     {{-- Twitter --}}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Survey - Malkia Konnect">
-    <meta name="twitter:description" content="Nimeshiriki maoni yangu kuhusu taulo za kike. Kama pedi zimewahi kukuangusha, huu ni wakati wako wa kusema.">
-    <meta name="twitter:image" content="{{ asset('WhatsApp Image 2025-12-17 at 8.34.39 PM.jpeg') }}">
+    <meta name="twitter:description" content="Nimeshiriki maoni yangu kuhusu pedi za kike. Kama pedi zimewahi kukuangusha, huu ni wakati wako wa kusema.">
+    <meta name="twitter:image" content="{{ url(asset('WhatsApp Image 2025-12-17 at 8.34.39 PM.jpeg')) }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         [x-cloak]{ display:none !important; }
@@ -142,6 +142,69 @@
                         }
                     }
                 },
+                isValidStep() {
+                    const form = document.querySelector('form');
+                    if (!form) return false;
+
+                    const allRequired = Array.from(form.querySelectorAll('[required]'));
+                    const temporarilyDisabled = [];
+
+                    allRequired.forEach(el => {
+                        if (el.offsetParent === null) {
+                            temporarilyDisabled.push(el);
+                            el._wasRequired = true;
+                            el.required = false;
+                        }
+                    });
+
+                    const valid = form.checkValidity();
+
+                    temporarilyDisabled.forEach(el => {
+                        if (el._wasRequired) {
+                            el.required = true;
+                            delete el._wasRequired;
+                        }
+                    });
+
+                    return valid;
+                },
+                goNext() {
+                    if (this.step >= this.maxStep) return;
+
+                    const form = document.querySelector('form');
+                    if (!form) return;
+
+                    // Temporarily disable required on inputs that are not visible in the current step
+                    const allRequired = Array.from(form.querySelectorAll('[required]'));
+                    const temporarilyDisabled = [];
+
+                    allRequired.forEach(el => {
+                        // offsetParent is null for elements that are not visible (display:none)
+                        if (el.offsetParent === null) {
+                            temporarilyDisabled.push(el);
+                            el._wasRequired = true;
+                            el.required = false;
+                        }
+                    });
+
+                    const valid = form.checkValidity();
+                    if (!valid) {
+                        form.reportValidity();
+                    }
+
+                    // Restore required attribute
+                    temporarilyDisabled.forEach(el => {
+                        if (el._wasRequired) {
+                            el.required = true;
+                            delete el._wasRequired;
+                        }
+                    });
+
+                    if (valid) {
+                        this.step++;
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                },
                 celebrate() {
                     this.celebrating = true;
                     this.createConfetti();
@@ -178,7 +241,7 @@
                     Hello mama!
                 </h1>
                 <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                    Tuambie ukweli wako kuhusu taulo za kike (pedi). <span class="text-rose-600 font-bold">Dakika 2 zako</span> zitatusaidia kutengeneza taulo zisizovuja, zisizowasha na zinazokujali kweli.
+                    Tuambie ukweli wako kuhusu pedi za kike. <span class="text-rose-600 font-bold">Dakika 2 zako</span> zitatusaidia kutengeneza pedi zisizovuja, zisizowasha na zinazokujali kweli.
                 </p>
             </div>
 
@@ -325,13 +388,13 @@
                     </h2>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">3. Ni brand gani ya taulo za kike unayotumia mara nyingi?</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">3. Ni brand gani ya pedi za kike unayotumia mara nyingi?</label>
                             <input type="text" name="current_brand" value="{{ old('current_brand') }}" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/70 focus:border-[#7e22ce]" />
                             @error('current_brand')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
                         </div>
 
                         <div>
-                            <p class="block text-sm font-medium text-gray-700 mb-2">4. Kwa nini unachagua brand hiyo? (chagua hadi 2)</p>
+                            <p class="block text-sm font-medium text-gray-700 mb-2">4. Kwa nini unachagua brand hiyo? (Chagua majibu mawili)</p>
                             @php
                                 $reasons = [
                                     'price' => 'Bei',
@@ -369,7 +432,7 @@
                     </h2>
                     <div class="space-y-4">
                         <div>
-                            <p class="block text-sm font-medium text-gray-700 mb-2">5. Ni mambo gani muhimu zaidi kwako kwenye taulo ya kike? (chagua hadi 3)</p>
+                            <p class="block text-sm font-medium text-gray-700 mb-2">5. Ni mambo gani muhimu zaidi kwako kwenye pedi ya kike? (Chagua majibu matatu)</p>
                             @php
                                 $features = [
                                     'absorption' => 'Kufyonza vizuri',
@@ -665,7 +728,8 @@
                             x-show="step < maxStep"
                             x-cloak
                             class="px-5 py-2 rounded-full bg-[#7e22ce] hover:bg-[#6b21a8] text-white text-xs sm:text-sm font-medium shadow-sm"
-                            @click="if(step < maxStep) { step++; window.scrollTo({top: 0, behavior: 'smooth'}); }"
+                            @click="goNext()"
+                            :disabled="!isValidStep()"
                         >
                             Endelea
                         </button>
