@@ -5,7 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Survey - {{ config('app.name', 'Malkia Konnect') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>[x-cloak]{ display:none !important; }</style>
+    <style>
+        [x-cloak]{ display:none !important; }
+        
+        @keyframes confetti {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1) rotate(-5deg); }
+            50% { transform: scale(1.15) rotate(5deg); }
+            75% { transform: scale(1.1) rotate(-5deg); }
+        }
+        
+        .confetti-piece {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ec4899;
+            animation: confetti 3s ease-out forwards;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .celebrate-btn {
+            animation: celebrate 0.6s ease-in-out;
+        }
+    </style>
 </head>
 <body class="antialiased text-gray-900">
     <div class="relative min-h-screen flex items-center justify-center py-6 sm:py-10 px-3 sm:px-4 overflow-hidden bg-black">
@@ -35,7 +63,31 @@
                 </p>
             </div>
 
-            <section x-data="{ step: 1, maxStep: 4 }" class="space-y-4">
+            <section x-data="{ 
+                step: 1, 
+                maxStep: 4,
+                celebrating: false,
+                celebrate() {
+                    this.celebrating = true;
+                    this.createConfetti();
+                    setTimeout(() => this.celebrating = false, 600);
+                },
+                createConfetti() {
+                    const colors = ['#ec4899', '#f472b6', '#fb7185', '#fda4af', '#7e22ce', '#a855f7'];
+                    for(let i = 0; i < 50; i++) {
+                        setTimeout(() => {
+                            const confetti = document.createElement('div');
+                            confetti.className = 'confetti-piece';
+                            confetti.style.left = Math.random() * 100 + '%';
+                            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                            confetti.style.animationDelay = Math.random() * 0.3 + 's';
+                            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                            document.body.appendChild(confetti);
+                            setTimeout(() => confetti.remove(), 3500);
+                        }, i * 30);
+                    }
+                }
+            }" class="space-y-4">
             <div class="flex items-center justify-between gap-4 mb-2">
                 <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden">
                     <div class="h-full bg-[#7e22ce] transition-all duration-300" :style="`width: ${(step / maxStep) * 100}%`"></div>
@@ -509,9 +561,11 @@
                             type="submit" 
                             x-show="step === maxStep" 
                             x-cloak 
+                            @click="celebrate()"
+                            :class="celebrating ? 'celebrate-btn' : ''"
                             class="px-6 py-2.5 rounded-full bg-[#7e22ce] hover:bg-[#6b21a8] text-white text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                         >
-                            Tuma Dodoso
+                            🎉 Tuma Dodoso
                         </button>
                     </div>
                 </div>
