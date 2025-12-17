@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Survey - {{ config('app.name', 'Malkia Konnect') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>[x-cloak]{ display:none !important; }</style>
 </head>
 <body class="antialiased text-gray-900 bg-gradient-to-br from-rose-50 via-white to-teal-50 min-h-screen flex items-center justify-center py-8 px-4">
     <main class="w-full max-w-3xl">
@@ -21,18 +22,26 @@
             </p>
         </div>
 
-        <section>
+        <section x-data="{ step: 1, maxStep: 4 }" class="space-y-4">
             @if (session('survey_ok'))
                 <div class="mb-5 rounded-xl bg-green-50 text-green-800 px-4 py-3 border border-green-200 text-sm">
                     {{ session('survey_ok') }}
                 </div>
             @endif
 
+            <div class="flex items-center justify-between gap-4 mb-2">
+                <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden">
+                    <div class="h-full bg-[#7e22ce] transition-all duration-300" :style="`width: ${(step / maxStep) * 100}%`"></div>
+                </div>
+                <div class="text-xs font-medium text-gray-600 whitespace-nowrap">
+                    Hatua <span x-text="step"></span> ya <span x-text="maxStep"></span>
+                </div>
+            </div>
+
             <form method="POST" action="{{ route('survey.submit') }}" class="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 lg:p-8 space-y-6">
                 @csrf
 
-                <!-- Sehemu ya 1: Kuhusu wewe -->
-                <div class="space-y-4">
+                <div x-show="step === 1" x-cloak class="space-y-4">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                         <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-[#7e22ce]/10 text-[#7e22ce] text-xs font-bold">1</span>
                         Kuhusu wewe
@@ -83,8 +92,7 @@
                     </div>
                 </div>
 
-                <!-- Sehemu ya 2: Unachotumia sasa -->
-                <div class="border-t border-gray-100 pt-5 space-y-4">
+                <div x-show="step === 2" x-cloak class="border-t border-gray-100 pt-5 space-y-4">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                         <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-[#7e22ce]/10 text-[#7e22ce] text-xs font-bold">2</span>
                         Unachotumia sasa
@@ -121,8 +129,7 @@
                     </div>
                 </div>
 
-                <!-- Sehemu ya 3: Taulo nzuri ni ipi? -->
-                <div class="border-t border-gray-100 pt-5 space-y-4">
+                <div x-show="step === 2" x-cloak class="border-t border-gray-100 pt-5 space-y-4">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                         <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-[#7e22ce]/10 text-[#7e22ce] text-xs font-bold">3</span>
                         Taulo nzuri ni ipi?
@@ -241,8 +248,7 @@
                     </div>
                 </div>
 
-                <!-- Sehemu ya 4: Mambo ya kuepuka -->
-                <div class="border-t border-gray-100 pt-5 space-y-4">
+                <div x-show="step === 3" x-cloak class="border-t border-gray-100 pt-5 space-y-4">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                         <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-[#7e22ce]/10 text-[#7e22ce] text-xs font-bold">4</span>
                         Mambo ya kuepuka
@@ -295,8 +301,7 @@
                     </div>
                 </div>
 
-                <!-- Sehemu ya 5: Bei & thamani -->
-                <div class="border-t border-gray-100 pt-5 space-y-4">
+                <div x-show="step === 3" x-cloak class="border-t border-gray-100 pt-5 space-y-4">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                         <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-[#7e22ce]/10 text-[#7e22ce] text-xs font-bold">5</span>
                         Bei & thamani
@@ -350,8 +355,7 @@
                     </div>
                 </div>
 
-                <!-- Sehemu ya 6: Maoni ya kweli -->
-                <div class="border-t border-gray-100 pt-5 space-y-4">
+                <div x-show="step === 4" x-cloak class="border-t border-gray-100 pt-5 space-y-4">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                         <span class="inline-flex items-center justify-center h-6 w-6 rounded-full bg-[#7e22ce]/10 text-[#7e22ce] text-xs font-bold">6</span>
                         Maoni ya kweli
@@ -396,14 +400,45 @@
                     </div>
                 </div>
 
-                <!-- Submit -->
-                <div class="pt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                    <p class="text-xs text-gray-500 max-w-sm">
-                        Kwa kubonyeza "Tuma Dodoso" unakubali kuwa maoni yako yanatumika kuboresha taulo za kike na huduma za Malkia.
-                    </p>
-                    <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-full bg-[#7e22ce] hover:bg-[#6b21a8] text-white text-sm font-medium px-6 py-2.5 shadow-sm">
-                        <span>Tuma Dodoso</span>
-                    </button>
+                <div class="pt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-t border-gray-100 mt-2">
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-rose-50 text-rose-500 text-xs font-semibold">
+                            <span x-text="step"></span>
+                        </span>
+                        <span>
+                            Hatua ya <span x-text="step"></span> / <span x-text="maxStep"></span>
+                        </span>
+                    </div>
+
+                    <div class="flex items-center gap-3 justify-end">
+                        <button
+                            type="button"
+                            class="px-4 py-2 rounded-full border border-gray-300 text-xs sm:text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                            @click="if(step > 1) step--; window.scrollTo({top: 0, behavior: 'smooth'});"
+                            :disabled="step === 1"
+                        >
+                            Rudi nyuma
+                        </button>
+
+                        <button
+                            type="button"
+                            x-show="step < maxStep"
+                            x-cloak
+                            class="px-5 py-2 rounded-full bg-[#7e22ce] hover:bg-[#6b21a8] text-white text-xs sm:text-sm font-medium shadow-sm"
+                            @click="if(step < maxStep) { step++; window.scrollTo({top: 0, behavior: 'smooth'}); }"
+                        >
+                            Endelea
+                        </button>
+
+                        <div x-show="step === maxStep" x-cloak class="flex flex-col sm:flex-row sm:items-center gap-2">
+                            <p class="text-[11px] sm:text-xs text-gray-500 max-w-xs">
+                                Kwa kubonyeza "Tuma Dodoso" unakubali kuwa maoni yako yanatumika kuboresha taulo za kike na huduma za Malkia.
+                            </p>
+                            <button type="submit" class="px-5 py-2 rounded-full bg-[#7e22ce] hover:bg-[#6b21a8] text-white text-xs sm:text-sm font-medium shadow-sm">
+                                Tuma Dodoso
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>
