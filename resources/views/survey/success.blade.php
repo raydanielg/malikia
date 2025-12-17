@@ -31,10 +31,10 @@
             <!-- Success Icon -->
             <div class="flex justify-center">
                 <div class="relative scale-in">
-                    <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full blur-2xl opacity-50"></div>
-                    <div class="relative bg-gradient-to-r from-green-500 to-emerald-600 rounded-full p-8 shadow-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-r from-rose-400 to-pink-500 rounded-full blur-2xl opacity-60"></div>
+                    <div class="relative bg-gradient-to-r from-rose-500 to-pink-600 rounded-full p-8 shadow-2xl flex items-center justify-center">
                         <svg class="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                         </svg>
                     </div>
                 </div>
@@ -54,8 +54,8 @@
                 </p>
             </div>
 
-            <!-- Stats/Info Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 max-w-3xl mx-auto">
+            <!-- Stats/Info Card -->
+            <div class="grid grid-cols-1 sm:grid-cols-1 gap-4 sm:gap-5 max-w-3xl mx-auto">
                 <div class="bg-white rounded-xl shadow-md sm:shadow-lg p-5 sm:p-6 border border-purple-100">
                     <div class="flex justify-center mb-3">
                         <div class="bg-purple-100 rounded-full p-3">
@@ -66,30 +66,6 @@
                     </div>
                     <h3 class="text-sm font-semibold text-gray-800">Majibu Yamesave</h3>
                     <p class="text-xs text-gray-600 mt-1">Majibu yako yamehifadhiwa salama</p>
-                </div>
-                
-                <div class="bg-white rounded-xl shadow-md sm:shadow-lg p-5 sm:p-6 border border-pink-100">
-                    <div class="flex justify-center mb-3">
-                        <div class="bg-pink-100 rounded-full p-3">
-                            <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <h3 class="text-sm font-semibold text-gray-800">Muda Uliotumia</h3>
-                    <p class="text-xs text-gray-600 mt-1">Dakika 2-3 tu - Asante!</p>
-                </div>
-                
-                <div class="bg-white rounded-xl shadow-md sm:shadow-lg p-5 sm:p-6 border border-rose-100">
-                    <div class="flex justify-center mb-3">
-                        <div class="bg-rose-100 rounded-full p-3">
-                            <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <h3 class="text-sm font-semibold text-gray-800">Thamani Yako</h3>
-                    <p class="text-xs text-gray-600 mt-1">Maoni yako yanathaminiwa sana</p>
                 </div>
             </div>
 

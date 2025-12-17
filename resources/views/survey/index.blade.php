@@ -121,6 +121,27 @@
                     localStorage.removeItem('malkia_survey_data');
                     this.formData = {};
                 },
+                limitSelection(group, max, event) {
+                    const form = document.querySelector('form');
+                    if (!form) return;
+
+                    let selector = '';
+                    if (group === 'reasons') {
+                        selector = "input[name='reasons[]']";
+                    } else if (group === 'important_features') {
+                        selector = "input[name='important_features[]']";
+                    }
+
+                    if (!selector) return;
+
+                    const checkedCount = form.querySelectorAll(selector + ':checked').length;
+                    if (checkedCount > max) {
+                        // Revert the last change if over limit
+                        if (event && event.target) {
+                            event.target.checked = false;
+                        }
+                    }
+                },
                 celebrate() {
                     this.celebrating = true;
                     this.createConfetti();
@@ -302,7 +323,14 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                                 @foreach($reasons as $key => $label)
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="checkbox" name="reasons[]" value="{{ $key }}" @checked(collect(old('reasons', []))->contains($key)) class="h-4 w-4 text-[#7e22ce] border-gray-300">
+                                        <input
+                                            type="checkbox"
+                                            name="reasons[]"
+                                            value="{{ $key }}"
+                                            @checked(collect(old('reasons', []))->contains($key))
+                                            class="h-4 w-4 text-[#7e22ce] border-gray-300"
+                                            @change="limitSelection('reasons', 2, $event)"
+                                        >
                                         <span>{{ $label }}</span>
                                     </label>
                                 @endforeach
@@ -336,7 +364,14 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                                 @foreach($features as $key => $label)
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="checkbox" name="important_features[]" value="{{ $key }}" @checked(collect(old('important_features', []))->contains($key)) class="h-4 w-4 text-[#7e22ce] border-gray-300">
+                                        <input
+                                            type="checkbox"
+                                            name="important_features[]"
+                                            value="{{ $key }}"
+                                            @checked(collect(old('important_features', []))->contains($key))
+                                            class="h-4 w-4 text-[#7e22ce] border-gray-300"
+                                            @change="limitSelection('important_features', 3, $event)"
+                                        >
                                         <span>{{ $label }}</span>
                                     </label>
                                 @endforeach
