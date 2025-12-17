@@ -10,7 +10,7 @@
 <body class="antialiased text-gray-900">
     <div class="relative min-h-screen flex items-center justify-center py-6 sm:py-10 px-3 sm:px-4 overflow-hidden bg-black">
         <video
-            class="absolute inset-0 w-full h-full object-cover opacity-60 blur-sm sm:blur-md scale-105"
+            class="absolute inset-0 w-full h-full object-cover opacity-50 blur-lg scale-110"
             autoplay
             muted
             loop
@@ -19,7 +19,7 @@
             <source src="{{ asset('puberty/0_Woman_Purple_3840x2160.mp4') }}" type="video/mp4">
             <source src="{{ asset('puberty/7188347_Woman_Women_3840x2160.mp4') }}" type="video/mp4">
         </video>
-        <div class="absolute inset-0 bg-gradient-to-br from-rose-900/80 via-rose-700/45 to-teal-900/80 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-rose-900/85 via-rose-700/50 to-teal-900/85 mix-blend-multiply"></div>
 
         <main class="relative z-10 w-full max-w-3xl mx-auto">
             <div class="mb-8 text-center space-y-3">
@@ -505,14 +505,14 @@
                             Endelea
                         </button>
 
-                        <div x-show="step === maxStep" x-cloak class="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <p class="text-[11px] sm:text-xs text-gray-500 max-w-xs">
-                                Kwa kubonyeza "Tuma Dodoso" unakubali kuwa maoni yako yanatumika kuboresha taulo za kike na huduma za Malkia.
-                            </p>
-                            <button type="submit" class="px-5 py-2 rounded-full bg-[#7e22ce] hover:bg-[#6b21a8] text-white text-xs sm:text-sm font-medium shadow-sm">
-                                Tuma Dodoso
-                            </button>
-                        </div>
+                        <button 
+                            type="submit" 
+                            x-show="step === maxStep" 
+                            x-cloak 
+                            class="px-6 py-2.5 rounded-full bg-[#7e22ce] hover:bg-[#6b21a8] text-white text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                        >
+                            Tuma Dodoso
+                        </button>
                     </div>
                 </div>
             </form>
