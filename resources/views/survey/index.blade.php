@@ -8,9 +8,9 @@
     <style>[x-cloak]{ display:none !important; }</style>
 </head>
 <body class="antialiased text-gray-900">
-    <div class="relative min-h-screen flex items-center justify-center py-8 px-4 overflow-hidden bg-black">
+    <div class="relative min-h-screen flex items-center justify-center py-6 sm:py-10 px-3 sm:px-4 overflow-hidden bg-black">
         <video
-            class="absolute inset-0 w-full h-full object-cover opacity-70"
+            class="absolute inset-0 w-full h-full object-cover opacity-60 blur-sm sm:blur-md scale-105"
             autoplay
             muted
             loop
@@ -19,9 +19,9 @@
             <source src="{{ asset('puberty/0_Woman_Purple_3840x2160.mp4') }}" type="video/mp4">
             <source src="{{ asset('puberty/7188347_Woman_Women_3840x2160.mp4') }}" type="video/mp4">
         </video>
-        <div class="absolute inset-0 bg-gradient-to-br from-rose-900/70 via-rose-700/40 to-teal-900/70 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-rose-900/80 via-rose-700/45 to-teal-900/80 mix-blend-multiply"></div>
 
-        <main class="relative z-10 w-full max-w-3xl">
+        <main class="relative z-10 w-full max-w-3xl mx-auto">
             <div class="mb-6 text-center">
                 <p class="inline-flex items-center gap-2 rounded-full bg-rose-50 text-rose-700 text-xs font-medium px-3 py-1 border border-rose-100">
                     <span class="h-2 w-2 rounded-full bg-rose-500"></span>
@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('survey.submit') }}" class="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 lg:p-8 space-y-6">
+            <form method="POST" action="{{ route('survey.submit') }}" class="bg-white/95 backdrop-blur-sm border border-white/60 rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 space-y-6">
                 @csrf
 
                 <div class="rounded-2xl bg-rose-50/60 border border-rose-100 p-3 sm:p-4 flex items-center gap-3 sm:gap-4">
