@@ -91,7 +91,7 @@
     <!-- Sehemu ya 1: Kuhusu wewe -->
     <div class="bg-white rounded-lg shadow border mb-6">
         <div class="bg-purple-600 text-white px-6 py-3 rounded-t-lg">
-            <h2 class="text-lg font-bold">1️⃣ Sehemu ya 1: Kuhusu Wewe</h2>
+            <h2 class="text-lg font-bold">Sehemu ya 1: Kuhusu Wewe</h2>
         </div>
         <div class="p-6 space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -114,7 +114,7 @@
     <!-- Sehemu ya 2: Unachotumia sasa -->
     <div class="bg-white rounded-lg shadow border mb-6">
         <div class="bg-green-600 text-white px-6 py-3 rounded-t-lg">
-            <h2 class="text-lg font-bold">2️⃣ Sehemu ya 2: Unachotumia Sasa</h2>
+            <h2 class="text-lg font-bold">Sehemu ya 2: Unachotumia Sasa</h2>
         </div>
         <div class="p-6 space-y-4">
             <div>
@@ -139,7 +139,7 @@
     <!-- Sehemu ya 3: Taulo nzuri ni ipi? -->
     <div class="bg-white rounded-lg shadow border mb-6">
         <div class="bg-blue-600 text-white px-6 py-3 rounded-t-lg">
-            <h2 class="text-lg font-bold">3️⃣ Sehemu ya 3: Taulo Nzuri ni Ipi?</h2>
+            <h2 class="text-lg font-bold">Sehemu ya 3: Taulo Nzuri ni Ipi?</h2>
         </div>
         <div class="p-6 space-y-4">
             <div>
@@ -182,7 +182,7 @@
     <!-- Sehemu ya 4: Mambo ya kuepuka -->
     <div class="bg-white rounded-lg shadow border mb-6">
         <div class="bg-orange-600 text-white px-6 py-3 rounded-t-lg">
-            <h2 class="text-lg font-bold">4️⃣ Sehemu ya 4: Mambo ya Kuepuka</h2>
+            <h2 class="text-lg font-bold">Sehemu ya 4: Mambo ya Kuepuka</h2>
         </div>
         <div class="p-6 space-y-4">
             <div>
