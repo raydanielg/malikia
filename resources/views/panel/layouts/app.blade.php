@@ -14,13 +14,19 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50 dark:bg-gray-800">
+<body class="bg-gray-50 dark:bg-gray-800 min-h-screen">
     @include('panel.layouts.sidebar')
 
-    <div class="p-4 sm:ml-80">
-        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-16">
-            @yield('content')
-        </div>
+    <div class="p-4 sm:ml-80 flex flex-col min-h-screen">
+        {{-- Top Header / Navbar --}}
+        @include('panel.layouts.header')
+
+        {{-- Main Content Wrapper --}}
+        <main class="mt-4 flex-1">
+            <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 bg-white/60 backdrop-blur-sm">
+                @yield('content')
+            </div>
+        </main>
     </div>
 </body>
 </html>
