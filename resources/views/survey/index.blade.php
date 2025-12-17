@@ -47,10 +47,10 @@
                     Tunathamini maoni yako
                 </div>
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">
-                    Tusaidie kuboresha <span class="bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">Malkia Konnect</span>
+                    Hello mama!
                 </h1>
                 <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                    Survey hii itachukua takribani <span class="text-rose-600 font-bold">dakika 2–3</span> tu. Majibu yako yanatusaidia kuboresha bidhaa na huduma zetu.
+                    Tuambie ukweli wako kuhusu taulo za kike (pedi). <span class="text-rose-600 font-bold">Dakika 2 zako</span> zitatusaidia kutengeneza taulo zisizovuja, zisizowasha na zinazokujali kweli.
                 </p>
                 <div class="flex items-center justify-center gap-2 text-sm text-gray-500">
                     <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
