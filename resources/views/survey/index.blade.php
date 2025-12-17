@@ -35,9 +35,12 @@
         }
     </style>
 </head>
-<body class="antialiased text-gray-900 bg-gradient-to-br from-gray-50 via-white to-gray-100">
-    <div class="min-h-screen py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
-        <main class="w-full max-w-4xl mx-auto">
+<body class="antialiased text-gray-900">
+    <div
+        class="min-h-screen py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat flex items-start justify-center"
+        style="background-image: url('{{ asset('cute-love-hearts-white-wallpaper-valentines-day-celebration_1017-49256.jpg') }}');"
+    >
+        <main class="w-full max-w-4xl mx-auto bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/60 p-4 sm:p-6 lg:p-8">
             <!-- Header Section -->
             <div class="mb-8 text-center space-y-4">
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">
@@ -46,12 +49,6 @@
                 <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
                     Tuambie ukweli wako kuhusu taulo za kike (pedi). <span class="text-rose-600 font-bold">Dakika 2 zako</span> zitatusaidia kutengeneza taulo zisizovuja, zisizowasha na zinazokujali kweli.
                 </p>
-                <div class="flex items-center justify-center gap-2 text-sm text-gray-500">
-                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <span>Majibu yako yanasave automatically</span>
-                </div>
             </div>
 
             <section x-data="{ 
