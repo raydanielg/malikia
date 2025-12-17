@@ -127,9 +127,9 @@
 
                     let selector = '';
                     if (group === 'reasons') {
-                        selector = "input[name='reasons[]']";
+                        selector = 'input[name="reasons[]"]';
                     } else if (group === 'important_features') {
-                        selector = "input[name='important_features[]']";
+                        selector = 'input[name="important_features[]"]';
                     }
 
                     if (!selector) return;
