@@ -52,30 +52,14 @@
             animation: celebrate 0.6s ease-in-out;
         }
     </style>
-</head>
-<body class="antialiased text-gray-900">
-    <div
-        class="min-h-screen py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat flex items-start justify-center"
-        style="background-image: url('{{ asset('cute-love-hearts-white-wallpaper-valentines-day-celebration_1017-49256.jpg') }}');"
-    >
-        <main class="w-full max-w-4xl mx-auto bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/60 p-4 sm:p-6 lg:p-8">
-            <!-- Header Section -->
-            <div class="mb-8 text-center space-y-4">
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">
-                    Hello mama!
-                </h1>
-                <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                    Tuambie ukweli wako kuhusu taulo za kike (pedi). <span class="text-rose-600 font-bold">Dakika 2 zako</span> zitatusaidia kutengeneza taulo zisizovuja, zisizowasha na zinazokujali kweli.
-                </p>
-            </div>
-
-            <section x-data="{ 
-                step: 1, 
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('surveyForm', () => ({
+                step: 1,
                 maxStep: 4,
                 celebrating: false,
                 formData: {},
                 init() {
-                    // Load saved data from localStorage
                     const saved = localStorage.getItem('malkia_survey_data');
                     if (saved) {
                         try {
@@ -85,8 +69,7 @@
                             console.error('Error loading saved data:', e);
                         }
                     }
-                    
-                    // Auto-save on input change
+
                     this.$watch('formData', () => {
                         this.saveFormData();
                     });
@@ -94,10 +77,10 @@
                 saveFormData() {
                     const form = document.querySelector('form');
                     if (!form) return;
-                    
+
                     const formData = new FormData(form);
                     const data = {};
-                    
+
                     for (let [key, value] of formData.entries()) {
                         if (key.endsWith('[]')) {
                             const baseKey = key.slice(0, -2);
@@ -107,16 +90,16 @@
                             data[key] = value;
                         }
                     }
-                    
+
                     localStorage.setItem('malkia_survey_data', JSON.stringify(data));
                 },
                 restoreFormData() {
                     const form = document.querySelector('form');
                     if (!form || !this.formData) return;
-                    
+
                     Object.keys(this.formData).forEach(key => {
                         const value = this.formData[key];
-                        
+
                         if (Array.isArray(value)) {
                             value.forEach(v => {
                                 const checkbox = form.querySelector(`input[name='${key}[]'][value='${v}']`);
@@ -154,7 +137,6 @@
 
                     const checkedCount = form.querySelectorAll(selector + ':checked').length;
                     if (checkedCount > max) {
-                        // Revert the last change if over limit
                         if (event && event.target) {
                             event.target.checked = false;
                         }
@@ -167,7 +149,7 @@
                 },
                 createConfetti() {
                     const colors = ['#ec4899', '#f472b6', '#fb7185', '#fda4af', '#7e22ce', '#a855f7'];
-                    for(let i = 0; i < 50; i++) {
+                    for (let i = 0; i < 50; i++) {
                         setTimeout(() => {
                             const confetti = document.createElement('div');
                             confetti.className = 'confetti-piece';
@@ -180,9 +162,31 @@
                         }, i * 30);
                     }
                 }
-            }" 
-            x-on:input.debounce.500ms="saveFormData()"
-            class="space-y-4">
+            }));
+        });
+    </script>
+</head>
+<body class="antialiased text-gray-900">
+    <div
+        class="min-h-screen py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat flex items-start justify-center"
+        style="background-image: url('{{ asset('cute-love-hearts-white-wallpaper-valentines-day-celebration_1017-49256.jpg') }}');"
+    >
+        <main class="w-full max-w-4xl mx-auto bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/60 p-4 sm:p-6 lg:p-8">
+            <!-- Header Section -->
+            <div class="mb-8 text-center space-y-4">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">
+                    Hello mama!
+                </h1>
+                <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    Tuambie ukweli wako kuhusu taulo za kike (pedi). <span class="text-rose-600 font-bold">Dakika 2 zako</span> zitatusaidia kutengeneza taulo zisizovuja, zisizowasha na zinazokujali kweli.
+                </p>
+            </div>
+
+            <section
+                x-data="surveyForm()"
+                x-init="init()"
+                x-on:input.debounce.500ms="saveFormData()"
+                class="space-y-4">
             <div class="flex items-center justify-between gap-4 mb-2">
                 <div class="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden">
                     <div class="h-full bg-[#7e22ce] transition-all duration-300" :style="`width: ${(step / maxStep) * 100}%`"></div>
