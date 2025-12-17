@@ -6,58 +6,22 @@
     <title>Survey - {{ config('app.name', 'Malkia Konnect') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="antialiased text-gray-900 bg-gray-50">
-    <!-- Header (similar to contact page) -->
-    <header class="w-full sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2">
-                <img src="{{ asset('LOGO-MALKIA-KONNECT.jpg') }}" alt="Logo" class="h-8 w-8 rounded object-cover"/>
-                <span class="font-semibold">{{ config('app.name', 'Malkia Konnect') }}</span>
-            </a>
-            <nav class="hidden lg:flex items-center gap-6 text-sm">
-                <a href="/" class="hover:text-[#7e22ce]">Home</a>
-                <a href="{{ route('services') }}" class="hover:text-[#7e22ce]">Huduma</a>
-                <a href="{{ route('about') }}" class="hover:text-[#7e22ce]">Kuhusu Sisi</a>
-                <a href="{{ route('survey') }}" class="text-[#7e22ce] font-semibold">Survey</a>
-                <a href="{{ route('contact') }}" class="hover:text-[#7e22ce]">Wasiliana Nasi</a>
-            </nav>
+<body class="antialiased text-gray-900 bg-gradient-to-br from-rose-50 via-white to-teal-50 min-h-screen flex items-center justify-center py-8 px-4">
+    <main class="w-full max-w-3xl">
+        <div class="mb-6 text-center">
+            <p class="inline-flex items-center gap-2 rounded-full bg-rose-50 text-rose-700 text-xs font-medium px-3 py-1 border border-rose-100">
+                <span class="h-2 w-2 rounded-full bg-rose-500"></span>
+                Tunathamini maoni yako
+            </p>
+            <h1 class="mt-3 text-2xl sm:text-3xl font-extrabold text-gray-900">
+                Tusaidie kuboresha Malkia Konnect
+            </h1>
+            <p class="mt-2 text-sm text-gray-600">
+                Survey hii itachukua takribani dakika 2–3 tu. Majibu yako yanatusaidia kuboresha bidhaa na huduma zetu.
+            </p>
         </div>
-    </header>
 
-    <main class="py-10 lg:py-16">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-10">
-            <!-- Intro / Left side -->
-            <section class="lg:col-span-1 space-y-4">
-                <p class="inline-flex items-center gap-2 rounded-full bg-rose-50 text-rose-700 text-xs font-medium px-3 py-1 border border-rose-100">
-                    <span class="h-2 w-2 rounded-full bg-rose-500"></span>
-                    Tunathamini maoni yako
-                </p>
-                <h1 class="text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight">
-                    Tusaidie kuboresha
-                    <span class="text-[#7e22ce] block">Malkia Konnect Experience</span>
-                </h1>
-                <p class="text-gray-700 text-sm lg:text-base">
-                    Survey hii itakuchukua takribani dakika 2–3 tu. Majibu yako yatatusaidia kuboresha bidhaa,
-                    huduma na support unayopokea kupitia Malkia Konnect.
-                </p>
-                <ul class="space-y-2 text-sm text-gray-700">
-                    <li class="flex items-start gap-2">
-                        <span class="mt-1 h-1.5 w-1.5 rounded-full bg-[#7e22ce]"></span>
-                        <span>Maswali mafupi, rahisi kujibu</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="mt-1 h-1.5 w-1.5 rounded-full bg-[#7e22ce]"></span>
-                        <span>Majibu yako ni ya siri, yatatumika kuboresha huduma pekee</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="mt-1 h-1.5 w-1.5 rounded-full bg-[#7e22ce]"></span>
-                        <span>Unaweza kuacha contact ili tukufuatilie ikiwa ni lazima</span>
-                    </li>
-                </ul>
-            </section>
-
-            <!-- Form -->
-            <section class="lg:col-span-2">
+        <section>
                 @if (session('survey_ok'))
                     <div class="mb-5 rounded-xl bg-green-50 text-green-800 px-4 py-3 border border-green-200 text-sm">
                         {{ session('survey_ok') }}
@@ -167,9 +131,7 @@
                     </div>
                 </form>
             </section>
-        </div>
+        </section>
     </main>
-
-    @include('partials.footer')
 </body>
 </html>
