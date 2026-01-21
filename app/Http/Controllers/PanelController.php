@@ -582,6 +582,7 @@ class PanelController extends Controller
     public function surveysIndex(Request $request)
     {
         $query = SurveyResponse::query();
+        $perPageInput = (string) $request->get('per_page', '20');
         
         // Filter by age group
         if ($request->filled('age_group')) {
@@ -610,8 +611,14 @@ class PanelController extends Controller
         if ($request->filled('search')) {
             $query->where('current_brand', 'like', '%' . $request->search . '%');
         }
-        
-        $surveys = $query->latest()->paginate(20);
+
+        if ($perPageInput === 'all') {
+            $perPage = max(1, (int) $query->count());
+        } else {
+            $perPage = (int) max(5, min(200, (int) $perPageInput));
+        }
+
+        $surveys = $query->latest()->paginate($perPage)->withQueryString();
         
         // Stats for dashboard
         $stats = [
@@ -631,7 +638,7 @@ class PanelController extends Controller
             ->groupBy('flow_level')
             ->pluck('count', 'flow_level');
         
-        return view('panel.surveys.index', compact('surveys', 'stats', 'ageGroups', 'flowLevels'));
+        return view('panel.surveys.index', compact('surveys', 'stats', 'ageGroups', 'flowLevels', 'perPageInput'));
     }
     
     public function surveyDetails(SurveyResponse $survey)

@@ -121,7 +121,7 @@
             </svg>
             <h3 class="text-lg font-semibold text-gray-800">Vichujio (Filters)</h3>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
             <div>
                 <label class="text-sm font-medium text-gray-700 mb-2 flex items-center">
                     <svg class="w-4 h-4 mr-1 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,6 +175,21 @@
                     <option value="2000_4000" @selected(request('price_range')==='2000_4000')>2,000–4,000</option>
                     <option value="4000_6000" @selected(request('price_range')==='4000_6000')>4,000–6,000</option>
                     <option value="over_6000" @selected(request('price_range')==='over_6000')>> 6,000</option>
+                </select>
+            </div>
+            <div>
+                <label class="text-sm font-medium text-gray-700 mb-2 flex items-center">
+                    <svg class="w-4 h-4 mr-1 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2h6v2a2 2 0 01-2 2h-2a2 2 0 01-2-2zm0 0V7a3 3 0 013-3h0a3 3 0 013 3v10"></path>
+                    </svg>
+                    Onyesha
+                </label>
+                <select name="per_page" class="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all">
+                    <option value="20" @selected(request('per_page','20')==='20')>20</option>
+                    <option value="50" @selected(request('per_page')==='50')>50</option>
+                    <option value="100" @selected(request('per_page')==='100')>100</option>
+                    <option value="200" @selected(request('per_page')==='200')>200</option>
+                    <option value="all" @selected(request('per_page')==='all')>Zote</option>
                 </select>
             </div>
             <div>
