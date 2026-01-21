@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\MotherIntake;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class MotherIntakeController extends Controller
 {
@@ -15,7 +15,7 @@ class MotherIntakeController extends Controller
         return view('intake.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): Response
     {
         if (!Schema::hasTable('mother_intakes')) {
             if ($request->expectsJson()) {
@@ -132,6 +132,12 @@ class MotherIntakeController extends Controller
             }
         } catch (\Throwable $e) {
             // silent fail; logging optional
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+            ]);
         }
 
         return redirect()->route('intake.thankyou');
