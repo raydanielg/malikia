@@ -187,6 +187,20 @@
                                   this.submitting = false;
                                   return;
                               }
+                              if (!res.ok) {
+                                  try {
+                                      const contentType = res.headers.get('content-type') || '';
+                                      if (contentType.includes('application/json')) {
+                                          const data = await res.json();
+                                          this.errors = data.errors || {};
+                                      }
+                                  } catch (e) {
+                                      // ignore
+                                  }
+                                  alert('Samahani, tatizo limetokea. Tafadhali jaribu tena.');
+                                  this.submitting = false;
+                                  return;
+                              }
                               // Treat any other 2xx/3xx as success
                               this.phone = fd.get('phone') || '';
                               this.success = true;

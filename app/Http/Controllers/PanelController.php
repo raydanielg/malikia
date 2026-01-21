@@ -287,9 +287,9 @@ class PanelController extends Controller
         $status = (string) $request->get('status', '');
         $priority = (string) $request->get('priority', '');
         $stage = (string) $request->get('journey_stage', '');
-        $perPage = (int) max(5, min(100, (int) $request->get('per_page', 15)));
+        $perPageInput = (string) $request->get('per_page', '15');
 
-        $intakes = MotherIntake::query()
+        $query = MotherIntake::query()
             ->when($q !== '', function ($qbuilder) use ($q) {
                 $qbuilder->where(function ($sub) use ($q) {
                     $sub->where('full_name', 'like', "%$q%")
@@ -302,11 +302,17 @@ class PanelController extends Controller
             ->when($status !== '', fn($qb) => $qb->where('status', $status))
             ->when($priority !== '', fn($qb) => $qb->where('priority', $priority))
             ->when($stage !== '', fn($qb) => $qb->where('journey_stage', $stage))
-            ->latest()
-            ->paginate($perPage)
-            ->withQueryString();
+            ->latest();
 
-        return view('panel.intakes-index', compact('intakes', 'q', 'status', 'priority', 'stage', 'perPage'));
+        if ($perPageInput === 'all') {
+            $perPage = max(1, (int) $query->count());
+        } else {
+            $perPage = (int) max(5, min(200, (int) $perPageInput));
+        }
+
+        $intakes = $query->paginate($perPage)->withQueryString();
+
+        return view('panel.intakes-index', compact('intakes', 'q', 'status', 'priority', 'stage', 'perPageInput'));
     }
 
     public function markAsCompleted(Request $request, MotherIntake $intake)

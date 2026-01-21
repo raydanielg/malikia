@@ -14,7 +14,7 @@
     </div>
 
     <form method="GET" action="{{ route('panel.intakes.index') }}" class="bg-white rounded-lg shadow p-4 border mb-4">
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-3">
             <div class="md:col-span-2">
                 <label class="text-sm text-gray-600">Tafuta (jina/simu/hospitali)</label>
                 <input type="text" name="q" value="{{ $q }}" placeholder="tafuta..." class="mt-1 w-full border rounded-md px-3 py-2" />
@@ -43,6 +43,15 @@
                     <option value="">Zote</option>
                     @foreach(['pregnant'=>'Pregnant','postpartum'=>'Postpartum','ttc'=>'Trying to conceive'] as $k=>$v)
                         <option value="{{ $k }}" @selected($stage===$k)>{{ $v }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div>
+                <label class="text-sm text-gray-600">Onyesha</label>
+                <select name="per_page" class="mt-1 w-full border rounded-md px-3 py-2">
+                    @foreach(['15'=>'15','25'=>'25','50'=>'50','100'=>'100','all'=>'Zote'] as $k=>$v)
+                        <option value="{{ $k }}" @selected(($perPageInput ?? '15')===(string)$k)>{{ $v }}</option>
                     @endforeach
                 </select>
             </div>

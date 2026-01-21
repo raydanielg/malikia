@@ -45,6 +45,14 @@ class MotherIntake extends Model
         'priority' => self::PRIORITY_MEDIUM,
     ];
 
+    protected $casts = [
+        'interests' => 'array',
+        'agree_comms' => 'boolean',
+        'disclaimer_ack' => 'boolean',
+        'reviewed_at' => 'datetime',
+        'completed_at' => 'datetime',
+    ];
+
     // Status constants
     const STATUS_PENDING = 'pending';
     const STATUS_IN_PROGRESS = 'in_progress';
