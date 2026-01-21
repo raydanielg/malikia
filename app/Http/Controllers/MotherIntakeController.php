@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MotherIntake;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
 class MotherIntakeController extends Controller
@@ -16,6 +17,16 @@ class MotherIntakeController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        if (!Schema::hasTable('mother_intakes')) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Mfumo haujajiandaa bado. Tafadhali endesha database migrations (mother_intakes table haipo).',
+                ], 503);
+            }
+
+            return redirect()->back()->with('error', 'Mfumo haujajiandaa bado. Tafadhali jaribu tena baadae.');
+        }
+
         $validated = $request->validate([
             'full_name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\.\-]+$/'],
             // Ruhusu format yoyote ya simu (alama kama +, -, nafasi, mabano) na mpaka herufi 25
@@ -55,17 +66,21 @@ class MotherIntakeController extends Controller
             $validated['user_id'] = $request->user()->id;
         }
 
-        // Set default status values (in case columns don't exist yet)
-        if (!isset($validated['status'])) {
+        // Set defaults only if these columns exist (some servers may not have migrated yet)
+        if (Schema::hasColumn('mother_intakes', 'status') && !isset($validated['status'])) {
             $validated['status'] = MotherIntake::STATUS_PENDING;
         }
-        if (!isset($validated['priority'])) {
+        if (Schema::hasColumn('mother_intakes', 'priority') && !isset($validated['priority'])) {
             $validated['priority'] = MotherIntake::PRIORITY_MEDIUM;
         }
 
-        // Normalize booleans
-        $validated['agree_comms'] = (bool) ($request->boolean('agree_comms'));
-        $validated['disclaimer_ack'] = (bool) ($request->boolean('disclaimer_ack'));
+        // Normalize booleans only if columns exist
+        if (Schema::hasColumn('mother_intakes', 'agree_comms')) {
+            $validated['agree_comms'] = (bool) ($request->boolean('agree_comms'));
+        }
+        if (Schema::hasColumn('mother_intakes', 'disclaimer_ack')) {
+            $validated['disclaimer_ack'] = (bool) ($request->boolean('disclaimer_ack'));
+        }
 
         // Clear stage-specific fields to avoid inconsistent data
         if (($validated['journey_stage'] ?? null) === 'pregnant') {
@@ -88,7 +103,21 @@ class MotherIntakeController extends Controller
             }
         }
 
-        $intake = MotherIntake::create($validated);
+        try {
+            // Guard against 500s when DB columns differ (e.g. production not migrated yet)
+            $columns = Schema::getColumnListing('mother_intakes');
+            $validated = array_intersect_key($validated, array_flip($columns));
+
+            $intake = MotherIntake::create($validated);
+        } catch (\Throwable $e) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Samahani, tatizo la kuhifadhi taarifa limetokea. Tafadhali jaribu tena.',
+                ], 500);
+            }
+
+            return redirect()->back()->with('error', 'Samahani, tatizo la kuhifadhi taarifa limetokea. Tafadhali jaribu tena.');
+        }
 
         // Notify admin
         try {
