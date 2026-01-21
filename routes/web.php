@@ -41,11 +41,11 @@ Route::get('/survey/success', function () {
 Route::post('/survey', function (Request $request) {
     $validated = $request->validate([
         // Sehemu ya 1: Kuhusu wewe
-        'age_group' => ['required', 'string', 'max:50'],
-        'flow_level' => ['required', 'string', 'max:50'],
+        'age_group' => ['nullable', 'string', 'max:50'],
+        'flow_level' => ['nullable', 'string', 'max:50'],
 
         // Sehemu ya 2: Unachotumia sasa
-        'current_brand' => ['required', 'string', 'max:255'],
+        'current_brand' => ['nullable', 'string', 'max:255'],
         'reasons' => ['nullable', 'array'],
         'reasons.*' => ['string', 'max:50'],
 
@@ -65,23 +65,33 @@ Route::post('/survey', function (Request $request) {
         'stopped_brand_explain' => ['nullable', 'string', 'max:1000'],
 
         // Sehemu ya 5: Bei & thamani
-        'price_range' => ['required', 'string', 'max:50'],
+        'price_range' => ['nullable', 'string', 'max:50'],
         'pay_more' => ['nullable', 'string', 'max:20'],
         'good_pad_definition' => ['nullable', 'string', 'max:500'],
 
         // Sehemu ya 6: Maoni ya kweli
         'ideal_pad' => ['nullable', 'string', 'max:2000'],
         'unresolved_problem' => ['nullable', 'string', 'max:2000'],
-        'try_new_brand' => ['required', 'string', 'max:20'],
+        'try_new_brand' => ['nullable', 'string', 'max:20'],
         'other_comments' => ['nullable', 'string', 'max:2000'],
     ]);
 
-    // Save survey response to database
-    $surveyResponse = SurveyResponse::create([
+    $data = [
         ...$validated,
+        'age_group' => $validated['age_group'] ?? 'unknown',
+        'flow_level' => $validated['flow_level'] ?? 'unknown',
+        'current_brand' => $validated['current_brand'] ?? 'unknown',
+        'price_range' => $validated['price_range'] ?? 'unknown',
+        'try_new_brand' => $validated['try_new_brand'] ?? 'unknown',
+        'reasons' => $validated['reasons'] ?? [],
+        'important_features' => $validated['important_features'] ?? [],
+        'dislikes' => $validated['dislikes'] ?? [],
         'ip_address' => $request->ip(),
         'user_agent' => $request->userAgent(),
-    ]);
+    ];
+
+    // Save survey response to database
+    $surveyResponse = SurveyResponse::create($data);
 
     // Redirect to success page
     return redirect()->route('survey.success');

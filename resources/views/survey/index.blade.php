@@ -350,7 +350,7 @@
                                 @endphp
                                 @foreach($ages as $key => $label)
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="radio" name="age_group" value="{{ $key }}" {{ old('age_group') === $key ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300" required>
+                                        <input type="radio" name="age_group" value="{{ $key }}" {{ old('age_group') === $key ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300">
                                         <span>{{ $label }}</span>
                                     </label>
                                 @endforeach
@@ -371,7 +371,7 @@
                                 @endphp
                                 @foreach($flows as $key => $label)
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="radio" name="flow_level" value="{{ $key }}" {{ old('flow_level') === $key ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300" required>
+                                        <input type="radio" name="flow_level" value="{{ $key }}" {{ old('flow_level') === $key ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300">
                                         <span>{{ $label }}</span>
                                     </label>
                                 @endforeach
@@ -623,7 +623,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                                 @foreach($prices as $key => $label)
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="radio" name="price_range" value="{{ $key }}" {{ old('price_range') === $key ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300" required>
+                                        <input type="radio" name="price_range" value="{{ $key }}" {{ old('price_range') === $key ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300">
                                         <span>{{ $label }}</span>
                                     </label>
                                 @endforeach
@@ -680,15 +680,15 @@
                             <p class="block text-sm font-medium text-gray-700 mb-2">17. Je, ungejaribu brand mpya kama itatatua tatizo lako kubwa?</p>
                             <div class="flex flex-wrap gap-4 text-sm">
                                 <label class="inline-flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="try_new_brand" value="yes" {{ old('try_new_brand') === 'yes' ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300" required>
+                                    <input type="radio" name="try_new_brand" value="yes" {{ old('try_new_brand') === 'yes' ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300">
                                     <span>Ndiyo</span>
                                 </label>
                                 <label class="inline-flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="try_new_brand" value="maybe" {{ old('try_new_brand') === 'maybe' ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300" required>
+                                    <input type="radio" name="try_new_brand" value="maybe" {{ old('try_new_brand') === 'maybe' ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300">
                                     <span>Labda</span>
                                 </label>
                                 <label class="inline-flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="try_new_brand" value="no" {{ old('try_new_brand') === 'no' ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300" required>
+                                    <input type="radio" name="try_new_brand" value="no" {{ old('try_new_brand') === 'no' ? 'checked' : '' }} class="h-4 w-4 text-[#7e22ce] border-gray-300">
                                     <span>Hapana</span>
                                 </label>
                             </div>
