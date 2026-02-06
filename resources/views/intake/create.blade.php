@@ -231,6 +231,14 @@
                     <template x-if="errors.phone"><p class="text-sm text-red-600 mt-1" x-text="errors.phone[0]"></p></template>
                 </div>
 
+                <!-- Email (optional) -->
+                <div class="mb-4">
+                    <label class="block text-sm sm:text-base font-medium">Email (hiari)</label>
+                    <input type="email" name="email" class="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#7e22ce]/40" placeholder="e.g. name@example.com" value="{{ old('email') }}" autocomplete="email" />
+                    @error('email')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+                    <template x-if="errors.email"><p class="text-sm text-red-600 mt-1" x-text="errors.email[0]"></p></template>
+                </div>
+
                 <!-- Journey stage -->
                 <div class="mb-4">
                     <label class="block text-sm sm:text-base font-medium"><span x-text="t[lang].journey_q"></span> <span class="text-red-600">*</span></label>

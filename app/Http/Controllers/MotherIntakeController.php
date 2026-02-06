@@ -121,12 +121,26 @@ class MotherIntakeController extends Controller
 
         // Notify admin
         try {
-            $adminEmail = config('mail.from.address');
+            $adminEmail = config('mail.admin.address') ?: config('mail.from.address');
             if ($adminEmail) {
                 \Mail::raw(
-                    "Intake mpya kutoka {$intake->full_name}\nSimu: {$intake->phone}\nHatua: {$intake->pregnancy_stage}",
+                    "Intake mpya kutoka {$intake->full_name}\nSimu: {$intake->phone}\nHatua: {$intake->journey_stage}",
                     function ($m) use ($adminEmail) {
                         $m->to($adminEmail)->subject('Intake Mpya ya Mama');
+                    }
+                );
+            }
+        } catch (\Throwable $e) {
+            // silent fail; logging optional
+        }
+
+        // Confirmation email to user (optional)
+        try {
+            if ($intake->email) {
+                \Mail::raw(
+                    "Asante {$intake->full_name}. Tumepokea taarifa zako. Tutawasiliana nawe hivi karibuni.",
+                    function ($m) use ($intake) {
+                        $m->to($intake->email)->subject('Tumepokea taarifa zako');
                     }
                 );
             }
