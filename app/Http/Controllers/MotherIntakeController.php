@@ -35,7 +35,6 @@ class MotherIntakeController extends Controller
                 'string',
                 'max:25',
                 'regex:/^\+?\d{10,15}$/',
-                'unique:mother_intakes,phone'
             ],
 
             // New form fields
@@ -46,8 +45,8 @@ class MotherIntakeController extends Controller
             'delivery_hospital' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\'\-()&]*$/'],
             // TTC duration field (how long trying to conceive)
             'ttc_duration' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\']*$/', 'required_if:journey_stage,ttc'],
-            'agree_comms' => ['nullable', 'boolean'],
-            'disclaimer_ack' => ['nullable', 'boolean'],
+            'agree_comms' => ['required', 'accepted'],
+            'disclaimer_ack' => ['required', 'accepted'],
 
             // Legacy/additional optional fields (kept for compatibility)
             'email' => ['nullable', 'email', 'max:255'],
@@ -151,6 +150,7 @@ class MotherIntakeController extends Controller
         if ($request->expectsJson()) {
             return response()->json([
                 'success' => true,
+                'data' => $intake,
             ]);
         }
 
