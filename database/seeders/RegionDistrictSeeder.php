@@ -12,6 +12,12 @@ class RegionDistrictSeeder extends Seeder
      */
     public function run(): void
     {
+        // Clear existing data to avoid duplicates or orphaned districts
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        \App\Models\District::truncate();
+        \App\Models\Region::truncate();
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         // Tanzania Mainland Regions (26 Regions)
         $mainlandRegions = [
             [
