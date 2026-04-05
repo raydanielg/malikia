@@ -7,8 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #1E40AF;
-            --primary-blue-dark: #1E3A8A;
+            --primary-teal: #85C2BE;
+            --primary-teal-dark: #6AB0AC;
             --text-dark: #1E293B;
             --text-mid: #475569;
             --border: #CBD5E1;
@@ -17,13 +17,13 @@
         }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.6; margin: 0; padding: 0; }
         .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        header { background: var(--primary-blue); color: white; padding: 40px 0; text-align: center; border-radius: 0 0 24px 24px; }
+        header { background: var(--primary-teal); color: white; padding: 40px 0; text-align: center; border-radius: 0 0 24px 24px; }
         h1 { font-family: 'DM Serif Display', serif; margin: 0; }
         .content { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); margin-top: -20px; }
-        h2 { color: var(--primary-blue); border-bottom: 2px solid var(--cream); padding-bottom: 10px; margin-top: 30px; }
+        h2 { color: var(--primary-teal); border-bottom: 2px solid var(--cream); padding-bottom: 10px; margin-top: 30px; }
         .lang-toggle { text-align: right; margin-bottom: 20px; }
         .lang-btn { background: none; border: 1px solid var(--border); padding: 5px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; }
-        .lang-btn.active { background: var(--primary-blue); color: white; border-color: var(--primary-blue); }
+        .lang-btn.active { background: var(--primary-teal); color: white; border-color: var(--primary-teal); }
         .en { display: none; }
     </style>
 </head>
@@ -61,7 +61,7 @@
             </div>
             
             <div style="margin-top: 40px; text-align: center;">
-                <a href="{{ route('intake.create') }}" style="color: var(--primary-blue); font-weight: 600; text-decoration: none;">&larr; Rudi kwenye Fomu</a>
+                <a href="{{ route('intake.create') }}" style="color: var(--primary-teal); font-weight: 600; text-decoration: none;">&larr; Rudi kwenye Fomu</a>
             </div>
         </div>
     </div>

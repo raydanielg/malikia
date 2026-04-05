@@ -8,21 +8,21 @@
 <style>
   :root {
     --primary-teal: #85C2BE;
-    --primary-teal-light: #A7D7D4;
-    --primary-teal-dark: #6AB0AC;
-    --accent-gold: #E2B859;
+    --primary-teal-light: #AEE2DF;
+    --primary-teal-dark: #4D8B87;
+    --accent-gold: #D4A017;
     --white: #FFFFFF;
     --cream: #F8FAFC;
     --warm-white: #F1F5F9;
-    --text-dark: #1E293B;
-    --text-mid: #475569;
-    --text-light: #94A3B8;
-    --border: #CBD5E1;
-    --border-focus: #85C2BE;
+    --text-dark: #0F172A;
+    --text-mid: #334155;
+    --text-light: #64748B;
+    --border: #94A3B8;
+    --border-focus: #4D8B87;
     --error: #DC2626;
-    --shadow-sm: 0 1px 3px rgba(133,194,190,0.1);
-    --shadow-md: 0 4px 16px rgba(133,194,190,0.12);
-    --shadow-lg: 0 8px 32px rgba(133,194,190,0.15);
+    --shadow-sm: 0 2px 4px rgba(77,139,135,0.15);
+    --shadow-md: 0 6px 24px rgba(77,139,135,0.25);
+    --shadow-lg: 0 12px 48px rgba(77,139,135,0.35);
     --radius: 16px;
     --radius-sm: 12px;
   }
@@ -297,22 +297,22 @@
     font-size: 11px;
   }
 
-  .text-input {
+  .text-input, .select-input {
     width: 100%;
     padding: 13px 16px;
-    border: 1.5px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: var(--radius-sm);
     font-size: 15px;
     font-family: inherit;
     color: var(--text-dark);
-    background: var(--warm-white);
+    background: white;
     transition: all 0.2s ease;
     outline: none;
   }
 
-  .text-input:focus {
-    border-color: var(--border-focus);
-    box-shadow: 0 0 0 3px rgba(133,194,190,0.1);
+  .text-input:focus, .select-input:focus {
+    border-color: var(--primary-teal-dark);
+    box-shadow: 0 0 0 4px rgba(133,194,190,0.2);
     background: white;
   }
 
@@ -351,26 +351,26 @@
   }
 
   .stage-card {
-    position: relative;
+    flex: 1;
     padding: 16px 14px;
-    border: 2px solid var(--border);
+    border: 2.5px solid var(--border);
     border-radius: var(--radius);
     cursor: pointer;
     transition: all 0.25s ease;
     text-align: center;
-    background: var(--warm-white);
+    background: white;
   }
 
   .stage-card:hover {
-    border-color: var(--primary-teal-light);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
+    border-color: var(--primary-teal);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
   }
 
   .stage-card.selected {
-    border-color: var(--primary-teal);
-    background: linear-gradient(135deg, rgba(133,194,190,0.1), rgba(133,194,190,0.15));
-    box-shadow: 0 0 0 3px rgba(133,194,190,0.2);
+    border-color: var(--primary-teal-dark);
+    background: linear-gradient(135deg, rgba(77,139,135,0.15), rgba(77,139,135,0.25));
+    box-shadow: 0 0 0 4px rgba(77,139,135,0.2);
   }
 
   .stage-card input { display: none; }
@@ -404,14 +404,14 @@
   .due-date-section.visible { display: block; }
 
   .due-date-info {
-    background: linear-gradient(135deg, rgba(133,194,190,0.15), rgba(133,194,190,0.1));
+    background: linear-gradient(135deg, rgba(77,139,135,0.15), rgba(77,139,135,0.1));
     border-radius: var(--radius-sm);
     padding: 14px 16px;
     margin-bottom: 14px;
     display: flex;
     gap: 10px;
     align-items: flex-start;
-    border: 1px solid rgba(133,194,190,0.3);
+    border: 2px solid rgba(77,139,135,0.3);
   }
 
   .due-date-info svg {
@@ -449,11 +449,11 @@
   .pregnancy-progress {
     display: none;
     margin-top: 14px;
-    background: linear-gradient(135deg, rgba(133,194,190,0.15), rgba(133,194,190,0.1));
+    background: linear-gradient(135deg, rgba(77,139,135,0.15), rgba(77,139,135,0.1));
     border-radius: var(--radius);
     padding: 18px;
     animation: fadeIn 0.35s ease;
-    border: 1px solid rgba(133,194,190,0.3);
+    border: 2px solid rgba(77,139,135,0.3);
   }
 
   .pregnancy-progress.visible { display: block; }
@@ -538,9 +538,10 @@
   }
 
   .month-chip.selected {
-    border-color: var(--primary-teal);
-    background: linear-gradient(135deg, rgba(133,194,190,0.15), rgba(133,194,190,0.1));
-    color: var(--primary-teal);
+    border-color: var(--primary-teal-dark);
+    background: linear-gradient(135deg, rgba(77,139,135,0.2), rgba(77,139,135,0.1));
+    color: var(--primary-teal-dark);
+    font-weight: 700;
   }
 
   .month-chip span {
@@ -580,10 +581,10 @@
   .trying-option:hover { border-color: var(--primary-teal-light); }
 
   .trying-option.selected {
-    border-color: var(--primary-teal);
-    background: linear-gradient(135deg, rgba(133,194,190,0.15), rgba(133,194,190,0.1));
+    border-color: var(--primary-teal-dark);
+    background: linear-gradient(135deg, rgba(77,139,135,0.2), rgba(77,139,135,0.1));
     color: var(--text-dark);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   /* Baby info */
@@ -768,14 +769,14 @@
 
   .success-icon {
     width: 80px; height: 80px;
-    background: linear-gradient(135deg, rgba(133,194,190,0.2), rgba(133,194,190,0.1));
+    background: linear-gradient(135deg, rgba(77,139,135,0.25), rgba(77,139,135,0.15));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
     animation: popIn 0.5s ease 0.2s both;
-    border: 2px solid rgba(133,194,190,0.35);
+    border: 2.5px solid rgba(77,139,135,0.4);
   }
 
   @keyframes popIn {
@@ -930,21 +931,23 @@
           </div>
 
           <div class="field-group">
-            <label data-i18n="labelLocation">Wilaya <span class="req">*</span></label>
+            <label data-i18n="labelRegion">Mkoa <span class="req">*</span></label>
             <div class="select-wrapper">
-              <select name="location" class="select-input" id="region" required>
-                <option value="" data-i18n="optSelect">Chagua Wilaya</option>
-                <optgroup label="Dar es Salaam">
-                  <option value="Kinondoni">Kinondoni</option>
-                  <option value="Ilala">Ilala</option>
-                  <option value="Temeke">Temeke</option>
-                  <option value="Ubungo">Ubungo</option>
-                  <option value="Kigamboni">Kigamboni</option>
-                </optgroup>
-                <option value="other" data-i18n="refOther">Nyingine</option>
+              <select name="region" class="select-input" id="regionSelect" onchange="updateDistricts()" required>
+                <option value="" data-i18n="optSelectRegion">Chagua Mkoa</option>
               </select>
             </div>
-            <div class="field-error" data-i18n="errRegion">Tafadhali chagua wilaya yako</div>
+            <div class="field-error" data-i18n="errRegion">Tafadhali chagua mkoa wako</div>
+          </div>
+
+          <div class="field-group">
+            <label data-i18n="labelLocation">Wilaya <span class="req">*</span></label>
+            <div class="select-wrapper">
+              <select name="location" class="select-input" id="districtSelect" required disabled>
+                <option value="" data-i18n="optSelectDistrict">Chagua Wilaya</option>
+              </select>
+            </div>
+            <div class="field-error" data-i18n="errDistrict">Tafadhali chagua wilaya yako</div>
           </div>
 
           <div class="btn-row">
@@ -1124,6 +1127,72 @@
 </div>
 
 <script>
+// ===== REGION & DISTRICT DATA =====
+const locationData = {
+  'Arusha': ['Arusha City', 'Arusha DC', 'Karatu', 'Longido', 'Meru', 'Monduli', 'Ngorongoro'],
+  'Dar es Salaam': ['Ilala', 'Kinondoni', 'Temeke', 'Ubungo', 'Kigamboni'],
+  'Dodoma': ['Dodoma City', 'Bahi', 'Chamwino', 'Chemba', 'Kondoa', 'Kongwa', 'Mpwapwa'],
+  'Geita': ['Geita Town', 'Bukombe', 'Chato', 'Geita', 'Mbogwe', 'Nyang\'hwale'],
+  'Iringa': ['Iringa Municipal', 'Iringa DC', 'Kilolo', 'Mafinga Town', 'Mufindi'],
+  'Kagera': ['Bukoba Municipal', 'Bukoba DC', 'Biharamulo', 'Chato', 'Karagwe', 'Kyerwa', 'Missenyi', 'Muleba', 'Ngara'],
+  'Katavi': ['Mpanda Municipal', 'Mpanda DC', 'Mlele', 'Nsimbo'],
+  'Kigoma': ['Kigoma Municipal', 'Kigoma DC', 'Kakonko', 'Kasulu Town', 'Kasulu DC', 'Kibondo', 'Kibiti', 'Uvinza'],
+  'Kilimanjaro': ['Moshi Municipal', 'Moshi DC', 'Hai', 'Mwanga', 'Rombo', 'Same', 'Siha'],
+  'Lindi': ['Lindi Municipal', 'Lindi DC', 'Kilwa', 'Liwale', 'MTama', 'Nachingwea', 'Ruangwa'],
+  'Manyara': ['Babati Town', 'Babati DC', 'Hanang', 'Kiteto', 'Mbulu', 'Mbulu Town', 'Simanjiro'],
+  'Mara': ['Musoma Municipal', 'Musoma DC', 'Bunda Town', 'Bunda DC', 'Butiama', 'Rorya', 'Serengeti', 'Tarime'],
+  'Mbeya': ['Mbeya City', 'Mbeya DC', 'Chunya', 'Kyela', 'Mbarali', 'Mbozi', 'Rungwe'],
+  'Morogoro': ['Morogoro Municipal', 'Morogoro DC', 'Gairo', 'Kilombero', 'Kilosa', 'Mvomero', 'Ulanga'],
+  'Mtwara': ['Mtwara Municipal', 'Mtwara DC', 'Masasi Town', 'Masasi DC', 'Newala Town', 'Newala DC', 'Nanyumbu', 'Tandahimba'],
+  'Mwanza': ['Mwanza City', 'Ilemela', 'Kwimba', 'Magu', 'Misungwi', 'Buchosa', 'Sengerema', 'Ukerewe'],
+  'Njombe': ['Njombe Town', 'Njombe DC', 'Ludewa', 'Makambako Town', 'Makete', 'Wanging\'ombe'],
+  'Pemba Kaskazini': ['Wete', 'Michewani'],
+  'Pemba Kusini': ['Chake Chake', 'Mkoani'],
+  'Pwani': ['Kibaha Town', 'Kibaha DC', 'Bagamoyo', 'Kisarawe', 'Mafia', 'Mkuranga', 'Rufiji', 'Vikindu'],
+  'Rukwa': ['Sumbawanga Municipal', 'Sumbawanga DC', 'Kalambo', 'Kansi', 'Mpanda', 'Nkasi'],
+  'Ruvuma': ['Songea Municipal', 'Songea DC', 'Mbinga Town', 'Mbinga DC', 'Namtumbo', 'Njombe', 'Tunduru'],
+  'Shinyanga': ['Shinyanga Municipal', 'Shinyanga DC', 'Kahama Town', 'Kahama DC', 'Kishapu', 'Meatu'],
+  'Simiyu': ['Bariadi Town', 'Bariadi DC', 'Busega', 'Itilima', 'Maswa', 'Meatu'],
+  'Singida': ['Singida Municipal', 'Singida DC', 'Iramba', 'Ikungi', 'Manyoni', 'Mkalama', 'Miti'],
+  'Songwe': ['Vwawa Town', 'Mbozi', 'Ileje', 'Momba', 'Tunduma Town'],
+  'Tabora': ['Tabora Municipal', 'Tabora DC', 'Igunga', 'Kaliua', 'Nzega Town', 'Nzega DC', 'Sikonge', 'Urambo', 'Uyui'],
+  'Tanga': ['Tanga City', 'Tanga DC', 'Handeni Town', 'Handeni DC', 'Korogwe Town', 'Korogwe DC', 'Lushoto', 'Mkinga', 'Muheza', 'Mlalo', 'Pangani'],
+  'Unguja Kaskazini': ['Kaskazini A', 'Kaskazini B'],
+  'Unguja Kusini': ['Kusini', 'Kati'],
+  'Unguja Mjini Magharibi': ['Magharibi A', 'Magharibi B'],
+};
+
+function initLocations() {
+  const regSelect = document.getElementById('regionSelect');
+  const regions = Object.keys(locationData).sort();
+  regions.forEach(r => {
+    const opt = document.createElement('option');
+    opt.value = r;
+    opt.textContent = r;
+    regSelect.appendChild(opt);
+  });
+}
+
+function updateDistricts() {
+  const regSelect = document.getElementById('regionSelect');
+  const distSelect = document.getElementById('districtSelect');
+  const selectedRegion = regSelect.value;
+  
+  distSelect.innerHTML = `<option value="">${translations[currentLang].optSelectDistrict}</option>`;
+  
+  if (selectedRegion && locationData[selectedRegion]) {
+    distSelect.disabled = false;
+    locationData[selectedRegion].sort().forEach(d => {
+      const opt = document.createElement('option');
+      opt.value = d;
+      opt.textContent = d;
+      distSelect.appendChild(opt);
+    });
+  } else {
+    distSelect.disabled = true;
+  }
+}
+
 // ===== STATE =====
 let currentStep = 1;
 let currentLang = 'sw';
@@ -1134,6 +1203,11 @@ let selectedTrying = null;
 // ===== i18n =====
 const translations = {
     labelLocation: 'Wilaya',
+    labelRegion: 'Mkoa',
+    optSelectRegion: 'Chagua Mkoa',
+    optSelectDistrict: 'Chagua Wilaya',
+    errRegion: 'Tafadhali chagua mkoa wako',
+    errDistrict: 'Tafadhali chagua wilaya yako',
     labelStatus: 'Uko katika hali gani sasa?',
     stagePregnant: 'Mjamzito', stagePregnantDesc: 'Nasubiri mtoto',
     stagePostpartum: 'Mzazi Mpya', stagePostpartumDesc: 'Mtoto wangu amezaliwa',
@@ -1174,7 +1248,12 @@ const translations = {
     stepLabel2: 'Step 2 of 3', stepTitle2: 'Your motherhood journey',
     stepLabel3: 'Step 3 of 3', stepTitle3: 'Confirm and join',
     labelName: 'Your full name', labelPhone: 'WhatsApp number',
+    labelRegion: 'Region',
     labelLocation: 'District',
+    optSelectRegion: 'Select Region',
+    optSelectDistrict: 'Select District',
+    errRegion: 'Please select your region',
+    errDistrict: 'Please select your district',
     labelStatus: 'What is your current status?',
     stagePregnant: 'Pregnant', stagePregnantDesc: 'Expecting a baby',
     stagePostpartum: 'New Mother', stagePostpartumDesc: 'My baby is born',
@@ -1367,7 +1446,8 @@ function validateStep1() {
   let valid = true;
   const name = document.getElementById('fullName');
   const phone = document.getElementById('phone');
-  const region = document.getElementById('region');
+  const region = document.getElementById('regionSelect');
+  const district = document.getElementById('districtSelect');
 
   clearErrors();
 
@@ -1375,6 +1455,7 @@ function validateStep1() {
   const phoneVal = phone.value.replace(/\s/g, '');
   if (!phoneVal || phoneVal.length < 9) { showError(phone); valid = false; }
   if (!region.value) { showError(region); valid = false; }
+  if (!district.value) { showError(district); valid = false; }
 
   return valid;
 }
@@ -1410,7 +1491,8 @@ function buildSummary() {
   const t = translations[currentLang];
   const name = document.getElementById('fullName').value;
   const phone = '+255 ' + document.getElementById('phone').value;
-  const region = document.getElementById('region').value;
+  const region = document.getElementById('regionSelect').value;
+  const district = document.getElementById('districtSelect').value;
 
   const stageLabels = {
     pregnant: currentLang === 'sw' ? 'Nina mimba' : 'Pregnant',
@@ -1422,7 +1504,8 @@ function buildSummary() {
   let html = '';
   html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryName + '</span><strong>' + name + '</strong></div>';
   html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryPhone + '</span><strong>' + phone + '</strong></div>';
-  html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryRegion + '</span><strong>' + region + '</strong></div>';
+  html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.labelRegion + '</span><strong>' + region + '</strong></div>';
+  html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.labelLocation + '</span><strong>' + district + '</strong></div>';
   html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryStatus + '</span><strong>' + (stageLabels[selectedStage] || '') + '</strong></div>';
   
   const priorityLabels = {
@@ -1462,6 +1545,7 @@ function openWhatsApp() {
 
 // Init months grid
 buildMonthsGrid();
+initLocations();
 
 // Phone formatting
 document.getElementById('phone').addEventListener('input', function(e) {
