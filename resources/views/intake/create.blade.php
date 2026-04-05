@@ -1246,6 +1246,7 @@ const translations = {
     footerTerms: 'Masharti', footerPrivacy: 'Faragha', footerContact: 'Wasiliana nasi',
     monthLabel: 'mwezi',
     monthsLabel: 'miezi',
+    underOneMonth: 'Chini ya mwezi 1',
     trimester1: 'Trimester 1', trimester2: 'Trimester 2', trimester3: 'Trimester 3',
     week: 'Wiki',
     summaryName: 'Jina', summaryPhone: 'WhatsApp', summaryRegion: 'Wilaya',
@@ -1292,6 +1293,7 @@ const translations = {
     footerTerms: 'Terms', footerPrivacy: 'Privacy', footerContact: 'Contact us',
     monthLabel: 'month',
     monthsLabel: 'months',
+    underOneMonth: 'Under 1 month',
     trimester1: 'Trimester 1', trimester2: 'Trimester 2', trimester3: 'Trimester 3',
     week: 'Week',
     summaryName: 'Name', summaryPhone: 'WhatsApp', summaryRegion: 'District',
@@ -1339,6 +1341,18 @@ function buildMonthsGrid() {
   grid.innerHTML = '';
   const singleLabel = translations[currentLang].monthLabel;
   const multiLabel = translations[currentLang].monthsLabel;
+  const underOneMonthLabel = translations[currentLang].underOneMonth;
+
+  const underChip = document.createElement('div');
+  underChip.className = 'month-chip' + (selectedMonth === 0 ? ' selected' : '');
+  underChip.textContent = underOneMonthLabel;
+  underChip.addEventListener('click', () => {
+    selectedMonth = 0;
+    document.getElementById('babyWeeksOld').value = 0;
+    grid.querySelectorAll('.month-chip').forEach(c => c.classList.remove('selected'));
+    underChip.classList.add('selected');
+  });
+  grid.appendChild(underChip);
   
   for (let i = 1; i <= 24; i++) {
     const chip = document.createElement('div');
@@ -1351,7 +1365,7 @@ function buildMonthsGrid() {
     
     chip.addEventListener('click', () => {
       selectedMonth = i;
-      document.getElementById('babyWeeksOld').value = i;
+      document.getElementById('babyWeeksOld').value = i * 4;
       grid.querySelectorAll('.month-chip').forEach(c => c.classList.remove('selected'));
       chip.classList.add('selected');
     });
@@ -1550,8 +1564,12 @@ function buildSummary() {
     const trimester = document.getElementById('trimesterDisplay').textContent;
     html += '<div style="display:flex;justify-content:space-between;padding:6px 0"><span>' + (currentLang === 'sw' ? 'Maendeleo' : 'Progress') + '</span><strong>' + weeks + ' (' + trimester + ')</strong></div>';
   } else if (selectedStage === 'postpartum' && selectedMonth !== null) {
-    const label = selectedMonth === 1 ? t.monthLabel : t.monthsLabel;
-    html += '<div style="display:flex;justify-content:space-between;padding:6px 0"><span>' + t.summaryBabyAge + '</span><strong>' + selectedMonth + ' ' + label + '</strong></div>';
+    if (selectedMonth === 0) {
+      html += '<div style="display:flex;justify-content:space-between;padding:6px 0"><span>' + t.summaryBabyAge + '</span><strong>' + t.underOneMonth + '</strong></div>';
+    } else {
+      const label = selectedMonth === 1 ? t.monthLabel : t.monthsLabel;
+      html += '<div style="display:flex;justify-content:space-between;padding:6px 0"><span>' + t.summaryBabyAge + '</span><strong>' + selectedMonth + ' ' + label + '</strong></div>';
+    }
   }
 
   document.getElementById('summaryContent').innerHTML = html;

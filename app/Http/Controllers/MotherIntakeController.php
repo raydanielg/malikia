@@ -37,13 +37,14 @@ class MotherIntakeController extends Controller
                 'nullable',
                 'string',
                 'max:25',
-                'regex:/^\+?\d{10,15}$/',
+                // E.164-ish (digits only, optional leading +). Frontend sends 9 digits for TZ without +255.
+                'regex:/^\+?\d{9,15}$/',
             ],
 
             // New form fields
             'journey_stage' => ['required', 'in:pregnant,postpartum,trying,parent'],
             'pregnancy_weeks' => ['nullable', 'integer', 'min:1', 'max:42'],
-            'baby_weeks_old' => ['nullable', 'integer', 'min:0', 'max:200'],
+            'baby_weeks_old' => ['nullable', 'integer', 'min:0', 'max:200', 'required_if:journey_stage,postpartum'],
             'hospital_planned' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\'\-()&]*$/'],
             'delivery_hospital' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\'\-()&]*$/'],
             'region' => ['nullable', 'string', 'max:255'],
@@ -53,6 +54,7 @@ class MotherIntakeController extends Controller
             'baby_name' => ['nullable', 'string', 'max:255'],
             'baby_gender' => ['nullable', 'in:girl,boy'],
             'referral' => ['nullable', 'string', 'max:255'],
+            'priority' => ['nullable', 'in:low,medium,high,urgent'],
             // TTC duration field (how long trying to conceive)
             'ttc_duration' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\']*$/', 'required_if:journey_stage,trying'],
             'agree_comms' => ['required', 'accepted'],
@@ -62,7 +64,7 @@ class MotherIntakeController extends Controller
             'email' => ['nullable', 'email', 'max:255'],
             'age' => ['nullable', 'integer', 'min:12', 'max:60'],
             'pregnancy_stage' => ['nullable', 'string', 'max:50'],
-            'due_date' => ['nullable', 'date'],
+            'due_date' => ['nullable', 'date', 'required_if:journey_stage,pregnant'],
             'location' => ['nullable', 'string', 'max:255'],
             'previous_pregnancies' => ['nullable', 'integer', 'min:0', 'max:20'],
             'concerns' => ['nullable', 'string', 'max:5000'],
