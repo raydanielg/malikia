@@ -38,13 +38,18 @@ class MotherIntakeController extends Controller
             ],
 
             // New form fields
-            'journey_stage' => ['required', 'in:pregnant,postpartum,ttc'],
+            'journey_stage' => ['required', 'in:pregnant,postpartum,trying,parent'],
             'pregnancy_weeks' => ['nullable', 'integer', 'min:1', 'max:42'],
-            'baby_weeks_old' => ['nullable', 'integer', 'min:0', 'max:52'],
+            'baby_weeks_old' => ['nullable', 'integer', 'min:0', 'max:200'],
             'hospital_planned' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\'\-()&]*$/'],
             'delivery_hospital' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\'\-()&]*$/'],
+            'region' => ['nullable', 'string', 'max:255'],
+            'district' => ['nullable', 'string', 'max:255'],
+            'baby_name' => ['nullable', 'string', 'max:255'],
+            'baby_gender' => ['nullable', 'in:girl,boy'],
+            'referral' => ['nullable', 'string', 'max:255'],
             // TTC duration field (how long trying to conceive)
-            'ttc_duration' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\']*$/', 'required_if:journey_stage,ttc'],
+            'ttc_duration' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\']*$/', 'required_if:journey_stage,trying'],
             'agree_comms' => ['required', 'accepted'],
             'disclaimer_ack' => ['required', 'accepted'],
 
@@ -84,17 +89,19 @@ class MotherIntakeController extends Controller
         // Clear stage-specific fields to avoid inconsistent data
         if (($validated['journey_stage'] ?? null) === 'pregnant') {
             // keep pregnancy_weeks and hospital_planned; nullify baby_weeks_old
-            $validated['baby_weeks_old'] = $validated['baby_weeks_old'] ?? null;
+            $validated['baby_weeks_old'] = null;
         } elseif (($validated['journey_stage'] ?? null) === 'postpartum') {
             // keep baby_weeks_old; nullify pregnancy_weeks and hospital_planned (if not needed)
             $validated['pregnancy_weeks'] = null;
-        } else { // ttc
+        } elseif (($validated['journey_stage'] ?? null) === 'trying') {
             $validated['pregnancy_weeks'] = null;
             $validated['baby_weeks_old'] = null;
+        } else { // parent
+            $validated['pregnancy_weeks'] = null;
         }
 
-        // If TTC, capture trying duration into notes (to avoid DB schema changes)
-        if (($validated['journey_stage'] ?? null) === 'ttc') {
+        // If trying, capture trying duration into notes (to avoid DB schema changes)
+        if (($validated['journey_stage'] ?? null) === 'trying') {
             $duration = $request->string('ttc_duration');
             if ($duration) {
                 $prefix = isset($validated['notes']) && $validated['notes'] ? rtrim($validated['notes']) . "\n" : '';
