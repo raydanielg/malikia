@@ -45,6 +45,8 @@ class MotherIntakeController extends Controller
             'delivery_hospital' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.,\'\-()&]*$/'],
             'region' => ['nullable', 'string', 'max:255'],
             'district' => ['nullable', 'string', 'max:255'],
+            'region_id' => ['nullable', 'exists:regions,id'],
+            'district_id' => ['nullable', 'exists:districts,id'],
             'baby_name' => ['nullable', 'string', 'max:255'],
             'baby_gender' => ['nullable', 'in:girl,boy'],
             'referral' => ['nullable', 'string', 'max:255'],
@@ -113,6 +115,14 @@ class MotherIntakeController extends Controller
             // Guard against 500s when DB columns differ (e.g. production not migrated yet)
             $columns = Schema::getColumnListing('mother_intakes');
             $validated = array_intersect_key($validated, array_flip($columns));
+
+            // Set region and district names from IDs for compatibility if columns exist
+            if (isset($validated['region_id']) && Schema::hasColumn('mother_intakes', 'region')) {
+                $validated['region'] = \App\Models\Region::find($validated['region_id'])?->name;
+            }
+            if (isset($validated['district_id']) && Schema::hasColumn('mother_intakes', 'district')) {
+                $validated['district'] = \App\Models\District::find($validated['district_id'])?->name;
+            }
 
             $intake = MotherIntake::create($validated);
         } catch (\Throwable $e) {

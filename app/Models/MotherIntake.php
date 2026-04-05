@@ -13,6 +13,8 @@ class MotherIntake extends Model
     protected $fillable = [
         'full_name',
         'phone',
+        'region_id',
+        'district_id',
         'journey_stage',
         'pregnancy_weeks',
         'baby_weeks_old',
@@ -73,6 +75,16 @@ class MotherIntake extends Model
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class);
+    }
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
     }
 
     public function reviewer()
