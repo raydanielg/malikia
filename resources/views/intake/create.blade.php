@@ -1128,42 +1128,22 @@
 
 <script>
 // ===== REGION & DISTRICT DATA =====
-const locationData = {
-  'Arusha': { id: 1, districts: [{id: 1, name: 'Arusha City'}, {id: 2, name: 'Arusha DC'}, {id: 3, name: 'Karatu'}, {id: 4, name: 'Longido'}, {id: 5, name: 'Meru'}, {id: 6, name: 'Monduli'}, {id: 7, name: 'Ngorongoro'}] },
-  'Dar es Salaam': { id: 2, districts: [{id: 8, name: 'Ilala'}, {id: 9, name: 'Kinondoni'}, {id: 10, name: 'Temeke'}, {id: 11, name: 'Ubungo'}, {id: 12, name: 'Kigamboni'}] },
-  'Dodoma': { id: 3, districts: [{id: 13, name: 'Dodoma City'}, {id: 14, name: 'Bahi'}, {id: 15, name: 'Chamwino'}, {id: 16, name: 'Chemba'}, {id: 17, name: 'Kondoa'}, {id: 18, name: 'Kongwa'}, {id: 19, name: 'Mpwapwa'}] },
-  'Geita': { id: 4, districts: [{id: 20, name: 'Geita Town'}, {id: 21, name: 'Bukombe'}, {id: 22, name: 'Chato'}, {id: 23, name: 'Geita'}, {id: 24, name: 'Mbogwe'}, {id: 25, name: 'Nyang\'hwale'}] },
-  'Iringa': { id: 5, districts: [{id: 26, name: 'Iringa Municipal'}, {id: 27, name: 'Iringa DC'}, {id: 28, name: 'Kilolo'}, {id: 29, name: 'Mafinga Town'}, {id: 30, name: 'Mufindi'}] },
-  'Kagera': { id: 6, districts: [{id: 31, name: 'Bukoba Municipal'}, {id: 32, name: 'Bukoba DC'}, {id: 33, name: 'Biharamulo'}, {id: 34, name: 'Chato'}, {id: 35, name: 'Karagwe'}, {id: 36, name: 'Kyerwa'}, {id: 37, name: 'Missenyi'}, {id: 38, name: 'Muleba'}, {id: 39, name: 'Ngara'}] },
-  'Katavi': { id: 7, districts: [{id: 40, name: 'Mpanda Municipal'}, {id: 41, name: 'Mpanda DC'}, {id: 42, name: 'Mlele'}, {id: 43, name: 'Nsimbo'}] },
-  'Kigoma': { id: 8, districts: [{id: 44, name: 'Kigoma Municipal'}, {id: 45, name: 'Kigoma DC'}, {id: 46, name: 'Kakonko'}, {id: 47, name: 'Kasulu Town'}, {id: 48, name: 'Kasulu DC'}, {id: 49, name: 'Kibondo'}, {id: 50, name: 'Kibiti'}, {id: 51, name: 'Uvinza'}] },
-  'Kilimanjaro': { id: 9, districts: [{id: 52, name: 'Moshi Municipal'}, {id: 53, name: 'Moshi DC'}, {id: 54, name: 'Hai'}, {id: 55, name: 'Mwanga'}, {id: 56, name: 'Rombo'}, {id: 57, name: 'Same'}, {id: 58, name: 'Siha'}] },
-  'Lindi': { id: 10, districts: [{id: 59, name: 'Lindi Municipal'}, {id: 60, name: 'Lindi DC'}, {id: 61, name: 'Kilwa'}, {id: 62, name: 'Liwale'}, {id: 63, name: 'MTama'}, {id: 64, name: 'Nachingwea'}, {id: 65, name: 'Ruangwa'}] },
-  'Manyara': { id: 11, districts: [{id: 66, name: 'Babati Town'}, {id: 67, name: 'Babati DC'}, {id: 68, name: 'Hanang'}, {id: 69, name: 'Kiteto'}, {id: 70, name: 'Mbulu'}, {id: 71, name: 'Mbulu Town'}, {id: 72, name: 'Simanjiro'}] },
-  'Mara': { id: 12, districts: [{id: 73, name: 'Musoma Municipal'}, {id: 74, name: 'Musoma DC'}, {id: 75, name: 'Bunda Town'}, {id: 76, name: 'Bunda DC'}, {id: 77, name: 'Butiama'}, {id: 78, name: 'Rorya'}, {id: 79, name: 'Serengeti'}, {id: 80, name: 'Tarime'}] },
-  'Mbeya': { id: 13, districts: [{id: 81, name: 'Mbeya City'}, {id: 82, name: 'Mbeya DC'}, {id: 83, name: 'Chunya'}, {id: 84, name: 'Kyela'}, {id: 85, name: 'Mbarali'}, {id: 86, name: 'Mbozi'}, {id: 87, name: 'Rungwe'}] },
-  'Morogoro': { id: 14, districts: [{id: 88, name: 'Morogoro Municipal'}, {id: 89, name: 'Morogoro DC'}, {id: 90, name: 'Gairo'}, {id: 91, name: 'Kilombero'}, {id: 92, name: 'Kilosa'}, {id: 93, name: 'Mvomero'}, {id: 94, name: 'Ulanga'}] },
-  'Mtwara': { id: 15, districts: [{id: 95, name: 'Mtwara Municipal'}, {id: 96, name: 'Mtwara DC'}, {id: 97, name: 'Masasi Town'}, {id: 98, name: 'Masasi DC'}, {id: 99, name: 'Newala Town'}, {id: 100, name: 'Newala DC'}, {id: 101, name: 'Nanyumbu'}, {id: 102, name: 'Tandahimba'}] },
-  'Mwanza': { id: 16, districts: [{id: 103, name: 'Mwanza City'}, {id: 104, name: 'Ilemela'}, {id: 105, name: 'Kwimba'}, {id: 106, name: 'Magu'}, {id: 107, name: 'Misungwi'}, {id: 108, name: 'Buchosa'}, {id: 109, name: 'Sengerema'}, {id: 110, name: 'Ukerewe'}] },
-  'Njombe': { id: 17, districts: [{id: 111, name: 'Njombe Town'}, {id: 112, name: 'Njombe DC'}, {id: 113, name: 'Ludewa'}, {id: 114, name: 'Makambako Town'}, {id: 115, name: 'Makete'}, {id: 116, name: 'Wanging\'ombe'}] },
-  'Pemba Kaskazini': { id: 18, districts: [{id: 117, name: 'Wete'}, {id: 118, name: 'Michewani'}] },
-  'Pemba Kusini': { id: 19, districts: [{id: 119, name: 'Chake Chake'}, {id: 120, name: 'Mkoani'}] },
-  'Pwani': { id: 20, districts: [{id: 121, name: 'Kibaha Town'}, {id: 122, name: 'Kibaha DC'}, {id: 123, name: 'Bagamoyo'}, {id: 124, name: 'Kisarawe'}, {id: 125, name: 'Mafia'}, {id: 126, name: 'Mkuranga'}, {id: 127, name: 'Rufiji'}, {id: 128, name: 'Vikindu'}] },
-  'Rukwa': { id: 21, districts: [{id: 129, name: 'Sumbawanga Municipal'}, {id: 130, name: 'Sumbawanga DC'}, {id: 131, name: 'Kalambo'}, {id: 132, name: 'Kansi'}, {id: 133, name: 'Mpanda'}, {id: 134, name: 'Nkasi'}] },
-  'Ruvuma': { id: 22, districts: [{id: 135, name: 'Songea Municipal'}, {id: 136, name: 'Songea DC'}, {id: 137, name: 'Mbinga Town'}, {id: 138, name: 'Mbinga DC'}, {id: 139, name: 'Namtumbo'}, {id: 140, name: 'Njombe'}, {id: 141, name: 'Tunduru'}] },
-  'Shinyanga': { id: 23, districts: [{id: 142, name: 'Shinyanga Municipal'}, {id: 143, name: 'Shinyanga DC'}, {id: 144, name: 'Kahama Town'}, {id: 145, name: 'Kahama DC'}, {id: 146, name: 'Kishapu'}, {id: 147, name: 'Meatu'}] },
-  'Simiyu': { id: 24, districts: [{id: 148, name: 'Bariadi Town'}, {id: 149, name: 'Bariadi DC'}, {id: 150, name: 'Busega'}, {id: 151, name: 'Itilima'}, {id: 152, name: 'Maswa'}, {id: 153, name: 'Meatu'}] },
-  'Singida': { id: 25, districts: [{id: 154, name: 'Singida Municipal'}, {id: 155, name: 'Singida DC'}, {id: 156, name: 'Iramba'}, {id: 157, name: 'Ikungi'}, {id: 158, name: 'Manyoni'}, {id: 159, name: 'Mkalama'}, {id: 160, name: 'Miti'}] },
-  'Songwe': { id: 26, districts: [{id: 161, name: 'Vwawa Town'}, {id: 162, name: 'Mbozi'}, {id: 163, name: 'Ileje'}, {id: 164, name: 'Momba'}, {id: 165, name: 'Tunduma Town'}] },
-  'Tabora': { id: 27, districts: [{id: 166, name: 'Tabora Municipal'}, {id: 167, name: 'Tabora DC'}, {id: 168, name: 'Igunga'}, {id: 169, name: 'Kaliua'}, {id: 170, name: 'Nzega Town'}, {id: 171, name: 'Nzega DC'}, {id: 172, name: 'Sikonge'}, {id: 173, name: 'Urambo'}, {id: 174, name: 'Uyui'}] },
-  'Tanga': { id: 28, districts: [{id: 175, name: 'Tanga City'}, {id: 176, name: 'Tanga DC'}, {id: 177, name: 'Handeni Town'}, {id: 178, name: 'Handeni DC'}, {id: 179, name: 'Korogwe Town'}, {id: 180, name: 'Korogwe DC'}, {id: 181, name: 'Lushoto'}, {id: 182, name: 'Mkinga'}, {id: 183, name: 'Muheza'}, {id: 184, name: 'Mlalo'}, {id: 185, name: 'Pangani'}] },
-  'Unguja Kaskazini': { id: 29, districts: [{id: 186, name: 'Kaskazini A'}, {id: 187, name: 'Kaskazini B'}] },
-  'Unguja Kusini': { id: 30, districts: [{id: 188, name: 'Kusini'}, {id: 189, name: 'Kati'}] },
-  'Unguja Mjini Magharibi': { id: 31, districts: [{id: 190, name: 'Magharibi A'}, {id: 191, name: 'Magharibi B'}] },
-};
+const locationData = @json($regions->mapWithKeys(function($region) {
+    return [$region->name => [
+        'id' => $region->id,
+        'districts' => $region->districts->map(function($district) {
+            return ['id' => $district->id, 'name' => $district->name];
+        })->values()
+    ]];
+}));
 
 function initLocations() {
   const regSelect = document.getElementById('regionSelect');
+  if (!regSelect) return;
+  
+  // Clear existing options except first
+  regSelect.innerHTML = `<option value="">${translations[currentLang].optSelectRegion}</option>`;
+  
   const regions = Object.keys(locationData).sort();
   regions.forEach(r => {
     const opt = document.createElement('option');

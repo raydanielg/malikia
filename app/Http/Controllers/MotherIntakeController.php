@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\MotherIntake;
+use App\Models\Region;
+use App\Models\District;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
@@ -12,7 +14,8 @@ class MotherIntakeController extends Controller
 {
     public function create(): View
     {
-        return view('intake.create');
+        $regions = Region::with('districts')->orderBy('name')->get();
+        return view('intake.create', compact('regions'));
     }
 
     public function store(Request $request): Response
