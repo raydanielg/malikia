@@ -7,36 +7,31 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --rose: #85C2BE;
-    --rose-light: #D4EDEB;
-    --rose-glow: #6AB0AC;
-    --cream: #F7FBFB;
-    --warm-white: #FCFEFE;
-    --text-dark: #1E2D2C;
-    --text-mid: #4A6462;
-    --text-light: #8A9E9C;
-    --border: #D0E2E0;
-    --border-focus: #85C2BE;
-    --sage: #7E5FAD;
-    --sage-light: #EDE6F5;
-    --gold: #9B7CC8;
-    --gold-light: #F3EEFA;
-    --purple: #7E5FAD;
-    --purple-light: #EDE6F5;
-    --purple-glow: #A88DD4;
-    --error: #D44;
-    --shadow-sm: 0 1px 3px rgba(30,45,44,0.06);
-    --shadow-md: 0 4px 16px rgba(30,45,44,0.08);
-    --shadow-lg: 0 8px 32px rgba(30,45,44,0.10);
-    --radius: 14px;
-    --radius-sm: 10px;
+    --primary-blue: #1E40AF;
+    --primary-blue-light: #3B82F6;
+    --primary-blue-dark: #1E3A8A;
+    --accent-blue: #60A5FA;
+    --white: #FFFFFF;
+    --cream: #F8FAFC;
+    --warm-white: #F1F5F9;
+    --text-dark: #1E293B;
+    --text-mid: #475569;
+    --text-light: #94A3B8;
+    --border: #CBD5E1;
+    --border-focus: #3B82F6;
+    --error: #DC2626;
+    --shadow-sm: 0 1px 3px rgba(30,64,175,0.06);
+    --shadow-md: 0 4px 16px rgba(30,64,175,0.08);
+    --shadow-lg: 0 8px 32px rgba(30,64,175,0.10);
+    --radius: 16px;
+    --radius-sm: 12px;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
 
   body {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--cream);
+    background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
     color: var(--text-dark);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -48,8 +43,8 @@
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background: 
-      radial-gradient(ellipse at 20% 0%, rgba(133,194,190,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 100%, rgba(126,95,173,0.06) 0%, transparent 60%);
+      radial-gradient(ellipse at 20% 0%, rgba(59,130,246,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(30,64,175,0.06) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -71,45 +66,47 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 0 24px;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 24px;
   }
 
   .logo-area {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 14px;
   }
 
-  .logo-mark {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, var(--rose), var(--purple));
+  .logo-image {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
     border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-family: 'DM Serif Display', serif;
-    font-size: 20px;
-    box-shadow: 0 2px 8px rgba(133,194,190,0.3);
+    background: white;
+    padding: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
 
   .logo-text {
     font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    color: var(--text-dark);
-    line-height: 1;
+    font-size: 22px;
+    color: white;
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: 0.5px;
   }
 
   .logo-text span {
     display: block;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--rose);
-    margin-top: 2px;
+    color: var(--accent-blue);
+    margin-top: 3px;
   }
 
   .lang-toggle {
@@ -135,7 +132,7 @@
   }
 
   .lang-btn.active {
-    background: var(--rose);
+    background: var(--primary-blue-light);
     color: white;
   }
 
@@ -156,8 +153,8 @@
   }
 
   .card-hero {
-    background: linear-gradient(135deg, #85C2BE 0%, #7E5FAD 100%);
-    padding: 32px 28px 28px;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+    padding: 36px 28px 32px;
     position: relative;
     overflow: hidden;
   }
@@ -234,11 +231,11 @@
   }
 
   .progress-step.active {
-    background: var(--rose);
+    background: var(--primary-blue);
   }
 
   .progress-step.done {
-    background: var(--sage);
+    background: var(--primary-blue-dark);
   }
 
   /* Step containers */
@@ -256,10 +253,10 @@
 
   .step-label {
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: var(--rose);
+    color: var(--primary-blue);
     margin-bottom: 4px;
   }
 
@@ -284,7 +281,7 @@
   }
 
   .field-group label .req {
-    color: var(--rose);
+    color: var(--primary-blue);
     margin-left: 2px;
   }
 
@@ -329,8 +326,8 @@
     border-radius: var(--radius-sm);
     font-size: 15px;
     font-family: inherit;
-    color: var(--text-dark);
-    background: var(--rose-light);
+    color: white;
+    background: linear-gradient(135deg, var(--primary-blue-light) 0%, var(--primary-blue) 100%);
     text-align: center;
     font-weight: 600;
     outline: none;
@@ -359,15 +356,15 @@
   }
 
   .stage-card:hover {
-    border-color: var(--rose-glow);
+    border-color: var(--primary-blue-light);
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
   }
 
   .stage-card.selected {
-    border-color: var(--rose);
-    background: linear-gradient(135deg, rgba(133,194,190,0.04), rgba(133,194,190,0.08));
-    box-shadow: 0 0 0 3px rgba(133,194,190,0.1);
+    border-color: var(--primary-blue);
+    background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(30,64,175,0.12));
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
   }
 
   .stage-card input { display: none; }
@@ -401,18 +398,19 @@
   .due-date-section.visible { display: block; }
 
   .due-date-info {
-    background: var(--gold-light);
+    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(30,64,175,0.08));
     border-radius: var(--radius-sm);
     padding: 14px 16px;
     margin-bottom: 14px;
     display: flex;
     gap: 10px;
     align-items: flex-start;
+    border: 1px solid rgba(59,130,246,0.2);
   }
 
   .due-date-info svg {
     width: 20px; height: 20px;
-    color: var(--gold);
+    color: var(--primary-blue);
     flex-shrink: 0;
     margin-top: 1px;
   }
@@ -445,10 +443,11 @@
   .pregnancy-progress {
     display: none;
     margin-top: 14px;
-    background: linear-gradient(135deg, var(--rose-light), rgba(232,160,176,0.2));
+    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(30,64,175,0.08));
     border-radius: var(--radius);
     padding: 18px;
     animation: fadeIn 0.35s ease;
+    border: 1px solid rgba(59,130,246,0.2);
   }
 
   .pregnancy-progress.visible { display: block; }
@@ -463,7 +462,7 @@
   .progress-weeks {
     font-family: 'DM Serif Display', serif;
     font-size: 22px;
-    color: var(--rose);
+    color: var(--primary-blue);
   }
 
   .progress-trimester {
@@ -486,7 +485,7 @@
 
   .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--rose), var(--rose-glow));
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-light));
     border-radius: 8px;
     transition: width 0.6s ease;
   }
@@ -529,13 +528,13 @@
   }
 
   .month-chip:hover {
-    border-color: var(--sage);
+    border-color: var(--primary-blue-light);
   }
 
   .month-chip.selected {
-    border-color: var(--sage);
-    background: var(--sage-light);
-    color: var(--sage);
+    border-color: var(--primary-blue);
+    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(30,64,175,0.08));
+    color: var(--primary-blue);
   }
 
   .month-chip span {
@@ -572,11 +571,11 @@
     background: var(--warm-white);
   }
 
-  .trying-option:hover { border-color: var(--gold); }
+  .trying-option:hover { border-color: var(--primary-blue-light); }
 
   .trying-option.selected {
-    border-color: var(--gold);
-    background: var(--gold-light);
+    border-color: var(--primary-blue);
+    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(30,64,175,0.08));
     color: var(--text-dark);
     font-weight: 600;
   }
@@ -648,8 +647,8 @@
   }
 
   .consent-block input[type="checkbox"]:checked {
-    background: var(--rose);
-    border-color: var(--rose);
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
   }
 
   .consent-block input[type="checkbox"]:checked::after {
@@ -670,7 +669,7 @@
   }
 
   .consent-block label a {
-    color: var(--rose);
+    color: var(--primary-blue);
     text-decoration: none;
     font-weight: 600;
   }
@@ -707,14 +706,14 @@
   .btn-back:hover { background: var(--border); }
 
   .btn-next {
-    background: linear-gradient(135deg, #85C2BE, #6AB0AC);
+    background: linear-gradient(135deg, var(--primary-blue-light), var(--primary-blue));
     color: white;
-    box-shadow: 0 4px 14px rgba(133,194,190,0.3);
+    box-shadow: 0 4px 14px rgba(59,130,246,0.3);
   }
 
   .btn-next:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(133,194,190,0.4);
+    box-shadow: 0 6px 20px rgba(59,130,246,0.4);
   }
 
   .btn-next:active {
@@ -733,14 +732,14 @@
   }
 
   .btn-submit {
-    background: linear-gradient(135deg, var(--sage), #6B4E9B);
+    background: linear-gradient(135deg, var(--primary-blue-dark), var(--primary-blue));
     color: white;
-    box-shadow: 0 4px 14px rgba(126,95,173,0.35);
+    box-shadow: 0 4px 14px rgba(30,64,175,0.35);
   }
 
   .btn-submit:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(126,95,173,0.45);
+    box-shadow: 0 6px 20px rgba(30,64,175,0.45);
   }
 
   .btn-submit:disabled {
@@ -763,13 +762,14 @@
 
   .success-icon {
     width: 80px; height: 80px;
-    background: var(--sage-light);
+    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(30,64,175,0.1));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
     animation: popIn 0.5s ease 0.2s both;
+    border: 2px solid rgba(59,130,246,0.3);
   }
 
   @keyframes popIn {
@@ -780,7 +780,7 @@
 
   .success-icon svg {
     width: 40px; height: 40px;
-    color: var(--sage);
+    color: var(--primary-blue);
   }
 
   .success-title {
@@ -868,7 +868,7 @@
   <!-- Header -->
   <div class="header">
     <div class="logo-area">
-      <div class="logo-mark">M</div>
+      <img src="{{ asset('img/logo white hair.png') }}" alt="Malkia Konnect Logo" class="logo-image">
       <div class="logo-text">
         Malkia
         <span>Konnect</span>
