@@ -1073,27 +1073,7 @@
             <div id="summaryContent" style="font-size: 14px; color: var(--text-mid); line-height: 1.8;"></div>
           </div>
 
-          <div class="field-group">
-            <label data-i18n="labelPriority">Uharaka wa Huduma <span class="req">*</span></label>
-            <select class="select-input" id="priority" name="priority" required>
-              <option value="medium" data-i18n="optMedium">Kawaida</option>
-              <option value="high" data-i18n="optHigh">Haraka Sana</option>
-              <option value="low" data-i18n="optLow">Sio Haraka</option>
-            </select>
-          </div>
-
-          <div class="field-group">
-            <label data-i18n="labelHow">Umetusikia kupitia wapi?</label>
-            <select class="select-input" id="referral" name="referral">
-              <option value="">Chagua</option>
-              <option value="instagram">Instagram</option>
-              <option value="whatsapp">WhatsApp</option>
-              <option value="friend" data-i18n="refFriend">Rafiki / Familia</option>
-              <option value="hospital" data-i18n="refHospital">Hospitali / Kliniki</option>
-              <option value="midwife" data-i18n="refMidwife">Mkunga</option>
-              <option value="other" data-i18n="refOther">Nyingine</option>
-            </select>
-          </div>
+          <input type="hidden" id="priority" name="priority" value="medium">
 
           <div class="consent-block">
             <input type="checkbox" id="consent" name="agree_comms" value="1">
@@ -1551,8 +1531,9 @@ function buildSummary() {
     medium: currentLang === 'sw' ? 'Kawaida' : 'Normal',
     low: currentLang === 'sw' ? 'Sio Haraka' : 'Low Priority'
   };
-  const priorityVal = document.getElementById('priority').value;
-  html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryPriority + '</span><strong>' + (priorityLabels[priorityVal] || '') + '</strong></div>';
+  const priorityEl = document.getElementById('priority');
+  const priorityVal = priorityEl ? priorityEl.value : 'medium';
+  html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryPriority + '</span><strong>' + (priorityLabels[priorityVal] || priorityVal) + '</strong></div>';
 
   if (selectedStage === 'pregnant') {
     const d = document.getElementById('dueDate').value;
