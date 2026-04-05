@@ -912,7 +912,7 @@
         <!-- STEP 1: Basic Info -->
         <div class="form-step active" id="step1">
           <div class="step-label" data-i18n="stepLabel1">Hatua 1 ya 3</div>
-          <div class="step-title" data-i18n="stepTitle1">Tujue wewe</div>
+          <div class="step-title" data-i18n="stepTitle1">Tunaomba tukufahamu</div>
 
           <div class="field-group">
             <label data-i18n="labelName">Jina lako kamili <span class="req">*</span></label>
