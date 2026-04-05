@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         // );
 
         $this->call([
+            RegionDistrictSeeder::class,
             TestimonialSeeder::class,
             UserDemoSeeder::class,
         ]);
