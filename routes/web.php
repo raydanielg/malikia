@@ -29,6 +29,14 @@ Route::get('/team', function () {
     return view('team.index');
 })->name('team');
 
+Route::get('/terms', function () {
+    return view('legal.terms');
+})->name('terms');
+
+Route::get('/privacy', function () {
+    return view('legal.privacy');
+})->name('privacy');
+
 // Survey pages
 Route::get('/survey', function () {
     return view('survey.index');

@@ -7,10 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary-blue: #1E40AF;
-    --primary-blue-light: #3B82F6;
-    --primary-blue-dark: #1E3A8A;
-    --accent-blue: #60A5FA;
+    --primary-teal: #85C2BE;
+    --primary-teal-light: #A7D7D4;
+    --primary-teal-dark: #6AB0AC;
+    --accent-gold: #E2B859;
     --white: #FFFFFF;
     --cream: #F8FAFC;
     --warm-white: #F1F5F9;
@@ -18,11 +18,11 @@
     --text-mid: #475569;
     --text-light: #94A3B8;
     --border: #CBD5E1;
-    --border-focus: #3B82F6;
+    --border-focus: #85C2BE;
     --error: #DC2626;
-    --shadow-sm: 0 1px 3px rgba(30,64,175,0.06);
-    --shadow-md: 0 4px 16px rgba(30,64,175,0.08);
-    --shadow-lg: 0 8px 32px rgba(30,64,175,0.10);
+    --shadow-sm: 0 1px 3px rgba(133,194,190,0.1);
+    --shadow-md: 0 4px 16px rgba(133,194,190,0.12);
+    --shadow-lg: 0 8px 32px rgba(133,194,190,0.15);
     --radius: 16px;
     --radius-sm: 12px;
   }
@@ -43,8 +43,8 @@
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background: 
-      radial-gradient(ellipse at 20% 0%, rgba(59,130,246,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 100%, rgba(30,64,175,0.06) 0%, transparent 60%);
+      radial-gradient(ellipse at 20% 0%, rgba(133,194,190,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(133,194,190,0.08) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -67,7 +67,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px 20px;
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+    background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-teal-dark) 100%);
     border-radius: 24px;
     box-shadow: var(--shadow-md);
     margin-bottom: 24px;
@@ -110,7 +110,7 @@
     font-weight: 800;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--accent-blue);
+    color: var(--accent-gold);
     margin-top: 4px;
     opacity: 0.95;
   }
@@ -138,7 +138,7 @@
   }
 
   .lang-btn.active {
-    background: var(--primary-blue-light);
+    background: var(--primary-teal-light);
     color: white;
   }
 
@@ -159,7 +159,7 @@
   }
 
   .card-hero {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+    background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-teal-dark) 100%);
     padding: 36px 28px 32px;
     position: relative;
     overflow: hidden;
@@ -237,11 +237,11 @@
   }
 
   .progress-step.active {
-    background: var(--primary-blue);
+    background: var(--primary-teal);
   }
 
   .progress-step.done {
-    background: var(--primary-blue-dark);
+    background: var(--primary-teal-dark);
   }
 
   /* Step containers */
@@ -262,7 +262,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: var(--primary-blue);
+    color: var(--primary-teal);
     margin-bottom: 4px;
   }
 
@@ -287,7 +287,7 @@
   }
 
   .field-group label .req {
-    color: var(--primary-blue);
+    color: var(--primary-teal);
     margin-left: 2px;
   }
 
@@ -333,7 +333,7 @@
     font-size: 15px;
     font-family: inherit;
     color: white;
-    background: linear-gradient(135deg, var(--primary-blue-light) 0%, var(--primary-blue) 100%);
+    background: linear-gradient(135deg, var(--primary-teal-light) 0%, var(--primary-teal) 100%);
     text-align: center;
     font-weight: 600;
     outline: none;
@@ -362,15 +362,15 @@
   }
 
   .stage-card:hover {
-    border-color: var(--primary-blue-light);
+    border-color: var(--primary-teal-light);
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
   }
 
   .stage-card.selected {
-    border-color: var(--primary-blue);
-    background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(30,64,175,0.12));
-    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+    border-color: var(--primary-teal);
+    background: linear-gradient(135deg, rgba(133,194,190,0.1), rgba(133,194,190,0.15));
+    box-shadow: 0 0 0 3px rgba(133,194,190,0.2);
   }
 
   .stage-card input { display: none; }
@@ -404,19 +404,19 @@
   .due-date-section.visible { display: block; }
 
   .due-date-info {
-    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(30,64,175,0.08));
+    background: linear-gradient(135deg, rgba(133,194,190,0.15), rgba(133,194,190,0.1));
     border-radius: var(--radius-sm);
     padding: 14px 16px;
     margin-bottom: 14px;
     display: flex;
     gap: 10px;
     align-items: flex-start;
-    border: 1px solid rgba(59,130,246,0.2);
+    border: 1px solid rgba(133,194,190,0.3);
   }
 
   .due-date-info svg {
     width: 20px; height: 20px;
-    color: var(--primary-blue);
+    color: var(--primary-teal);
     flex-shrink: 0;
     margin-top: 1px;
   }
@@ -449,11 +449,11 @@
   .pregnancy-progress {
     display: none;
     margin-top: 14px;
-    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(30,64,175,0.08));
+    background: linear-gradient(135deg, rgba(133,194,190,0.15), rgba(133,194,190,0.1));
     border-radius: var(--radius);
     padding: 18px;
     animation: fadeIn 0.35s ease;
-    border: 1px solid rgba(59,130,246,0.2);
+    border: 1px solid rgba(133,194,190,0.3);
   }
 
   .pregnancy-progress.visible { display: block; }
@@ -468,7 +468,7 @@
   .progress-weeks {
     font-family: 'DM Serif Display', serif;
     font-size: 22px;
-    color: var(--primary-blue);
+    color: var(--primary-teal);
   }
 
   .progress-trimester {
@@ -491,7 +491,7 @@
 
   .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-light));
+    background: linear-gradient(90deg, var(--primary-teal), var(--primary-teal-light));
     border-radius: 8px;
     transition: width 0.6s ease;
   }
@@ -534,13 +534,13 @@
   }
 
   .month-chip:hover {
-    border-color: var(--primary-blue-light);
+    border-color: var(--primary-teal-light);
   }
 
   .month-chip.selected {
-    border-color: var(--primary-blue);
-    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(30,64,175,0.08));
-    color: var(--primary-blue);
+    border-color: var(--primary-teal);
+    background: linear-gradient(135deg, rgba(133,194,190,0.15), rgba(133,194,190,0.1));
+    color: var(--primary-teal);
   }
 
   .month-chip span {
@@ -577,11 +577,11 @@
     background: var(--warm-white);
   }
 
-  .trying-option:hover { border-color: var(--primary-blue-light); }
+  .trying-option:hover { border-color: var(--primary-teal-light); }
 
   .trying-option.selected {
-    border-color: var(--primary-blue);
-    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(30,64,175,0.08));
+    border-color: var(--primary-teal);
+    background: linear-gradient(135deg, rgba(133,194,190,0.15), rgba(133,194,190,0.1));
     color: var(--text-dark);
     font-weight: 600;
   }
@@ -653,8 +653,8 @@
   }
 
   .consent-block input[type="checkbox"]:checked {
-    background: var(--primary-blue);
-    border-color: var(--primary-blue);
+    background: var(--primary-teal);
+    border-color: var(--primary-teal);
   }
 
   .consent-block input[type="checkbox"]:checked::after {
@@ -675,7 +675,7 @@
   }
 
   .consent-block label a {
-    color: var(--primary-blue);
+    color: var(--primary-teal);
     text-decoration: none;
     font-weight: 600;
   }
@@ -712,14 +712,14 @@
   .btn-back:hover { background: var(--border); }
 
   .btn-next {
-    background: linear-gradient(135deg, var(--primary-blue-light), var(--primary-blue));
+    background: linear-gradient(135deg, var(--primary-teal-light), var(--primary-teal));
     color: white;
-    box-shadow: 0 4px 14px rgba(59,130,246,0.3);
+    box-shadow: 0 4px 14px rgba(133,194,190,0.3);
   }
 
   .btn-next:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(59,130,246,0.4);
+    box-shadow: 0 6px 20px rgba(133,194,190,0.4);
   }
 
   .btn-next:active {
@@ -738,14 +738,14 @@
   }
 
   .btn-submit {
-    background: linear-gradient(135deg, var(--primary-blue-dark), var(--primary-blue));
+    background: linear-gradient(135deg, var(--primary-teal-dark), var(--primary-teal));
     color: white;
-    box-shadow: 0 4px 14px rgba(30,64,175,0.35);
+    box-shadow: 0 4px 14px rgba(106,176,172,0.35);
   }
 
   .btn-submit:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(30,64,175,0.45);
+    box-shadow: 0 6px 20px rgba(106,176,172,0.45);
   }
 
   .btn-submit:disabled {
@@ -768,14 +768,14 @@
 
   .success-icon {
     width: 80px; height: 80px;
-    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(30,64,175,0.1));
+    background: linear-gradient(135deg, rgba(133,194,190,0.2), rgba(133,194,190,0.1));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
     animation: popIn 0.5s ease 0.2s both;
-    border: 2px solid rgba(59,130,246,0.3);
+    border: 2px solid rgba(133,194,190,0.35);
   }
 
   @keyframes popIn {
@@ -786,7 +786,7 @@
 
   .success-icon svg {
     width: 40px; height: 40px;
-    color: var(--primary-blue);
+    color: var(--primary-teal);
   }
 
   .success-title {
@@ -930,44 +930,21 @@
           </div>
 
           <div class="field-group">
-            <label data-i18n="labelEmail">Email <span class="optional">(hiari)</span></label>
-            <input type="email" name="email" class="text-input" id="email" placeholder="mama@email.com">
-          </div>
-
-          <div class="field-group">
-            <label data-i18n="labelLocation">Mkoa <span class="req">*</span></label>
-            <div class="location-grid">
-              <select class="select-input" id="region" name="region" required>
-                <option value="">Chagua mkoa</option>
-                <option value="Dar es Salaam">Dar es Salaam</option>
-                <option value="Arusha">Arusha</option>
-                <option value="Dodoma">Dodoma</option>
-                <option value="Mwanza">Mwanza</option>
-                <option value="Mbeya">Mbeya</option>
-                <option value="Morogoro">Morogoro</option>
-                <option value="Tanga">Tanga</option>
-                <option value="Kilimanjaro">Kilimanjaro</option>
-                <option value="Iringa">Iringa</option>
-                <option value="Kagera">Kagera</option>
-                <option value="Zanzibar">Zanzibar</option>
-                <option value="Mtwara">Mtwara</option>
-                <option value="Lindi">Lindi</option>
-                <option value="Ruvuma">Ruvuma</option>
-                <option value="Shinyanga">Shinyanga</option>
-                <option value="Tabora">Tabora</option>
-                <option value="Singida">Singida</option>
-                <option value="Kigoma">Kigoma</option>
-                <option value="Pwani">Pwani</option>
-                <option value="Mara">Mara</option>
-                <option value="Rukwa">Rukwa</option>
-                <option value="Simiyu">Simiyu</option>
-                <option value="Geita">Geita</option>
-                <option value="Katavi">Katavi</option>
-                <option value="Njombe">Njombe</option>
-                <option value="Songwe">Songwe</option>
+            <label data-i18n="labelLocation">Wilaya <span class="req">*</span></label>
+            <div class="select-wrapper">
+              <select name="location" class="select-input" id="region" required>
+                <option value="" data-i18n="optSelect">Chagua Wilaya</option>
+                <optgroup label="Dar es Salaam">
+                  <option value="Kinondoni">Kinondoni</option>
+                  <option value="Ilala">Ilala</option>
+                  <option value="Temeke">Temeke</option>
+                  <option value="Ubungo">Ubungo</option>
+                  <option value="Kigamboni">Kigamboni</option>
+                </optgroup>
+                <option value="other" data-i18n="refOther">Nyingine</option>
               </select>
-              <input type="text" class="text-input" id="district" name="district" placeholder="Wilaya / Mtaa">
             </div>
+            <div class="field-error" data-i18n="errRegion">Tafadhali chagua wilaya yako</div>
           </div>
 
           <div class="btn-row">
@@ -984,31 +961,25 @@
           <div class="step-title" data-i18n="stepTitle2">Safari yako ya uzazi</div>
 
           <div class="field-group">
-            <label data-i18n="labelStage">Uko katika hatua gani sasa? <span class="req">*</span></label>
+            <label data-i18n="labelStatus">Uko katika hali gani sasa? <span class="req">*</span></label>
             <div class="stage-cards">
               <label class="stage-card" onclick="selectStage('pregnant')">
                 <input type="radio" name="journey_stage" value="pregnant">
                 <span class="stage-icon">🤰</span>
-                <span class="stage-name" data-i18n="stagePregnant">Nina mimba</span>
+                <span class="stage-name" data-i18n="stagePregnant">Mjamzito</span>
                 <span class="stage-desc" data-i18n="stagePregnantDesc">Nasubiri mtoto</span>
               </label>
               <label class="stage-card" onclick="selectStage('postpartum')">
                 <input type="radio" name="journey_stage" value="postpartum">
                 <span class="stage-icon">👶</span>
-                <span class="stage-name" data-i18n="stagePostpartum">Nimeshajifungua</span>
+                <span class="stage-name" data-i18n="stagePostpartum">Mzazi Mpya</span>
                 <span class="stage-desc" data-i18n="stagePostpartumDesc">Mtoto wangu amezaliwa</span>
               </label>
               <label class="stage-card" onclick="selectStage('trying')">
                 <input type="radio" name="journey_stage" value="trying">
                 <span class="stage-icon">🌱</span>
-                <span class="stage-name" data-i18n="stageTrying">Napanga kupata mimba</span>
+                <span class="stage-name" data-i18n="stageTrying">Natafuta mtoto</span>
                 <span class="stage-desc" data-i18n="stageTryingDesc">Nataka kushika mimba</span>
-              </label>
-              <label class="stage-card" onclick="selectStage('parent')">
-                <input type="radio" name="journey_stage" value="parent">
-                <span class="stage-icon">💛</span>
-                <span class="stage-name" data-i18n="stageParent">Mzazi</span>
-                <span class="stage-desc" data-i18n="stageParentDesc">Nina watoto</span>
               </label>
             </div>
           </div>
@@ -1050,23 +1021,6 @@
               <input type="hidden" name="baby_weeks_old" id="babyWeeksOld">
               <div class="months-grid" id="monthsGrid"></div>
             </div>
-
-            <div class="baby-section visible" style="display:block; margin-top:14px;">
-              <div class="inline-fields">
-                <div class="field-group">
-                  <label data-i18n="labelBabyName">Jina la mtoto <span class="optional">(hiari)</span></label>
-                  <input type="text" name="baby_name" class="text-input" id="babyName" placeholder="Mfano: Neema">
-                </div>
-                <div class="field-group">
-                  <label data-i18n="labelBabyGender">Jinsia <span class="optional">(hiari)</span></label>
-                  <select class="select-input" id="babyGender" name="baby_gender">
-                    <option value="">Chagua</option>
-                    <option value="girl" data-i18n="optGirl">Msichana</option>
-                    <option value="boy" data-i18n="optBoy">Mvulana</option>
-                  </select>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- Trying section -->
@@ -1102,6 +1056,15 @@
           <!-- Summary card -->
           <div id="summaryCard" style="background: var(--cream); border-radius: var(--radius); padding: 18px; margin-bottom: 18px;">
             <div id="summaryContent" style="font-size: 14px; color: var(--text-mid); line-height: 1.8;"></div>
+          </div>
+
+          <div class="field-group">
+            <label data-i18n="labelPriority">Uharaka wa Huduma <span class="req">*</span></label>
+            <select class="select-input" id="priority" name="priority" required>
+              <option value="medium" data-i18n="optMedium">Kawaida</option>
+              <option value="high" data-i18n="optHigh">Haraka Sana</option>
+              <option value="low" data-i18n="optLow">Sio Haraka</option>
+            </select>
           </div>
 
           <div class="field-group">
@@ -1153,9 +1116,9 @@
 
   <div class="footer">
     © 2026 Malkia Konnect. <span data-i18n="footerRights">Haki zote zimehifadhiwa.</span><br>
-    <a href="#" data-i18n="footerTerms">Masharti</a>
-    <a href="#" data-i18n="footerPrivacy">Faragha</a>
-    <a href="#" data-i18n="footerContact">Wasiliana nasi</a>
+    <a href="{{ route('terms') }}" data-i18n="footerTerms">Masharti</a>
+    <a href="{{ route('privacy') }}" data-i18n="footerPrivacy">Faragha</a>
+    <a href="{{ route('contact') }}" data-i18n="footerContact">Wasiliana nasi</a>
   </div>
 
 </div>
@@ -1170,29 +1133,18 @@ let selectedTrying = null;
 
 // ===== i18n =====
 const translations = {
-  sw: {
-    badge: 'Mama, uko nyumbani',
-    heroTitle: 'Huhitaji kutembea safari hii peke yako, Mama.',
-    heroSub: 'Kila mama anastahili mtu wa kumwambia "utakuwa sawa." Malkia Konnect ni rafiki yako ya uzazi, moja kwa moja kwenye WhatsApp yako. Bure. Binafsi. Kwa ajili yako.',
-    stepLabel1: 'Hatua 1 ya 3', stepTitle1: 'Tunaomba tukufahamu',
-    stepLabel2: 'Hatua 2 ya 3', stepTitle2: 'Safari yako ya uzazi',
-    stepLabel3: 'Hatua 3 ya 3', stepTitle3: 'Thibitisha na ujiunge',
-    labelName: 'Jina lako kamili', labelPhone: 'Nambari ya WhatsApp',
-    labelEmail: 'Email', labelLocation: 'Mkoa',
-    labelStage: 'Uko katika hatua gani sasa?',
-    stagePregnant: 'Nina mimba', stagePregnantDesc: 'Nasubiri mtoto',
-    stagePostpartum: 'Nimeshajifungua', stagePostpartumDesc: 'Mtoto wangu amezaliwa',
-    stageTrying: 'Napanga kupata mimba', stageTryingDesc: 'Nataka kushika mimba',
-    stageParent: 'Mzazi', stageParentDesc: 'Nina watoto',
+    labelLocation: 'Wilaya',
+    labelStatus: 'Uko katika hali gani sasa?',
+    stagePregnant: 'Mjamzito', stagePregnantDesc: 'Nasubiri mtoto',
+    stagePostpartum: 'Mzazi Mpya', stagePostpartumDesc: 'Mtoto wangu amezaliwa',
+    stageTrying: 'Natafuta mtoto', stageTryingDesc: 'Nataka kushika mimba',
+    labelPriority: 'Uharaka wa Huduma',
+    optHigh: 'Haraka Sana', optMedium: 'Kawaida', optLow: 'Sio Haraka',
+    summaryStatus: 'Hali', summaryPriority: 'Uharaka',
     dueDateTip: 'Ingiza tarehe unayotarajiwa kujifungua. Ukiwa hujui, daktari au mkunga wako anaweza kukusaidia.',
     labelDueDate: 'Tarehe ya kujifungua (EDD)',
     daysLeft: 'Zimebaki siku',
     labelBabyAge: 'Mtoto wako ana umri gani?',
-    labelBabyName: 'Jina la mtoto', labelBabyGender: 'Jinsia',
-    optGirl: 'Msichana', optBoy: 'Mvulana',
-    labelTryingDuration: 'Umekuwa ukijaribu kwa muda gani?',
-    tryOpt1: 'Nimeanza hivi karibuni', tryOpt2: 'Miezi 1 hadi 6',
-    tryOpt3: 'Miezi 6 hadi 12', tryOpt4: 'Zaidi ya mwaka 1',
     labelHow: 'Umetusikia kupitia wapi?',
     refFriend: 'Rafiki / Familia', refHospital: 'Hospitali / Kliniki',
     refMidwife: 'Mkunga', refOther: 'Nyingine',
@@ -1202,14 +1154,16 @@ const translations = {
     successSub: 'Safari yako ya uzazi imebadilika leo. Tutakufikia kwenye WhatsApp ndani ya masaa 24 na salamu yako ya kwanza.',
     btnWhatsApp: 'Fungua WhatsApp',
     errName: 'Tafadhali ingiza jina lako', errPhone: 'Ingiza nambari sahihi ya simu',
+    errRegion: 'Tafadhali chagua wilaya yako',
     errDueDate: 'Tafadhali ingiza tarehe',
     footerRights: 'Haki zote zimehifadhiwa.',
     footerTerms: 'Masharti', footerPrivacy: 'Faragha', footerContact: 'Wasiliana nasi',
-    monthLabel: 'mw',
+    monthLabel: 'mwezi',
+    monthsLabel: 'miezi',
     trimester1: 'Trimester 1', trimester2: 'Trimester 2', trimester3: 'Trimester 3',
     week: 'Wiki',
-    summaryName: 'Jina', summaryPhone: 'WhatsApp', summaryRegion: 'Mkoa',
-    summaryStage: 'Hatua', summaryDueDate: 'Tarehe ya kujifungua',
+    summaryName: 'Jina', summaryPhone: 'WhatsApp', summaryRegion: 'Wilaya',
+    summaryStatus: 'Hali', summaryDueDate: 'Tarehe ya kujifungua',
     summaryBabyAge: 'Umri wa mtoto',
   },
   en: {
@@ -1220,21 +1174,18 @@ const translations = {
     stepLabel2: 'Step 2 of 3', stepTitle2: 'Your motherhood journey',
     stepLabel3: 'Step 3 of 3', stepTitle3: 'Confirm and join',
     labelName: 'Your full name', labelPhone: 'WhatsApp number',
-    labelEmail: 'Email', labelLocation: 'Region',
-    labelStage: 'What stage are you at?',
-    stagePregnant: "I'm pregnant", stagePregnantDesc: 'Expecting a baby',
-    stagePostpartum: 'I gave birth', stagePostpartumDesc: 'My baby is born',
+    labelLocation: 'District',
+    labelStatus: 'What is your current status?',
+    stagePregnant: 'Pregnant', stagePregnantDesc: 'Expecting a baby',
+    stagePostpartum: 'New Mother', stagePostpartumDesc: 'My baby is born',
     stageTrying: 'Trying to conceive', stageTryingDesc: 'Planning a pregnancy',
-    stageParent: 'Parent', stageParentDesc: 'I have children',
+    labelPriority: 'Service Priority',
+    optHigh: 'High Priority', optMedium: 'Normal', optLow: 'Low Priority',
+    summaryStatus: 'Status', summaryPriority: 'Priority',
     dueDateTip: "Enter your expected due date. If you don't know it, your doctor or midwife can help.",
     labelDueDate: 'Due date (EDD)',
     daysLeft: 'Days remaining',
     labelBabyAge: "How old is your baby?",
-    labelBabyName: "Baby's name", labelBabyGender: 'Gender',
-    optGirl: 'Girl', optBoy: 'Boy',
-    labelTryingDuration: 'How long have you been trying?',
-    tryOpt1: 'Just started', tryOpt2: '1 to 6 months',
-    tryOpt3: '6 to 12 months', tryOpt4: 'Over 1 year',
     labelHow: 'How did you hear about us?',
     refFriend: 'Friend / Family', refHospital: 'Hospital / Clinic',
     refMidwife: 'Midwife', refOther: 'Other',
@@ -1244,14 +1195,16 @@ const translations = {
     successSub: "Your motherhood journey changed today. We'll reach you on WhatsApp within 24 hours with your first message.",
     btnWhatsApp: 'Open WhatsApp',
     errName: 'Please enter your name', errPhone: 'Enter a valid phone number',
+    errRegion: 'Please select your district',
     errDueDate: 'Please enter a date',
     footerRights: 'All rights reserved.',
     footerTerms: 'Terms', footerPrivacy: 'Privacy', footerContact: 'Contact us',
-    monthLabel: 'mo',
+    monthLabel: 'month',
+    monthsLabel: 'months',
     trimester1: 'Trimester 1', trimester2: 'Trimester 2', trimester3: 'Trimester 3',
     week: 'Week',
-    summaryName: 'Name', summaryPhone: 'WhatsApp', summaryRegion: 'Region',
-    summaryStage: 'Stage', summaryDueDate: 'Due date',
+    summaryName: 'Name', summaryPhone: 'WhatsApp', summaryRegion: 'District',
+    summaryStatus: 'Status', summaryDueDate: 'Due date',
     summaryBabyAge: 'Baby age',
   }
 };
@@ -1281,22 +1234,18 @@ function buildMonthsGrid() {
   const grid = document.getElementById('monthsGrid');
   if (!grid) return;
   grid.innerHTML = '';
-  const label = translations[currentLang].monthLabel;
-  for (let i = 0; i <= 24; i++) {
+  const singleLabel = translations[currentLang].monthLabel;
+  const multiLabel = translations[currentLang].monthsLabel;
+  
+  for (let i = 1; i <= 24; i++) {
     const chip = document.createElement('div');
     chip.className = 'month-chip' + (selectedMonth === i ? ' selected' : '');
-    if (i === 0) {
-      chip.innerHTML = '<span>< 1 ' + label + '</span>';
-      chip.querySelector('span').style.fontSize = '13px';
-      chip.querySelector('span').style.fontWeight = '600';
-      chip.querySelector('span').style.color = 'inherit';
-      chip.querySelector('span').style.marginTop = '0';
-    } else {
-      chip.textContent = i;
-      const sub = document.createElement('span');
-      sub.textContent = label;
-      chip.appendChild(sub);
-    }
+    
+    chip.textContent = i;
+    const sub = document.createElement('span');
+    sub.textContent = i === 1 ? singleLabel : multiLabel;
+    chip.appendChild(sub);
+    
     chip.addEventListener('click', () => {
       selectedMonth = i;
       document.getElementById('babyWeeksOld').value = i;
@@ -1474,7 +1423,15 @@ function buildSummary() {
   html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryName + '</span><strong>' + name + '</strong></div>';
   html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryPhone + '</span><strong>' + phone + '</strong></div>';
   html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryRegion + '</span><strong>' + region + '</strong></div>';
-  html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryStage + '</span><strong>' + (stageLabels[selectedStage] || '') + '</strong></div>';
+  html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryStatus + '</span><strong>' + (stageLabels[selectedStage] || '') + '</strong></div>';
+  
+  const priorityLabels = {
+    high: currentLang === 'sw' ? 'Haraka Sana' : 'High Priority',
+    medium: currentLang === 'sw' ? 'Kawaida' : 'Normal',
+    low: currentLang === 'sw' ? 'Sio Haraka' : 'Low Priority'
+  };
+  const priorityVal = document.getElementById('priority').value;
+  html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>' + t.summaryPriority + '</span><strong>' + (priorityLabels[priorityVal] || '') + '</strong></div>';
 
   if (selectedStage === 'pregnant') {
     const d = document.getElementById('dueDate').value;
@@ -1484,16 +1441,16 @@ function buildSummary() {
     // Add Pregnancy Progress to summary
     const weeks = document.getElementById('weeksDisplay').textContent;
     const trimester = document.getElementById('trimesterDisplay').textContent;
-    html += '<div style="display:flex;justify-content:space-between;padding:6px 0"><span>' + (currentLang === 'sw' ? 'Hali' : 'Status') + '</span><strong>' + weeks + ' (' + trimester + ')</strong></div>';
-  }
-  if (selectedStage === 'postpartum' && selectedMonth !== null) {
-    html += '<div style="display:flex;justify-content:space-between;padding:6px 0"><span>' + t.summaryBabyAge + '</span><strong>' + selectedMonth + ' ' + t.monthLabel + '</strong></div>';
+    html += '<div style="display:flex;justify-content:space-between;padding:6px 0"><span>' + (currentLang === 'sw' ? 'Maendeleo' : 'Progress') + '</span><strong>' + weeks + ' (' + trimester + ')</strong></div>';
+  } else if (selectedStage === 'postpartum' && selectedMonth !== null) {
+    const label = selectedMonth === 1 ? t.monthLabel : t.monthsLabel;
+    html += '<div style="display:flex;justify-content:space-between;padding:6px 0"><span>' + t.summaryBabyAge + '</span><strong>' + selectedMonth + ' ' + label + '</strong></div>';
   }
 
   document.getElementById('summaryContent').innerHTML = html;
 }
 
-// ===== CONSENT -> ENABLE SUBMIT =====
+// ... (rest of the code remains the same)
 document.getElementById('consent').addEventListener('change', function() {
   document.getElementById('submitBtn').disabled = !this.checked;
 });
