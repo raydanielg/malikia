@@ -7,97 +7,63 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --rose: #85C2BE;
-    --rose-light: #D4EDEB;
-    --rose-glow: #6AB0AC;
-    --cream: #F7FBFB;
-    --warm-white: #FCFEFE;
-    --text-dark: #1E2D2C;
-    --text-mid: #4A6462;
-    --text-light: #8A9E9C;
-    --border: #D0E2E0;
-    --border-focus: #85C2BE;
-    --sage: #7E5FAD;
-    --sage-light: #EDE6F5;
-    --gold: #9B7CC8;
-    --gold-light: #F3EEFA;
-    --purple: #7E5FAD;
-    --purple-light: #EDE6F5;
-    --purple-glow: #A88DD4;
-    --error: #D44;
-    --shadow-sm: 0 1px 3px rgba(30,45,44,0.06);
-    --shadow-md: 0 4px 16px rgba(30,45,44,0.08);
-    --shadow-lg: 0 8px 32px rgba(30,45,44,0.10);
-    --radius: 14px;
-    --radius-sm: 10px;
+    --purple: #7e22ce;
+    --purple-light: #f5f3ff;
+    --purple-glow: #a855f7;
+    --text-dark: #1e1b4b;
+    --text-mid: #4b5563;
+    --text-light: #9ca3af;
+    --border: #e5e7eb;
+    --border-focus: #7e22ce;
+    --error: #dc2626;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --radius: 12px;
+    --radius-sm: 8px;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
 
   body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--cream);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #fdfcff;
     color: var(--text-dark);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Background pattern */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: 
-      radial-gradient(ellipse at 20% 0%, rgba(133,194,190,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 100%, rgba(126,95,173,0.06) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .page-wrapper {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 16px 40px;
-  }
-
-  /* Header */
   .header {
     width: 100%;
-    max-width: 480px;
+    background: var(--purple);
+    padding: 12px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 0 24px;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
 
   .logo-area {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
-  .logo-mark {
+  .logo-img {
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, var(--rose), var(--purple));
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-family: 'DM Serif Display', serif;
-    font-size: 20px;
-    box-shadow: 0 2px 8px rgba(133,194,190,0.3);
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid white;
   }
 
   .logo-text {
     font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    color: var(--text-dark);
+    font-size: 20px;
+    color: white;
     line-height: 1;
   }
 
@@ -105,140 +71,95 @@
     display: block;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-weight: 700;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    color: var(--rose);
+    color: rgba(255,255,255,0.8);
     margin-top: 2px;
   }
 
   .lang-toggle {
     display: flex;
-    background: white;
+    background: rgba(255,255,255,0.2);
     border-radius: 20px;
-    padding: 3px;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border);
+    padding: 2px;
   }
 
   .lang-btn {
     padding: 6px 14px;
     border: none;
     background: transparent;
-    border-radius: 17px;
+    border-radius: 18px;
     font-size: 12px;
-    font-weight: 600;
-    color: var(--text-light);
+    font-weight: 700;
+    color: white;
     cursor: pointer;
-    transition: all 0.25s ease;
-    font-family: inherit;
+    transition: all 0.2s;
   }
 
   .lang-btn.active {
-    background: var(--rose);
-    color: white;
-  }
-
-  /* Card */
-  .form-card {
-    width: 100%;
-    max-width: 480px;
     background: white;
-    border-radius: 24px;
-    box-shadow: var(--shadow-lg);
-    overflow: hidden;
-    animation: slideUp 0.5s ease;
-  }
-
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    color: var(--purple);
   }
 
   .card-hero {
-    background: linear-gradient(135deg, #85C2BE 0%, #7E5FAD 100%);
-    padding: 32px 28px 28px;
-    position: relative;
-    overflow: hidden;
+    background: white;
+    padding: 32px 24px 24px;
+    text-align: center;
   }
-
-  .card-hero::after {
-    content: '';
-    position: absolute;
-    bottom: -30px; right: -30px;
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
-  }
-
-  .card-hero::before {
-    content: '';
-    position: absolute;
-    top: -20px; left: -20px;
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.05);
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-    color: white;
-    letter-spacing: 0.5px;
-    margin-bottom: 14px;
-  }
-
-  .hero-badge svg { width: 14px; height: 14px; }
 
   .hero-title {
     font-family: 'DM Serif Display', serif;
-    font-size: 23px;
-    color: white;
-    line-height: 1.3;
+    font-size: 26px;
+    color: var(--purple);
+    line-height: 1.2;
     margin-bottom: 12px;
-    position: relative;
   }
 
   .hero-sub {
-    font-size: 14px;
-    color: rgba(255,255,255,0.9);
+    font-size: 15px;
+    color: var(--text-mid);
     line-height: 1.6;
-    position: relative;
   }
 
-  /* Form body */
-  .form-body {
-    padding: 28px 24px 32px;
+  .btn-next {
+    background: var(--purple);
+    color: white;
+    box-shadow: 0 4px 12px rgba(126, 34, 206, 0.2);
   }
 
-  /* Progress indicator */
-  .progress-bar {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 28px;
-  }
-
-  .progress-step {
-    flex: 1;
-    height: 4px;
-    border-radius: 4px;
-    background: var(--border);
-    transition: background 0.4s ease;
+  .btn-next:hover {
+    background: #6b21a8;
+    transform: translateY(-1px);
   }
 
   .progress-step.active {
-    background: var(--rose);
+    background: var(--purple);
   }
 
   .progress-step.done {
-    background: var(--sage);
+    background: #a855f7;
+  }
+
+  .step-label {
+    color: var(--purple);
+  }
+
+  .stage-card.selected {
+    border-color: var(--purple);
+    background: var(--purple-light);
+  }
+
+  .success-icon {
+    background: var(--purple-light);
+  }
+
+  .success-icon svg {
+    color: var(--purple);
+  }
+
+  .success-title {
+    color: var(--purple);
   }
 
   /* Step containers */
@@ -863,12 +784,12 @@
 </head>
 <body>
 
-<div class="page-wrapper">
+<div class="page-wrapper" style="padding: 0 0 40px 0;">
 
   <!-- Header -->
-  <div class="header">
+  <header class="header">
     <div class="logo-area">
-      <div class="logo-mark">M</div>
+      <img src="{{ asset('LOGO-MALKIA-KONNECT.jpg') }}" alt="Logo" class="logo-img">
       <div class="logo-text">
         Malkia
         <span>Konnect</span>
@@ -878,7 +799,7 @@
       <button class="lang-btn active" onclick="setLang('sw')">SW</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
-  </div>
+  </header>
 
   <!-- Form Card -->
   <div class="form-card">
