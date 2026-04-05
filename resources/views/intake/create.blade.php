@@ -66,47 +66,53 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 24px;
+    padding: 12px 20px;
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
-    border-radius: 20px;
+    border-radius: 24px;
     box-shadow: var(--shadow-md);
     margin-bottom: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
   }
 
   .logo-area {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
   }
 
   .logo-image {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
-    border-radius: 12px;
-    background: white;
-    padding: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .logo-image:hover {
+    transform: scale(1.05);
   }
 
   .logo-text {
     font-family: 'DM Serif Display', serif;
-    font-size: 22px;
+    font-size: 26px;
     color: white;
-    line-height: 1.1;
+    line-height: 1;
     font-weight: 400;
     letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
   .logo-text span {
     display: block;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--accent-blue);
-    margin-top: 3px;
+    margin-top: 4px;
+    opacity: 0.95;
   }
 
   .lang-toggle {
