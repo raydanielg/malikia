@@ -36,7 +36,7 @@
   .header {
     width: 100%;
     background: var(--purple);
-    padding: 12px 20px;
+    padding: 10px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -49,20 +49,20 @@
   .logo-area {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
   }
 
   .logo-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
     object-fit: cover;
-    border: 2px solid white;
+    border: 1.5px solid white;
   }
 
   .logo-text {
     font-family: 'DM Serif Display', serif;
-    font-size: 20px;
+    font-size: 16px;
     color: white;
     line-height: 1;
   }
@@ -70,12 +70,12 @@
   .logo-text span {
     display: block;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.8);
-    margin-top: 2px;
+    color: rgba(255,255,255,0.9);
+    margin-top: 1px;
   }
 
   .lang-toggle {
@@ -110,9 +110,9 @@
 
   .hero-title {
     font-family: 'DM Serif Display', serif;
-    font-size: 26px;
+    font-size: 18px;
     color: var(--purple);
-    line-height: 1.2;
+    line-height: 1.3;
     margin-bottom: 12px;
   }
 
@@ -383,7 +383,7 @@
 
   .progress-weeks {
     font-family: 'DM Serif Display', serif;
-    font-size: 22px;
+    font-size: 18px;
     color: var(--rose);
   }
 
@@ -776,7 +776,7 @@
   @media (max-width: 400px) {
     .form-body { padding: 22px 18px 28px; }
     .card-hero { padding: 26px 20px 22px; }
-    .hero-title { font-size: 22px; }
+    .hero-title { font-size: 18px; }
     .stage-cards { grid-template-columns: 1fr 1fr; gap: 8px; }
     .months-grid { grid-template-columns: repeat(3, 1fr); }
   }
