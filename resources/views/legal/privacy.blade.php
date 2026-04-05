@@ -7,24 +7,106 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-teal: #85C2BE;
-            --primary-teal-dark: #6AB0AC;
-            --text-dark: #1E293B;
-            --text-mid: #475569;
-            --border: #CBD5E1;
+            --primary-green: #2D6A4F;
+            --primary-green-light: #52B788;
+            --primary-green-dark: #1B4332;
+            --accent-gold: #FFD700;
             --white: #FFFFFF;
-            --cream: #F8FAFC;
+            --cream: #F0FDF4;
+            --warm-white: #ECFDF5;
+            --text-dark: #064E3B;
+            --text-mid: #065F46;
+            --text-light: #10B981;
+            --border: #38A169;
+            --border-focus: #2F855A;
+            --error: #E53E3E;
+            --radius: 20px;
+            --shadow-md: 0 6px 24px rgba(27, 67, 50, 0.15);
         }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.6; margin: 0; padding: 0; }
-        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        header { background: var(--primary-teal); color: white; padding: 40px 0; text-align: center; border-radius: 0 0 24px 24px; }
-        h1 { font-family: 'DM Serif Display', serif; margin: 0; }
-        .content { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); margin-top: -20px; }
-        h2 { color: var(--primary-teal); border-bottom: 2px solid var(--cream); padding-bottom: 10px; margin-top: 30px; }
-        .lang-toggle { text-align: right; margin-bottom: 20px; }
-        .lang-btn { background: none; border: 1px solid var(--border); padding: 5px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; }
-        .lang-btn.active { background: var(--primary-teal); color: white; border-color: var(--primary-teal); }
-        .en { display: none; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #F0FDF4 0%, #D1FAE5 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--primary-green);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 0 0 24px 24px;
+        }
+
+        h1 {
+            font-family: 'DM Serif Display', serif;
+            margin: 0;
+            color: var(--primary-green-dark);
+        }
+
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            margin-top: -20px;
+            border: 2px solid var(--border);
+        }
+
+        h2 {
+            color: var(--primary-green-dark);
+            border-bottom: 2px solid var(--cream);
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
+        .lang-toggle {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 1px solid var(--border);
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .lang-btn.active {
+            background: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+        }
+
+        .en {
+            display: none;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary-green-dark);
+            transform: translateX(-4px);
+        }
     </style>
 </head>
 <body>
