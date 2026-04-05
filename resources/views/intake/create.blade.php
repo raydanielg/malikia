@@ -1213,6 +1213,7 @@ let selectedTrying = null;
 
 // ===== i18n =====
 const translations = {
+  sw: {
     labelLocation: 'Wilaya',
     labelRegion: 'Mkoa',
     optSelectRegion: 'Chagua Mkoa',
@@ -1302,6 +1303,12 @@ const translations = {
 function setLang(lang) {
   currentLang = lang;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === lang.toUpperCase()));
+
+  const regionSelect = document.getElementById('regionSelect');
+  const districtSelect = document.getElementById('districtSelect');
+  const regionVal = regionSelect ? regionSelect.value : '';
+  const districtVal = districtSelect ? districtSelect.value : '';
+
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (translations[lang][key]) {
@@ -1315,6 +1322,12 @@ function setLang(lang) {
       }
     }
   });
+
+  initLocations();
+  if (regionSelect && regionVal) regionSelect.value = regionVal;
+  updateDistricts();
+  if (districtSelect && districtVal) districtSelect.value = districtVal;
+
   buildMonthsGrid();
   if (document.getElementById('dueDate').value) calculateProgress();
 }
@@ -1554,9 +1567,7 @@ function openWhatsApp() {
   window.open('https://wa.me/255' + phone, '_blank');
 }
 
-// Init months grid
-buildMonthsGrid();
-initLocations();
+setLang(currentLang);
 
 // Phone formatting
 document.getElementById('phone').addEventListener('input', function(e) {
