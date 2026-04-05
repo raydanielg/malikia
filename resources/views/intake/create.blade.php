@@ -1147,7 +1147,7 @@ const locationData = @json(isset($regions) && $regions->count() > 0 ? $regions->
             return ['id' => $district->id, 'name' => $district->name];
         })->values()
     ]];
-}) : [
+})->toArray() : [
   'Arusha' => [ 'id' => 1, 'districts' => [['id' => 1, 'name' => 'Arusha City'], ['id' => 2, 'name' => 'Arusha DC'], ['id' => 3, 'name' => 'Karatu'], ['id' => 4, 'name' => 'Longido'], ['id' => 5, 'name' => 'Meru'], ['id' => 6, 'name' => 'Monduli'], ['id' => 7, 'name' => 'Ngorongoro']] ],
   'Dar es Salaam' => [ 'id' => 2, 'districts' => [['id' => 8, 'name' => 'Ilala'], ['id' => 9, 'name' => 'Kinondoni'], ['id' => 10, 'name' => 'Temeke'], ['id' => 11, 'name' => 'Ubungo'], ['id' => 12, 'name' => 'Kigamboni']] ],
   'Dodoma' => [ 'id' => 3, 'districts' => [['id' => 13, 'name' => 'Dodoma City'], ['id' => 14, 'name' => 'Bahi'], ['id' => 15, 'name' => 'Chamwino'], ['id' => 16, 'name' => 'Chemba'], ['id' => 17, 'name' => 'Kondoa'], ['id' => 18, 'name' => 'Kongwa'], ['id' => 19, 'name' => 'Mpwapwa']] ],
