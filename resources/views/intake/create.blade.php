@@ -1174,7 +1174,7 @@ const translations = {
     badge: 'Mama, uko nyumbani',
     heroTitle: 'Huhitaji kutembea safari hii peke yako, Mama.',
     heroSub: 'Kila mama anastahili mtu wa kumwambia "utakuwa sawa." Malkia Konnect ni rafiki yako ya uzazi, moja kwa moja kwenye WhatsApp yako. Bure. Binafsi. Kwa ajili yako.',
-    stepLabel1: 'Hatua 1 ya 3', stepTitle1: 'Tujue wewe',
+    stepLabel1: 'Hatua 1 ya 3', stepTitle1: 'Tunaomba tukufahamu',
     stepLabel2: 'Hatua 2 ya 3', stepTitle2: 'Safari yako ya uzazi',
     stepLabel3: 'Hatua 3 ya 3', stepTitle3: 'Thibitisha na ujiunge',
     labelName: 'Jina lako kamili', labelPhone: 'Nambari ya WhatsApp',
